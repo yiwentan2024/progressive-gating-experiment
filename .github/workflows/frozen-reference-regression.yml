@@ -1,0 +1,37 @@
+name: Original Frozen Reference Reproduction (separate from E2)
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'smoke: 107 + S20, full: also 16 targeted mutations'
+        required: true
+        type: choice
+        options:
+          - smoke
+          - full
+        default: smoke
+permissions:
+  contents: read
+jobs:
+  original-frozen-reference:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check exact frozen S9 manifest
+        run: python tools/check_frozen_manifest.py
+      - name: Run original frozen verifier (separate from the B2 evaluation)
+        shell: bash
+        run: |
+          mkdir -p runs/frozen_reference_recheck
+          python -m tools.run_frozen_regression --mode '${{ inputs.mode }}' --out runs/frozen_reference_recheck --timeout 1200
+      - name: Upload original verification evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: frozen-original-${{ inputs.mode }}-${{ github.run_id }}
+          path: runs/frozen_reference_recheck/
+          if-no-files-found: warn

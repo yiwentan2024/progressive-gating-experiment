@@ -1,0 +1,11 @@
+EvidenceClosure clean reproduction
+passed=True
+exit_code=0
+elapsed_seconds=114.578
+baseline=107/107 green
+M47–M62=16/16 assertion-killed
+S20=21 automated + 2 manual controls; passed=True
+tamper_hash_failure=True
+target_substitution_failure=True
+source_sha256=424377ba8bb71789af7dff5aba3e7af26a5cb5b2e0ef2ac26afc1eaead338034
+Runtime output is external to the frozen package.

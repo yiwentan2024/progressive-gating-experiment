@@ -1,0 +1,1 @@
+closure_id,gate_evaluation_id,target_node_id,gate_id,gate_mode,phase,attempt,supersedes_gate_evaluation_id,policy_version,gate_owner,evaluated_at_utc,threshold_operator,threshold_value,observed_value,unit,decision,exception_id,resolution_time_utc

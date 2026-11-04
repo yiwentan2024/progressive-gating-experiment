@@ -1,0 +1,26 @@
+{
+  "mutant_id": "M58_candidate_reviewer_authority",
+  "guard": "exclusion reviewer has effective service-scoped authority",
+  "status": "killed_assertion",
+  "returncode": 1,
+  "mutant_source_sha256": "972eb61c3f4ee8f94c3039d24485b1e70e713d65f58b3864fe395db2a890d92d",
+  "failing_tests": [
+    {
+      "test": "test_exclusion_reviewer_authority_is_service_scoped (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_exclusion_reviewer_authority_is_service_scoped)",
+      "outcome": "FAIL"
+    },
+    {
+      "test": "test_exclusion_reviewer_authority_must_be_effective (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_exclusion_reviewer_authority_must_be_effective)",
+      "outcome": "FAIL"
+    },
+    {
+      "test": "test_exclusion_reviewer_authority_is_service_scoped (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_exclusion_reviewer_authority_is_service_scoped)",
+      "outcome": "FAIL"
+    },
+    {
+      "test": "test_exclusion_reviewer_authority_must_be_effective (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_exclusion_reviewer_authority_must_be_effective)",
+      "outcome": "FAIL"
+    }
+  ],
+  "output_tail": "  File \"reproduction/EvidenceClosure/S3_terminal_review_counterexamples.py\", line 261, in test_exclusion_reviewer_authority_is_service_scoped\n    self.assertIn(\"unauthorized_candidate_reviewer\", error_codes(self.result()))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'unauthorized_candidate_reviewer' not found in set()\n\n======================================================================\nFAIL: test_exclusion_reviewer_authority_must_be_effective (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_exclusion_reviewer_authority_must_be_effective)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"reproduction/EvidenceClosure/S3_terminal_review_counterexamples.py\", line 252, in test_exclusion_reviewer_authority_must_be_effective\n    self.assertIn(\"unauthorized_candidate_reviewer\", error_codes(self.result()))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'unauthorized_candidate_reviewer' not found in set()\n\n----------------------------------------------------------------------\nRan 107 tests in 29.536s\n\nFAILED (failures=2)"
+}

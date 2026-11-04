@@ -1,0 +1,33 @@
+{
+  "id": "PG-DISP",
+  "scenario_family": "C01",
+  "type": "AUDIT_ONLY",
+  "title": "Missing effective disposition while the raw signal and baseline gates remain",
+  "injection": {
+    "layer": "evidence_disposition",
+    "at_stage": null,
+    "description": "All three stage gates pass. The QA stage raw signal is retained, but its effective disposition is removed from the audit input. The bounded inventory still identifies the missing disposition."
+  },
+  "baseline_expected": {
+    "dev": "PASS",
+    "qa": "PASS",
+    "staging": "PASS",
+    "first_failure_stage": null,
+    "first_failure_code": null
+  },
+  "audit_expected": {
+    "P0": "NOT_CONFIGURED",
+    "P1": "OPEN",
+    "evidence_status": "NOT_APPLICABLE",
+    "codes": [
+      "A1_EFFECTIVE_DISPOSITION_COUNT"
+    ]
+  },
+  "requires_audit_case": true,
+  "required_evidence": [
+    "raw QA signal present in the bounded inventory",
+    "effective disposition count for the QA signal is zero",
+    "all baseline stage gates PASS",
+    "P1 OPEN with A1_EFFECTIVE_DISPOSITION_COUNT; P0 NOT_CONFIGURED"
+  ]
+}

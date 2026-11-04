@@ -1,0 +1,3 @@
+authorization_id,subject,role,service_scope,effective_at_utc,retired_at_utc
+CRA-TRIAGER-1,synthetic-triager,incident_triager,*,2025-01-01T00:00:00Z,
+CRA-REVIEWER-1,synthetic-reviewer,governance_reviewer,*,2025-01-01T00:00:00Z,

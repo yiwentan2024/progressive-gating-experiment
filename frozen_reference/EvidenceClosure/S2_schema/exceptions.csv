@@ -1,0 +1,1 @@
+closure_id,exception_id,gate_evaluation_id,policy_version,approver,scope_gate_id,scope_service_id,risk_class,issue_time_utc,expiry_time_utc,revoked_at_utc,rationale,status

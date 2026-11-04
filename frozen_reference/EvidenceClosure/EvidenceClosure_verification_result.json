@@ -1,0 +1,23 @@
+{
+  "schema_version": "EvidenceClosure",
+  "verifier": "EvidenceClosure_authoritative_verifier.py (inherited/source-baseline)",
+  "source_path": "S3_analyze_evidence.py",
+  "source_bytes": 128617,
+  "source_sha256": "424377ba8bb71789af7dff5aba3e7af26a5cb5b2e0ef2ac26afc1eaead338034",
+  "passed": true,
+  "exit_code": 0,
+  "elapsed_seconds": 114.578,
+  "baseline_tests_run": 107,
+  "baseline_green": true,
+  "mutation_generated": 16,
+  "mutation_killed_by_assertion": 16,
+  "mutation_killed_by_crash": 0,
+  "mutation_survived": [],
+  "s20_automated_checks": 21,
+  "s20_manual_controls": 2,
+  "s20_passed": true,
+  "tamper_hash_failure": true,
+  "target_substitution_failure": true,
+  "runtime_output_path": "reproduced/output/EvidenceClosure_authoritative_verifier_report.json",
+  "runtime_output_path_resolved": "reproduced/output/EvidenceClosure_authoritative_verifier_report.json"
+}

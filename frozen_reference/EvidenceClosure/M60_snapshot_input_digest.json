@@ -1,0 +1,26 @@
+{
+  "mutant_id": "M60_snapshot_input_digest",
+  "guard": "each snapshot binds its own immutable visible-input digest",
+  "status": "killed_assertion",
+  "returncode": 1,
+  "mutant_source_sha256": "9f5e4ea9743e2fcc76c8f38053b1693cde76363643a4010a789ace46d76bfd06",
+  "failing_tests": [
+    {
+      "test": "test_query_rule_change_cannot_rewrite_an_existing_snapshot (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_query_rule_change_cannot_rewrite_an_existing_snapshot)",
+      "outcome": "FAIL"
+    },
+    {
+      "test": "test_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite)",
+      "outcome": "FAIL"
+    },
+    {
+      "test": "test_query_rule_change_cannot_rewrite_an_existing_snapshot (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_query_rule_change_cannot_rewrite_an_existing_snapshot)",
+      "outcome": "FAIL"
+    },
+    {
+      "test": "test_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite)",
+      "outcome": "FAIL"
+    }
+  ],
+  "output_tail": "  File \"reproduction/EvidenceClosure/S3_terminal_review_counterexamples.py\", line 122, in test_query_rule_change_cannot_rewrite_an_existing_snapshot\n    self.assertIn(\"snapshot_input_manifest_digest_mismatch\", failures)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'snapshot_input_manifest_digest_mismatch' not found in []\n\n======================================================================\nFAIL: test_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"reproduction/EvidenceClosure/S3_terminal_review_counterexamples.py\", line 290, in test_snapshot_input_digest_detects_silent_history_rewrite\n    self.assertIn(\"snapshot_input_manifest_digest_mismatch\", closure(analyze(self.root, self.policy), \"CL-01-complete\")[\"failure_codes\"])\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'snapshot_input_manifest_digest_mismatch' not found in []\n\n----------------------------------------------------------------------\nRan 107 tests in 29.556s\n\nFAILED (failures=2)"
+}

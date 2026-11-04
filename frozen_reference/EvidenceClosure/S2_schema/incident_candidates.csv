@@ -1,0 +1,1 @@
+closure_id,candidate_id,deployment_id,service_id,environment,observed_at_utc,admitted_at_utc,source_batch_id,signal_digest_sha256,status,incident_id,exclusion_reason_code,exclusion_rationale,decision_role,decided_by,decided_at_utc,reviewed_by,reviewed_at_utc,reopens_snapshot_id

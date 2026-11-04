@@ -1,0 +1,7 @@
+closure_id,release_decision_id,change_id,selected_build_id,selected_test_run_ids,selected_artifact_id,artifact_digest,approved_at_utc,policy_version,evaluation_time_utc,observation_window_hours,mandatory_gate_ids
+CL-01-complete,S1-REL,S1-CHG,S1-BLD,S1-TST,S1-ART,sha256:s1artifact,2026-01-05T13:00:00Z,p18.0,2026-01-06T14:00:00Z,24,G1|G2|G3|G4|G5|G6|G7
+CL-02-orphan,S2-REL,S2-CHG,S2-BLD,S2-TST,S2-ART,sha256:s2artifact,2026-01-06T13:00:00Z,p18.0,2026-01-07T14:00:00Z,24,G1|G2|G3|G4|G5|G6|G7
+CL-03-failed_gate,S3-REL,S3-CHG,S3-BLD,S3-TST,S3-ART,sha256:s3artifact,2026-01-07T13:00:00Z,p18.0,2026-01-08T14:00:00Z,24,G1|G2|G3|G4|G5|G6|G7
+CL-04-expired_exception,S4-REL,S4-CHG,S4-BLD,S4-TST,S4-ART,sha256:s4artifact,2026-01-08T13:00:00Z,p18.0,2026-01-09T14:00:00Z,24,G1|G2|G3|G4|G5|G6|G7
+CL-05-linked_incident,S5-REL,S5-CHG,S5-BLD,S5-TST,S5-ART,sha256:s5artifact,2026-01-09T13:00:00Z,p18.0,2026-01-10T14:00:00Z,24,G1|G2|G3|G4|G5|G6|G7
+CL-06-unlinked_incident,S6-REL,S6-CHG,S6-BLD,S6-TST,S6-ART,sha256:s6artifact,2026-01-10T13:00:00Z,p18.0,2026-01-11T14:00:00Z,24,G1|G2|G3|G4|G5|G6|G7

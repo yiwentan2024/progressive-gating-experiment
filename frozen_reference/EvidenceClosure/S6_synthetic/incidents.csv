@@ -1,0 +1,3 @@
+closure_id,incident_id,deployment_id,classification,severity,opened_at_utc,reported_at_utc,attribution_time_utc,classifier,classification_evidence,finding_id,feedback_link_time_utc,feedback_ttl_hours,resolved_at_utc,resolution_validator,resolution_evidence,reopens_snapshot_id,late_discovery_action
+CL-05-linked_incident,S5-INC,S5-DEP,deployment_induced,medium,2026-01-09T16:00:00Z,2026-01-09T16:00:00Z,2026-01-09T16:30:00Z,service-owner,synthetic deployment/time/change correlation,S5-FND,2026-01-09T20:00:00Z,8,2026-01-10T04:00:00Z,incident-owner,closed synthetic Finding,,
+CL-06-unlinked_incident,S6-INC,S6-DEP,deployment_induced,medium,2026-01-10T16:00:00Z,2026-01-10T16:00:00Z,2026-01-10T16:30:00Z,service-owner,synthetic deployment/time/change correlation,S6-FND,,8,,,,,

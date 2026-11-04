@@ -1,0 +1,63 @@
+policy_version: p18.0
+effective_at_utc: 2026-01-01T00:00:00Z
+gate_classification_is_predeclared: true
+policy_time_rule: one policy version is bound when the release episode opens; any policy change requires a new release episode and full reevaluation; in-episode policy migration is not supported by the V18 reference profile
+revocation_rule: immutable historical snapshots retain their as-of record; a newly effective revocation requires a direct successor snapshot
+gate_evidence_contract:
+  operators: [eq, ne, lt, le, gt, ge, in, policy_assertion]
+  declared_decision_rule: pass_requires_true; fail_or_exception_requires_false
+  unit_rule: gate_record_unit_must_equal_effective_policy_unit
+  owner_rule: effective_policy_owner_or_scoped_time_valid_delegation
+  owner_authorization_registry: S4_gate_owner_authorizations.csv
+  exception_authority_registry: S4_exception_authority_registry.csv
+gates:
+  G1:
+    mode: required
+    phase: pre_approval
+    owner: G1-owner
+    waiver_allowed: false
+  G2:
+    mode: required
+    phase: pre_approval
+    owner: G2-owner
+    waiver_allowed: false
+  G3:
+    mode: required
+    phase: pre_approval
+    owner: G3-owner
+    waiver_allowed: true
+  G4:
+    mode: required
+    phase: pre_approval
+    owner: G4-owner
+    waiver_allowed: false
+  G5:
+    mode: required
+    phase: pre_approval
+    owner: G5-owner
+    waiver_allowed: false
+  G6:
+    mode: required
+    phase: pre_approval
+    owner: G6-owner
+    waiver_allowed: false
+  G7:
+    mode: required
+    phase: pre_approval
+    owner: G7-owner
+    waiver_allowed: false
+  G8:
+    mode: optional_decision
+    phase: post_deployment
+    owner: G8-owner
+    waiver_allowed: false
+  G9:
+    mode: informational
+    phase: pre_approval
+    owner: G9-owner
+    waiver_allowed: false
+
+observation_window_hours:
+  minimum: 1
+  maximum: 168
+  unit: hours

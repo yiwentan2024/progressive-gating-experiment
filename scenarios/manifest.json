@@ -1,0 +1,260 @@
+{
+  "version": "SCENE-19-2026-10-22-PRE_ORACLE",
+  "scenarios": [
+    {
+      "id": "N01",
+      "type": "CONTROL",
+      "title": "Normal release: all gates and closure evidence satisfied",
+      "injection": "No injection; three-stage health checks, artifact digest, and signal dispositions all normal",
+      "expected_b2": "CLOSED",
+      "primary_codes": [],
+      "b0_action": "Real PR/tests/three-stage deployment pass",
+      "b1_action": "Real attestation issued and verified successfully",
+      "evidence": "Complete CI logs, artifact digest, upstream events, and B2 decision",
+      "source": "CONTROLLED"
+    },
+    {
+      "id": "N02",
+      "type": "CONTROL",
+      "title": "Authorized gate waiver",
+      "injection": "Scan gate WAIVED; policy permits, approver valid, approval time before cutoff",
+      "expected_b2": "CLOSED",
+      "primary_codes": [],
+      "b0_action": "Record approval and gate state per the real waiver policy; do not fabricate tool-native waivers",
+      "b1_action": "Provenance attestation verified as for a normal artifact",
+      "evidence": "Original policy and approval events, gate states, B2 decision",
+      "source": "CONTROLLED"
+    },
+    {
+      "id": "N03",
+      "type": "CONTROL",
+      "title": "Successor obligation fulfilled",
+      "injection": "Generate a Finding after cutoff, bind the correct Requirement, target release verified",
+      "expected_b2": "CLOSED",
+      "primary_codes": [],
+      "b0_action": "Existing release gates run as usual (no claim of native Finding linkage)",
+      "b1_action": "Verify provenance of the target artifact for real",
+      "evidence": "Finding/Requirement/Target time series, source snapshot hashes",
+      "source": "CONTROLLED"
+    },
+    {
+      "id": "A101",
+      "type": "A1",
+      "title": "Missing effective disposition",
+      "injection": "Remove the effective Disposition of SIG-002 while keeping the independent raw inventory",
+      "expected_b2": "OPEN",
+      "primary_codes": [
+        "A1_EFFECTIVE_DISPOSITION_COUNT"
+      ],
+      "b0_action": "Real gates run faithfully; the defect is injected only at the evidence disposition layer",
+      "b1_action": "Real attestation verification; do not assume it checks dispositions",
+      "evidence": "Difference between raw and disposition sets, failure codes",
+      "source": "CONTROLLED"
+    },
+    {
+      "id": "A102",
+      "type": "A1",
+      "title": "Two effective dispositions for one identity",
+      "injection": "Add a second effective Disposition for SIG-002",
+      "expected_b2": "OPEN",
+      "primary_codes": [
+        "A1_EFFECTIVE_DISPOSITION_COUNT"
+      ],
+      "b0_action": "Real tests pass or judge per configuration",
+      "b1_action": "Real provenance attestation verified as usual",
+      "evidence": "Both original Dispositions, timing and uniqueness failure codes",
+      "source": "CONTROLLED"
+    },
+    {
+      "id": "A103",
+      "type": "A1",
+      "title": "Candidate unresolved",
+      "injection": "Mark the SIG-002 disposition UNRESOLVED with the corresponding Candidate status OPEN",
+      "expected_b2": "OPEN",
+      "primary_codes": [
+        "A1_UNRESOLVED_SIGNAL",
+        "A1_CANDIDATE_UNRESOLVED"
+      ],
+      "b0_action": "Gates actually run; do not fake standard-gate judgments on business pending items",
+      "b1_action": "Provenance attestation verified",
+      "evidence": "candidate/disposition history, failure codes",
+      "source": "CONTROLLED"
+    },
+    {
+      "id": "A104",
+      "type": "A1",
+      "title": "Unauthorized disposition exclusion",
+      "injection": "Apply AUTHORIZED_EXCLUDED to SIG-002 where the actor lacks policy permission",
+      "expected_b2": "OPEN",
+      "primary_codes": [
+        "A1_UNAUTHORIZED_EXCLUSION"
+      ],
+      "b0_action": "Keep real policies and approval roles",
+      "b1_action": "Normal artifact attestation",
+      "evidence": "policy/actor/waiver config hashes, failure codes",
+      "source": "CONTROLLED"
+    },
+    {
+      "id": "A105",
+      "type": "A1",
+      "title": "Raw signal identity-digest mismatch",
+      "injection": "Modify the raw payload of SIG-002 without updating its payload_sha256",
+      "expected_b2": "OPEN",
+      "primary_codes": [
+        "A1_SIGNAL_DIGEST_INVALID"
+      ],
+      "b0_action": "Real tests and artifact digest checks run as usual",
+      "b1_action": "Verify the real artifact; do not assume artifact provenance can verify business signal payloads",
+      "evidence": "Original payload and digest, digest-verification failure code",
+      "source": "CONTROLLED"
+    },
+    {
+      "id": "A201",
+      "type": "A2",
+      "title": "Raw evidence arriving after cutoff",
+      "injection": "Place occurrence/receipt time of SIG-002 after the source release cutoff",
+      "expected_b2": "OPEN",
+      "primary_codes": [
+        "A1_LATE_SIGNAL"
+      ],
+      "b0_action": "B0 runs as usual; keep gate times and injection times",
+      "b1_action": "Normal artifact attestation",
+      "evidence": "cutoff/event_time/ingest_time triple",
+      "source": "CONTROLLED"
+    },
+    {
+      "id": "A202",
+      "type": "A2",
+      "title": "Wrong Finding-to-Requirement identity binding",
+      "injection": "Point the Finding's creates relation to a different Finding ID while keeping the target seemingly satisfied",
+      "expected_b2": "OPEN",
+      "primary_codes": [
+        "A2_FINDING_REQUIREMENT_INVALID"
+      ],
+      "b0_action": "B0 runs per the configured process",
+      "b1_action": "B1 verifies the artifact normally",
+      "evidence": "source finding and creates_requirement wrong edge, failure_code",
+      "source": "CONTROLLED"
+    },
+    {
+      "id": "A203",
+      "type": "A2",
+      "title": "Target release validation failed or incomplete",
+      "injection": "Finding successor relation valid, target due, but the real target validation status is FAIL",
+      "expected_b2": "OPEN",
+      "primary_codes": [
+        "A2_TARGET_VALIDATION_FAILED"
+      ],
+      "b0_action": "B0 runs as usual for the source release; a target release must run real tests",
+      "b1_action": "Record the real attestation result for the target artifact",
+      "evidence": "target due, target validation result, audit failure codes",
+      "source": "CONTROLLED"
+    },
+    {
+      "id": "A204",
+      "type": "A2",
+      "title": "Later attempt to rewrite a historical frozen snapshot",
+      "injection": "Keep the frozen payload/hash, modify the observed/current snapshot payload",
+      "expected_b2": "OPEN",
+      "primary_codes": [
+        "A2_FROZEN_SNAPSHOT_REWRITE"
+      ],
+      "b0_action": "Preserve the original cutoff decision of the source release and the later update facts",
+      "b1_action": "Do not overstate attestation capability as historical snapshot audit",
+      "evidence": "original frozen hash, later observed payload hash, historical result retention value",
+      "source": "CONTROLLED"
+    },
+    {
+      "id": "U01",
+      "type": "NFI",
+      "title": "Raw signal population boundary not independently confirmable",
+      "injection": "Remove collector completeness and query-scope attestations (keep extracted signals)",
+      "expected_b2": "OPEN",
+      "primary_codes": [
+        "A1_SCOPE_NOT_ATTESTED"
+      ],
+      "b0_action": "Real gates run normally; record which class of raw evidence is missing",
+      "b1_action": "Real provenance attestation runs",
+      "evidence": "List of missing materials with NFI marker; must not claim data omission is proven",
+      "source": "CONTROLLED"
+    },
+    {
+      "id": "U02",
+      "type": "NFI",
+      "title": "Source release attribution of a Finding unresolved",
+      "injection": "Keep the Finding trigger facts, set source_release_id to null; must not empty the obligation set",
+      "expected_b2": "OPEN",
+      "primary_codes": [
+        "A2_UNRESOLVED_SOURCE_ATTRIBUTION"
+      ],
+      "b0_action": "Real gates run normally",
+      "b1_action": "Provenance attestation executes as usual",
+      "evidence": "finding observed facts, source attribution NFI, obligations that did not disappear",
+      "source": "CONTROLLED"
+    },
+    {
+      "id": "B01",
+      "type": "BASELINE",
+      "title": "Standard gates must detect: real unit test failure",
+      "injection": "Set INJECT_B01=1 to make an actual unittest case fail; record the gate FAIL",
+      "expected_b2": "OPEN",
+      "primary_codes": [
+        "GATE_REQUIRED_FAILED"
+      ],
+      "b0_action": "Actually execute the failing test, store the original exit code and error",
+      "b1_action": "Keep the B0 test failure; must not mask it with attestation",
+      "evidence": "Original unittest failure stdout and workflow failure, B2 gate failure codes",
+      "source": "CONTROLLED"
+    },
+    {
+      "id": "B02",
+      "type": "BASELINE",
+      "title": "Standard existing provenance tool must detect: artifact substitution after signing",
+      "injection": "After actions/attest signing, modify the pyz bytes and run gh attestation verify",
+      "expected_b2": "OPEN",
+      "primary_codes": [
+        "ARTIFACT_DIGEST_MISMATCH"
+      ],
+      "b0_action": "The B0 artifact SHA pin must also actually verify; it may detect this as well",
+      "b1_action": "Real gh attestation verify must reject the modified artifact",
+      "evidence": "Pre/post-signing artifact SHAs, gh CLI exit and attestation bundle",
+      "source": "CONTROLLED"
+    },
+    {
+      "id": "ZH-R2",
+      "type": "REAL_DATA",
+      "title": "ZH R2: unresolved signals, failed gates, and cutoff",
+      "injection": "No controlled injection: only receive second-round raw project records and rebuild after source acceptance",
+      "expected_b2": "NOT_PREJUDGED",
+      "primary_codes": [],
+      "b0_action": "Re-verify the source system's real gate execution records; do not claim green runs were misses",
+      "b1_action": "Report real results only if the tool was actually deployed; otherwise N/A",
+      "evidence": "Real source record IDs, extraction rules, native/curated split, independent Oracle",
+      "source": "REAL_REQUIRES_NATIVE_EVIDENCE"
+    },
+    {
+      "id": "ZH-R3",
+      "type": "REAL_DATA",
+      "title": "ZH R3: 11:00 cutoff vs 11:10 post-release smoke",
+      "injection": "No controlled injection: re-verify historical visibility and gate policy",
+      "expected_b2": "NOT_PREJUDGED",
+      "primary_codes": [],
+      "b0_action": "Re-verify whether the 11:10 smoke was admitted by gates rather than judged a violation",
+      "b1_action": "Record N/A where the original system deployed no attestation tooling",
+      "evidence": "cutoff policy, source gate records, snapshot times, independent conclusions",
+      "source": "REAL_REQUIRES_NATIVE_EVIDENCE"
+    },
+    {
+      "id": "ZH-R4",
+      "type": "REAL_DATA",
+      "title": "ZH R4: 6/6 dispositions yet the snapshot stays frozen",
+      "injection": "No controlled injection: first obtain why it stayed frozen and the source of right-censoring",
+      "expected_b2": "NOT_PREJUDGED",
+      "primary_codes": [],
+      "b0_action": "Reconstruct all actual gates and release decisions",
+      "b1_action": "Mark N/A per actual tool deployment",
+      "evidence": "Original freeze reason, state history, right-censoring explanation, raw records",
+      "source": "REAL_REQUIRES_NATIVE_EVIDENCE"
+    }
+  ]
+}

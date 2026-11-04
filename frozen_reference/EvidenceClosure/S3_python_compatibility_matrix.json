@@ -1,0 +1,34 @@
+{
+  "scope": "observed V18 runs in interpreters available in the current environment; workflow configuration is not execution evidence",
+  "generated_at_utc": "2026-07-18T10:43:09.250921+00:00",
+  "results": [
+    {
+      "runtime_label": "CPython 3.12.13 (author validation environment)",
+      "python": "3.12.13",
+      "platform": "Windows-10-10.0.19045-SP0",
+      "status": "passed",
+      "returncode": 0,
+      "tests_run": 84,
+      "command": "python -m unittest -v S3_test_analyze_evidence.py S3_adversarial_review_tests.py S3_v18_semantic_tests.py"
+    },
+    {
+      "runtime_label": "CPython 3.14.0 (author validation environment)",
+      "python": "3.14.0",
+      "platform": "Windows-10-10.0.19045-SP0",
+      "status": "passed",
+      "returncode": 0,
+      "tests_run": 84,
+      "command": "python -m unittest -v S3_test_analyze_evidence.py S3_adversarial_review_tests.py S3_v18_semantic_tests.py"
+    }
+  ],
+  "configured_workflow_versions": [
+    "3.11",
+    "3.12",
+    "3.13",
+    "3.14"
+  ],
+  "not_observed_here": [
+    "3.11",
+    "3.13"
+  ]
+}

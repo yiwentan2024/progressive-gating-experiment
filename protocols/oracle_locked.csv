@@ -1,0 +1,24 @@
+# Preregistered expected outcomes for the controlled evaluation
+# (frozen with the repository's initial commit, before any evaluation run).
+# Scope: expected B2 machine decision and failure codes per scenario;
+# baseline rule: non-B01/B02 scenarios pass B0/B1 in every variant, B01/B02 fail (expected red) in every variant.
+scenario_id,expected_decision,failure_codes,rationale,source
+N01,CLOSED,,All signals have single effective dispositions before cutoff; gates green; no findings - release closes,PREREGISTERED
+N02,CLOSED,,Gate waiver policy-authorized," approver valid, approval before cutoff - release closes,PREREGISTERED"
+N03,CLOSED,,Finding bound to the correct requirement; target release verified before audit - obligation closed,PREREGISTERED
+A101,OPEN,A1_EFFECTIVE_DISPOSITION_COUNT,SIG-002 has no effective disposition at cutoff - closure blocked,PREREGISTERED
+A102,OPEN,A1_EFFECTIVE_DISPOSITION_COUNT,SIG-002 carries two simultaneous effective dispositions - identity ambiguous," closure blocked,PREREGISTERED"
+A103,OPEN,A1_UNRESOLVED_SIGNAL;A1_CANDIDATE_UNRESOLVED,SIG-002 disposition UNRESOLVED with candidate OPEN at cutoff - closure blocked,PREREGISTERED
+A104,OPEN,A1_UNAUTHORIZED_EXCLUSION,SIG-002 excluded by an actor outside the policy exclusion authorities - closure blocked,PREREGISTERED
+A105,OPEN,A1_SIGNAL_DIGEST_INVALID,SIG-002 payload digest does not match its recorded payload_sha256 - closure blocked,PREREGISTERED
+A201,OPEN,A1_LATE_SIGNAL,SIG-002 event/ingest times fall after the release cutoff - late evidence cannot backfill the decision,PREREGISTERED
+A202,OPEN,A2_FINDING_REQUIREMENT_INVALID,Finding requirement link points to a different finding identity - binding invalid,PREREGISTERED
+A203,OPEN,A2_TARGET_VALIDATION_FAILED,Target release due but its validation recorded as failed - obligation unmet,PREREGISTERED
+A204,OPEN,A2_FROZEN_SNAPSHOT_REWRITE,Observed snapshot payload differs from the frozen snapshot - rewrite attempt detected,PREREGISTERED
+U01,OPEN,A1_SCOPE_NOT_ATTESTED,Collector completeness attestation absent - signal population boundary unverifiable (NFI),PREREGISTERED
+U02,OPEN,A2_UNRESOLVED_SOURCE_ATTRIBUTION,Finding source release id is null - attribution unverifiable (NFI),PREREGISTERED
+B01,OPEN,GATE_REQUIRED_FAILED,Injected real unit test failure - the required gate must fail in every variant,PREREGISTERED
+B02,OPEN,ARTIFACT_DIGEST_MISMATCH,Artifact bytes changed after signing - digest pin and attestation must both reject,PREREGISTERED
+ZH-R2,NOT_PREJUDGED,,Awaiting verified source records; no expectation preregistered,PENDING_REAL_DATA
+ZH-R3,NOT_PREJUDGED,,Awaiting verified source records; no expectation preregistered,PENDING_REAL_DATA
+ZH-R4,NOT_PREJUDGED,,Awaiting verified source records; no expectation preregistered,PENDING_REAL_DATA

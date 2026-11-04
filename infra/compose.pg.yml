@@ -1,0 +1,40 @@
+# Progressive-gating harness only. The original infra/compose.yml is untouched.
+# Each stage is started separately by tools.pg_promote; images and host ports are
+# provided by the harness so one run cannot silently reuse another run's container.
+services:
+  dev:
+    image: ${PG_DEV_IMAGE:?PG_DEV_IMAGE is required}
+    labels:
+      pg.harness: progressive-gating
+      pg.stage: dev
+    environment:
+      STAGE_NAME: dev
+      FAIL_HEALTH: "0"
+      BIND_HOST: "0.0.0.0"
+    ports:
+      - "${PG_DEV_PORT:-19081}:8000"
+    restart: "no"
+  qa:
+    image: ${PG_QA_IMAGE:?PG_QA_IMAGE is required}
+    labels:
+      pg.harness: progressive-gating
+      pg.stage: qa
+    environment:
+      STAGE_NAME: qa
+      FAIL_HEALTH: ${PG_QA_FAIL_HEALTH:-0}
+      BIND_HOST: "0.0.0.0"
+    ports:
+      - "${PG_QA_PORT:-19082}:8000"
+    restart: "no"
+  staging:
+    image: ${PG_STAGING_IMAGE:?PG_STAGING_IMAGE is required}
+    labels:
+      pg.harness: progressive-gating
+      pg.stage: staging
+    environment:
+      STAGE_NAME: staging
+      FAIL_HEALTH: "0"
+      BIND_HOST: "0.0.0.0"
+    ports:
+      - "${PG_STAGING_PORT:-19083}:8000"
+    restart: "no"

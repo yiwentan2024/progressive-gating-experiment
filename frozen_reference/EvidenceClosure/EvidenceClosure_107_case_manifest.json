@@ -1,0 +1,68 @@
+{
+  "schema_version": "EvidenceClosure-107-case-manifest-1",
+  "count_claim": 107,
+  "count_semantics": "predicate-derived conformance instances",
+  "case_level_fixture_closures": [
+    {
+      "closure_id": "CL-01-complete",
+      "service_id": "service-1",
+      "release_decision_id": "S1-REL",
+      "evaluated_at_utc": "2026-01-06T14:00:00Z",
+      "closed_as_of": true,
+      "failure_codes": []
+    },
+    {
+      "closure_id": "CL-02-orphan",
+      "service_id": "service-2",
+      "release_decision_id": "S2-REL",
+      "evaluated_at_utc": "2026-01-07T14:00:00Z",
+      "closed_as_of": false,
+      "failure_codes": [
+        "orphan_release"
+      ]
+    },
+    {
+      "closure_id": "CL-03-failed_gate",
+      "service_id": "service-3",
+      "release_decision_id": "S3-REL",
+      "evaluated_at_utc": "2026-01-08T14:00:00Z",
+      "closed_as_of": false,
+      "failure_codes": [
+        "failed_decision_gate"
+      ]
+    },
+    {
+      "closure_id": "CL-04-expired_exception",
+      "service_id": "service-4",
+      "release_decision_id": "S4-REL",
+      "evaluated_at_utc": "2026-01-09T14:00:00Z",
+      "closed_as_of": false,
+      "failure_codes": [
+        "historical_snapshot_status_mismatch",
+        "invalid_exception_authorization",
+        "snapshot_status_mismatch"
+      ]
+    },
+    {
+      "closure_id": "CL-05-linked_incident",
+      "service_id": "service-5",
+      "release_decision_id": "S5-REL",
+      "evaluated_at_utc": "2026-01-10T14:00:00Z",
+      "closed_as_of": true,
+      "failure_codes": []
+    },
+    {
+      "closure_id": "CL-06-unlinked_incident",
+      "service_id": "service-6",
+      "release_decision_id": "S6-REL",
+      "evaluated_at_utc": "2026-01-11T14:00:00Z",
+      "closed_as_of": false,
+      "failure_codes": [
+        "missing_or_late_feedback_link",
+        "unresolved_deployment_incident"
+      ]
+    }
+  ],
+  "case_level_107_expansion": "not materialized in the source result; no fabricated rows",
+  "independent_field_validation": false
+}

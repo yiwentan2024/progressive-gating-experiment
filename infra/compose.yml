@@ -1,0 +1,16 @@
+services:
+  dev:
+    image: closure-eval:${IMAGE_TAG:-local}
+    environment: {STAGE_NAME: dev, FAIL_HEALTH: "0", BIND_HOST: "0.0.0.0"}
+    ports: ["127.0.0.1:18081:8000"]
+  qa:
+    image: closure-eval:${IMAGE_TAG:-local}
+    environment:
+      STAGE_NAME: qa
+      BIND_HOST: "0.0.0.0"
+      FAIL_HEALTH: ${QA_FAIL_HEALTH:-0}
+    ports: ["127.0.0.1:18082:8000"]
+  staging:
+    image: closure-eval:${IMAGE_TAG:-local}
+    environment: {STAGE_NAME: staging, FAIL_HEALTH: "0", BIND_HOST: "0.0.0.0"}
+    ports: ["127.0.0.1:18083:8000"]

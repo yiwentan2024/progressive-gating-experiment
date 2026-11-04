@@ -1,0 +1,35 @@
+name: v13-python-matrix
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "EvidenceClosure-supplementary/**"
+jobs:
+  tests:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
+    defaults:
+      run:
+        working-directory: EvidenceClosure-supplementary
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Record runtime and source digest
+        shell: pwsh
+        run: |
+          python --version
+          Get-FileHash -Algorithm SHA256 S3_analyze_evidence.py
+      - name: Run contract and review-derived tests
+        run: python -m unittest -v S3_test_analyze_evidence.py S3_adversarial_review_tests.py
+      - name: Run review-targeted mutation audit
+        run: python S3_mutation_test.py --output reproduced/S3_mutation_report.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: python-${{ matrix.python-version }}-audit
+          path: EvidenceClosure-supplementary/reproduced/
+

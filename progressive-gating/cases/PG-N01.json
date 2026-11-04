@@ -1,0 +1,31 @@
+{
+  "id": "PG-N01",
+  "scenario_family": "N01",
+  "type": "CONTROL",
+  "title": "Normal release: staged promotion with no injected evidence defect",
+  "injection": {
+    "layer": "none",
+    "at_stage": null,
+    "description": "No injection. One deterministic artifact is promoted dev -> qa -> staging through real HTTP gates; the audit input is complete."
+  },
+  "baseline_expected": {
+    "dev": "PASS",
+    "qa": "PASS",
+    "staging": "PASS",
+    "first_failure_stage": null,
+    "first_failure_code": null
+  },
+  "audit_expected": {
+    "P0": "NOT_CONFIGURED",
+    "P1": "CLOSED",
+    "evidence_status": "NOT_APPLICABLE",
+    "codes": []
+  },
+  "requires_audit_case": true,
+  "required_evidence": [
+    "ordered deploy/check/gate events for dev, qa, staging",
+    "same measured pyz digest at every stage",
+    "P1 verifier output CLOSED",
+    "P0 audit status NOT_CONFIGURED"
+  ]
+}

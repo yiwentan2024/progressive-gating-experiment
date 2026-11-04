@@ -1,0 +1,308 @@
+{
+  "schema_version": "1.0.0",
+  "error_schema_version": "1.0.0",
+  "unit_of_analysis": "one service-bounded ReleaseDecision audit snapshot at t_eval",
+  "valid_input": true,
+  "schema_errors": [],
+  "closure_results": [
+    {
+      "closure_id": "CL-01-complete",
+      "service_id": "service-1",
+      "release_decision_id": "S1-REL",
+      "snapshot_id": "S1-SNAP-1",
+      "evaluated_at_utc": "2026-01-06T14:00:00Z",
+      "closed_as_of": true,
+      "failure_codes": [],
+      "snapshot_results": [
+        {
+          "snapshot_id": "S1-SNAP-1",
+          "evaluated_at_utc": "2026-01-06T14:00:00Z",
+          "declared_status": "closed_as_of",
+          "recomputed_status": "closed_as_of",
+          "status_match": true,
+          "failure_codes": []
+        }
+      ]
+    },
+    {
+      "closure_id": "CL-02-orphan",
+      "service_id": "service-2",
+      "release_decision_id": "S2-REL",
+      "snapshot_id": "S2-SNAP-1",
+      "evaluated_at_utc": "2026-01-07T14:00:00Z",
+      "closed_as_of": false,
+      "failure_codes": [
+        "orphan_release"
+      ],
+      "snapshot_results": [
+        {
+          "snapshot_id": "S2-SNAP-1",
+          "evaluated_at_utc": "2026-01-07T14:00:00Z",
+          "declared_status": "open",
+          "recomputed_status": "open",
+          "status_match": true,
+          "failure_codes": [
+            "historical_snapshot_missing_release_path"
+          ]
+        }
+      ]
+    },
+    {
+      "closure_id": "CL-03-failed_gate",
+      "service_id": "service-3",
+      "release_decision_id": "S3-REL",
+      "snapshot_id": "S3-SNAP-1",
+      "evaluated_at_utc": "2026-01-08T14:00:00Z",
+      "closed_as_of": false,
+      "failure_codes": [
+        "failed_decision_gate"
+      ],
+      "snapshot_results": [
+        {
+          "snapshot_id": "S3-SNAP-1",
+          "evaluated_at_utc": "2026-01-08T14:00:00Z",
+          "declared_status": "open",
+          "recomputed_status": "open",
+          "status_match": true,
+          "failure_codes": [
+            "historical_snapshot_invalid_gate"
+          ]
+        }
+      ]
+    },
+    {
+      "closure_id": "CL-04-expired_exception",
+      "service_id": "service-4",
+      "release_decision_id": "S4-REL",
+      "snapshot_id": "S4-SNAP-1",
+      "evaluated_at_utc": "2026-01-09T14:00:00Z",
+      "closed_as_of": false,
+      "failure_codes": [
+        "historical_snapshot_status_mismatch",
+        "invalid_exception_authorization",
+        "snapshot_status_mismatch"
+      ],
+      "snapshot_results": [
+        {
+          "snapshot_id": "S4-SNAP-1",
+          "evaluated_at_utc": "2026-01-09T14:00:00Z",
+          "declared_status": "open",
+          "recomputed_status": "closed_as_of",
+          "status_match": false,
+          "failure_codes": [
+            "historical_snapshot_status_mismatch",
+            "snapshot_status_mismatch"
+          ]
+        }
+      ]
+    },
+    {
+      "closure_id": "CL-05-linked_incident",
+      "service_id": "service-5",
+      "release_decision_id": "S5-REL",
+      "snapshot_id": "S5-SNAP-1",
+      "evaluated_at_utc": "2026-01-10T14:00:00Z",
+      "closed_as_of": true,
+      "failure_codes": [],
+      "snapshot_results": [
+        {
+          "snapshot_id": "S5-SNAP-1",
+          "evaluated_at_utc": "2026-01-10T14:00:00Z",
+          "declared_status": "closed_as_of",
+          "recomputed_status": "closed_as_of",
+          "status_match": true,
+          "failure_codes": []
+        }
+      ]
+    },
+    {
+      "closure_id": "CL-06-unlinked_incident",
+      "service_id": "service-6",
+      "release_decision_id": "S6-REL",
+      "snapshot_id": "S6-SNAP-1",
+      "evaluated_at_utc": "2026-01-11T14:00:00Z",
+      "closed_as_of": false,
+      "failure_codes": [
+        "missing_or_late_feedback_link",
+        "unresolved_deployment_incident"
+      ],
+      "snapshot_results": [
+        {
+          "snapshot_id": "S6-SNAP-1",
+          "evaluated_at_utc": "2026-01-11T14:00:00Z",
+          "declared_status": "open",
+          "recomputed_status": "open",
+          "status_match": true,
+          "failure_codes": [
+            "historical_snapshot_unresolved_incident"
+          ]
+        }
+      ]
+    }
+  ],
+  "closure_failures": [
+    {
+      "closure_id": "CL-02-orphan",
+      "release_decision_id": "S2-REL",
+      "code": "orphan_release"
+    },
+    {
+      "closure_id": "CL-03-failed_gate",
+      "release_decision_id": "S3-REL",
+      "code": "failed_decision_gate"
+    },
+    {
+      "closure_id": "CL-04-expired_exception",
+      "release_decision_id": "S4-REL",
+      "code": "historical_snapshot_status_mismatch"
+    },
+    {
+      "closure_id": "CL-04-expired_exception",
+      "release_decision_id": "S4-REL",
+      "code": "invalid_exception_authorization"
+    },
+    {
+      "closure_id": "CL-04-expired_exception",
+      "release_decision_id": "S4-REL",
+      "code": "snapshot_status_mismatch"
+    },
+    {
+      "closure_id": "CL-06-unlinked_incident",
+      "release_decision_id": "S6-REL",
+      "code": "missing_or_late_feedback_link"
+    },
+    {
+      "closure_id": "CL-06-unlinked_incident",
+      "release_decision_id": "S6-REL",
+      "code": "unresolved_deployment_incident"
+    }
+  ],
+  "incident_temporal_classification": [
+    {
+      "closure_id": "CL-05-linked_incident",
+      "incident_id": "S5-INC",
+      "late_opening": false,
+      "late_reporting": false,
+      "late_attribution": false,
+      "reopen_required": false
+    },
+    {
+      "closure_id": "CL-06-unlinked_incident",
+      "incident_id": "S6-INC",
+      "late_opening": false,
+      "late_reporting": false,
+      "late_attribution": false,
+      "reopen_required": false
+    }
+  ],
+  "validation_audit": {
+    "exception_decisions": 1,
+    "invalid_exception_decisions": 1,
+    "required_value_matrix_fields": 194,
+    "required_value_total": 3140,
+    "required_value_present": 3140,
+    "candidate_coverage_required": 6,
+    "candidate_coverage_complete": 6
+  },
+  "data_quality": {
+    "status": "complete",
+    "required_values": {
+      "numerator": 3140,
+      "denominator": 3140,
+      "estimate": 1.0,
+      "required": 3140,
+      "observed": 3140,
+      "missing": 0
+    },
+    "candidate_coverage": {
+      "numerator": 6,
+      "denominator": 6,
+      "estimate": 1.0,
+      "required": 6,
+      "complete": 6,
+      "invalid_or_missing": 0
+    },
+    "validation_error_count": 0,
+    "outcome_metrics_suppressed": false,
+    "estimability_note": "counts use parseable records; invalid input suppresses outcome metrics but not this data-quality report"
+  },
+  "metrics": {
+    "trace_completeness": {
+      "numerator": 2,
+      "denominator": 6,
+      "estimate": 0.333333
+    },
+    "orphan_release_rate": {
+      "numerator": 1,
+      "denominator": 6,
+      "estimate": 0.166667
+    },
+    "decision_gate_rejection_rate": {
+      "numerator": 1,
+      "denominator": 48,
+      "estimate": 0.020833
+    },
+    "feedback_link_success": {
+      "numerator": 1,
+      "denominator": 2,
+      "estimate": 0.5,
+      "right_censored": 1
+    },
+    "exception_invalidity_rate": {
+      "numerator": 1,
+      "denominator": 1,
+      "estimate": 1.0
+    },
+    "latency_families": {
+      "gate_resolution": {
+        "unit": "hours",
+        "n": 0,
+        "median": null,
+        "minimum": null,
+        "maximum": null,
+        "dispersion": "not_estimable",
+        "right_censored": 1
+      },
+      "incident_attribution": {
+        "unit": "hours",
+        "n": 2,
+        "median": 0.5,
+        "minimum": 0.5,
+        "maximum": 0.5,
+        "dispersion": {
+          "iqr": 0.0
+        },
+        "right_censored": 0
+      },
+      "incident_feedback_link": {
+        "unit": "hours",
+        "n": 1,
+        "median": 3.5,
+        "minimum": 3.5,
+        "maximum": 3.5,
+        "dispersion": "not_informative",
+        "right_censored": 1
+      },
+      "incident_resolution": {
+        "unit": "hours",
+        "n": 1,
+        "median": 11.5,
+        "minimum": 11.5,
+        "maximum": 11.5,
+        "dispersion": "not_informative",
+        "right_censored": 1
+      },
+      "release_snapshot": {
+        "unit": "hours",
+        "n": 6,
+        "median": 25.0,
+        "minimum": 25.0,
+        "maximum": 25.0,
+        "dispersion": {
+          "iqr": 0.0
+        },
+        "right_censored": 0
+      }
+    }
+  }
+}

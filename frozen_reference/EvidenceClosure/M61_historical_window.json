@@ -1,0 +1,18 @@
+{
+  "mutant_id": "M61_historical_window",
+  "guard": "historical closed snapshot is rejected before its observation window closes",
+  "status": "killed_assertion",
+  "returncode": 1,
+  "mutant_source_sha256": "0c3cc0851daaabbc2d4d21a83145412c45d5b4c13fc85ad21deab3ec82979015",
+  "failing_tests": [
+    {
+      "test": "test_historical_closed_snapshot_before_window_end_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_historical_closed_snapshot_before_window_end_is_rejected)",
+      "outcome": "FAIL"
+    },
+    {
+      "test": "test_historical_closed_snapshot_before_window_end_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_historical_closed_snapshot_before_window_end_is_rejected)",
+      "outcome": "FAIL"
+    }
+  ],
+  "output_tail": "test_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected) ... ok\ntest_raw_to_import_counts_must_reconcile (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_to_import_counts_must_reconcile) ... ok\ntest_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata) ... ok\ntest_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite) ... ok\n\n======================================================================\nFAIL: test_historical_closed_snapshot_before_window_end_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_historical_closed_snapshot_before_window_end_is_rejected)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"reproduction/EvidenceClosure/S3_terminal_review_counterexamples.py\", line 74, in test_historical_closed_snapshot_before_window_end_is_rejected\n    self.assertIn(\"historical_snapshot_observation_window_open\", failures)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'historical_snapshot_observation_window_open' not found in ['historical_snapshot_invalid', 'historical_snapshot_missing_coverage', 'historical_snapshot_status_mismatch', 'snapshot_status_mismatch']\n\n----------------------------------------------------------------------\nRan 107 tests in 29.680s\n\nFAILED (failures=1)"
+}

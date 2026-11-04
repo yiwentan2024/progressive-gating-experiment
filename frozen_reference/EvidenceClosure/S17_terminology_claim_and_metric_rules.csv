@@ -1,0 +1,13 @@
+term_or_claim,type,definition_or_allowed_wording,prohibited_inference
+Release,descriptive,"A delivery grouping in source systems; not itself the audit decision object.",Do not equate with a deployment or snapshot.
+ReleaseDecision,normative,"The approved service-bounded object identified by closure_id and policy_version.",Do not aggregate across services without an explicit higher-level model.
+Deployment,normative,"An environment-specific execution of one ReleaseDecision.",Do not collapse canary blue-green or multi-environment events into one timestamp.
+closed_as_of(t_eval),normative,"No declared contract failure is observed at the cutoff under the stated candidate-coverage and observation assumptions.",Does not guarantee that no later incident will occur.
+snapshot,normative,"An immutable as-of audit record in one linear supersession chain.",Do not overwrite or silently branch prior snapshots.
+observation window,normative,"The policy-bounded interval after each Deployment that must end before closed_as_of.",Not the same as data extraction cutoff or maximum reporting delay.
+cutoff,normative,"The timestamp up to which evidence is admitted to one snapshot.",Does not prove future completeness.
+reporting attribution feedback resolution,normative,"Separate incident events with explicit precedence and censoring rules.",Do not substitute one timestamp for another.
+documentary mapping,descriptive,"An author-coded illustrative correspondence between retained statements and contract categories.",Not case conformance or field validation.
+tested conformance,claim boundary,"The reference implementation conformed for the declared fixtures and tests.",Not proof that the specification is complete or superior.
+EIR,metric,"Invalid latest declared-exception decisions divided by all latest decisions declared exception; denominator zero yields not_applicable.",Do not call the denominator effective exceptions.
+data completeness,metric,"Report required-field completeness and candidate-coverage completeness separately from outcome metrics.",Do not hide poor records by excluding invalid releases from all reporting.

@@ -1,0 +1,9 @@
+Historical/source-lineage note for the EvidenceClosure supplementary package
+==========================================================================
+Current package identity: IEEEAccess_Manuscript_EvidenceClosure.
+Technical test filenames and labels S3_v18_semantic_tests, V20, V21, V52,
+V53, and v13-python are retained source-history identifiers inside the
+inherited implementation. They are not manuscript versions, current
+authorities, or separate deliverables. The sole current entry point is
+reproduction/EvidenceClosure/EvidenceClosure_authoritative_verifier.py.
+Runtime output is external and must be placed under reproduced/output/.

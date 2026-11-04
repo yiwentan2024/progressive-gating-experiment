@@ -1,0 +1,31 @@
+{
+  "id": "PG-ART",
+  "scenario_family": "B01",
+  "type": "BASELINE_BLOCK",
+  "title": "Artifact substitution at the QA gate",
+  "injection": {
+    "layer": "artifact",
+    "at_stage": "qa",
+    "description": "Dev receives the pinned build. QA is requested with a different, runnable pyz image; the expected digest is not changed. The QA digest gate must reject it and staging must not be deployed."
+  },
+  "baseline_expected": {
+    "dev": "PASS",
+    "qa": "FAIL",
+    "staging": "NOT_DEPLOYED",
+    "first_failure_stage": "qa",
+    "first_failure_code": "ARTIFACT_DIGEST_MISMATCH"
+  },
+  "audit_expected": {
+    "P0": "NOT_RUN_UPSTREAM_BLOCKED",
+    "P1": "NOT_RUN_UPSTREAM_BLOCKED",
+    "evidence_status": null,
+    "codes": []
+  },
+  "requires_audit_case": false,
+  "required_evidence": [
+    "expected pyz digest and measured QA pyz digest",
+    "digest gate command exit / decision and QA container identity",
+    "staging container absence after rejection",
+    "P1 audit status NOT_RUN_UPSTREAM_BLOCKED (not OPEN)"
+  ]
+}

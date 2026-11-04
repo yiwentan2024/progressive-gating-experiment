@@ -1,0 +1,18 @@
+{
+  "mutant_id": "M54_candidate_observation_admission_order",
+  "guard": "candidate observation precedes admission",
+  "status": "killed_assertion",
+  "returncode": 1,
+  "mutant_source_sha256": "4bc479c4dc67b0d14c7ef1932d2b9d6c7b0b8311c95c1d4ee592b26ee1d7f621",
+  "failing_tests": [
+    {
+      "test": "test_candidate_admission_cannot_precede_observation (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_admission_cannot_precede_observation)",
+      "outcome": "FAIL"
+    },
+    {
+      "test": "test_candidate_admission_cannot_precede_observation (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_admission_cannot_precede_observation)",
+      "outcome": "FAIL"
+    }
+  ],
+  "output_tail": "test_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected) ... ok\ntest_raw_to_import_counts_must_reconcile (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_to_import_counts_must_reconcile) ... ok\ntest_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata) ... ok\ntest_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite) ... ok\n\n======================================================================\nFAIL: test_candidate_admission_cannot_precede_observation (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_admission_cannot_precede_observation)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"reproduction/EvidenceClosure/S3_terminal_review_counterexamples.py\", line 217, in test_candidate_admission_cannot_precede_observation\n    self.assertIn(\"candidate_admission_before_observation\", error_codes(self.result()))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'candidate_admission_before_observation' not found in set()\n\n----------------------------------------------------------------------\nRan 107 tests in 30.086s\n\nFAILED (failures=1)"
+}

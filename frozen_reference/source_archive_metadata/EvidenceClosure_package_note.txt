@@ -1,0 +1,5 @@
+# EvidenceClosure supplementary package note
+
+This is the minimal reproducibility companion for EvidenceClosure. It contains only cited protocol, implementation, schema, fixture, figure, test, and result materials. The public workflow archive is referenced by DOI in the manuscript and is not redistributed here. Independent field validation remains outside this package evidence boundary.
+
+A clean extraction run completed with the authoritative verifier (107/107 baseline predicates, 16/16 mutation assertions, S20 21 automated plus 2 manual controls, and tamper/target probes; exit code 0). Runtime reports are written outside the frozen package.

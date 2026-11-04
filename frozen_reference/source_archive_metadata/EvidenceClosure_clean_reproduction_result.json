@@ -1,0 +1,22 @@
+{
+  "schema_version": "EvidenceClosure",
+  "status": "passed_clean_extraction",
+  "current_entry_point": "reproduction/EvidenceClosure/EvidenceClosure_authoritative_verifier.py",
+  "baseline_tests_run": 107,
+  "baseline_green": true,
+  "mutation_generated": 16,
+  "mutation_killed_by_assertion": 16,
+  "s20_automated_checks": 21,
+  "s20_manual_controls": 2,
+  "tamper_hash_failure": true,
+  "target_substitution_failure": true,
+  "verifier_exit_code": 0,
+  "s20_exit_code": 0,
+  "unittest_exit_code": 0,
+  "verifier_elapsed_seconds": 112.656,
+  "unittest_elapsed_seconds": 15.42,
+  "fresh_clean_run": true,
+  "clean_extraction": "performed from the frozen supplementary ZIP into a new temporary directory",
+  "runtime_output_path": "reproduced/output/",
+  "evidence_boundary": "predicate-derived conformance; independent field validation not executed"
+}

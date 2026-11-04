@@ -1,0 +1,18 @@
+{
+  "mutant_id": "M57_candidate_actor_separation",
+  "guard": "exclusion decider and reviewer are distinct canonical principals",
+  "status": "killed_assertion",
+  "returncode": 1,
+  "mutant_source_sha256": "82469e68d4d924e0b95831ee76df3a7c57d312f5ab8d55be319ed55a8e070aa0",
+  "failing_tests": [
+    {
+      "test": "test_exclusion_decider_and_reviewer_must_differ (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_exclusion_decider_and_reviewer_must_differ)",
+      "outcome": "FAIL"
+    },
+    {
+      "test": "test_exclusion_decider_and_reviewer_must_differ (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_exclusion_decider_and_reviewer_must_differ)",
+      "outcome": "FAIL"
+    }
+  ],
+  "output_tail": "test_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected) ... ok\ntest_raw_to_import_counts_must_reconcile (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_to_import_counts_must_reconcile) ... ok\ntest_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata) ... ok\ntest_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite) ... ok\n\n======================================================================\nFAIL: test_exclusion_decider_and_reviewer_must_differ (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_exclusion_decider_and_reviewer_must_differ)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"reproduction/EvidenceClosure/S3_terminal_review_counterexamples.py\", line 226, in test_exclusion_decider_and_reviewer_must_differ\n    self.assertIn(\"candidate_review_separation_failure\", error_codes(self.result()))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'candidate_review_separation_failure' not found in {'unauthorized_candidate_reviewer'}\n\n----------------------------------------------------------------------\nRan 107 tests in 29.345s\n\nFAILED (failures=1)"
+}

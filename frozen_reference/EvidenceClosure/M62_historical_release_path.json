@@ -1,0 +1,18 @@
+{
+  "mutant_id": "M62_historical_release_path",
+  "guard": "historical snapshot recomputes its selected release path from cutoff-visible evidence",
+  "status": "killed_assertion",
+  "returncode": 1,
+  "mutant_source_sha256": "ad4aa29a2fa52c41cd63cbf172d70913846f9c57c07216b215e41eec82c20f37",
+  "failing_tests": [
+    {
+      "test": "test_historical_snapshot_rejects_post_cutoff_selected_path_evidence (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_historical_snapshot_rejects_post_cutoff_selected_path_evidence)",
+      "outcome": "FAIL"
+    },
+    {
+      "test": "test_historical_snapshot_rejects_post_cutoff_selected_path_evidence (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_historical_snapshot_rejects_post_cutoff_selected_path_evidence)",
+      "outcome": "FAIL"
+    }
+  ],
+  "output_tail": "test_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected) ... ok\ntest_raw_to_import_counts_must_reconcile (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_to_import_counts_must_reconcile) ... ok\ntest_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata) ... ok\ntest_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite) ... ok\n\n======================================================================\nFAIL: test_historical_snapshot_rejects_post_cutoff_selected_path_evidence (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_historical_snapshot_rejects_post_cutoff_selected_path_evidence)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"reproduction/EvidenceClosure/S3_terminal_review_counterexamples.py\", line 84, in test_historical_snapshot_rejects_post_cutoff_selected_path_evidence\n    self.assertIn(\"historical_snapshot_missing_release_path\", failures)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'historical_snapshot_missing_release_path' not found in []\n\n----------------------------------------------------------------------\nRan 107 tests in 29.354s\n\nFAILED (failures=1)"
+}

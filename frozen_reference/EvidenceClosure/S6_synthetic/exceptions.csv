@@ -1,0 +1,2 @@
+closure_id,exception_id,gate_evaluation_id,policy_version,approver,scope_gate_id,scope_service_id,risk_class,issue_time_utc,expiry_time_utc,revoked_at_utc,rationale,status
+CL-04-expired_exception,S4-EX,S4-GE-G3,p18.0,exception-approver,G3,service-4,medium,2026-01-08T10:00:00Z,2026-01-08T12:00:00Z,,synthetic expired exception,approved

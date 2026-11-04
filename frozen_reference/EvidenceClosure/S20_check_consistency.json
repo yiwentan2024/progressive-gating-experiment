@@ -1,0 +1,172 @@
+{
+  "schema_version": "1.0.0",
+  "authority": "S20_normative_source_of_truth.csv",
+  "rule_rows": 23,
+  "automated_checks": 21,
+  "manual_controls": 2,
+  "passed": true,
+  "failures": [],
+  "checks": [
+    {
+      "check_id": "C01",
+      "concept": "candidate population",
+      "status": "passed",
+      "files": "S2 schema; S3; S6 fixtures",
+      "detail": "candidate_coverage.csv: missing=[]; zero-candidate fixture=True"
+    },
+    {
+      "check_id": "C02",
+      "concept": "coverage time closure",
+      "status": "passed",
+      "files": "S2 schema; S3; semantic tests",
+      "detail": "time guard present"
+    },
+    {
+      "check_id": "C03",
+      "concept": "coverage version chain",
+      "status": "passed",
+      "files": "S2 schema; S3; terminal-review tests",
+      "detail": "candidate_coverage.csv: missing=[]"
+    },
+    {
+      "check_id": "C04",
+      "concept": "raw signal reconciliation",
+      "status": "passed",
+      "files": "S2 schema; S3; S6 fixtures; terminal-review tests",
+      "detail": "candidate_coverage.csv: missing=[]; raw_signal_inventory.csv: missing=[]; guards=['candidate_signal_reconciliation_mismatch', 'raw_signal_inventory_count_mismatch', 'raw_inventory_digest_mismatch', 'candidate_raw_signal_bijection_mismatch']"
+    },
+    {
+      "check_id": "C05",
+      "concept": "candidate state machine",
+      "status": "passed",
+      "files": "S3; S4 candidate authority; terminal-review tests",
+      "detail": "authority_file=True; guards=['candidate_admission_before_observation', 'candidate_decision_before_admission', 'candidate_review_separation_failure', 'unauthorized_candidate_decider', 'unauthorized_candidate_reviewer', 'incident_candidate_after_cutoff']"
+    },
+    {
+      "check_id": "C06",
+      "concept": "snapshot validity",
+      "status": "passed",
+      "files": "S2 schema; S3; terminal-review tests",
+      "detail": "snapshots.csv: missing=[]; guards=('snapshot_input_manifest_digest_mismatch', 'historical_snapshot_invalid', 'historical_snapshot_missing_release_path', 'historical_snapshot_missing_finding_lineage')"
+    },
+    {
+      "check_id": "C07",
+      "concept": "Requirement identity",
+      "status": "passed",
+      "files": "S2 schema; S3; terminal-review tests",
+      "detail": "nodes.csv: missing=[]"
+    },
+    {
+      "check_id": "C08",
+      "concept": "Finding to Requirement",
+      "status": "passed",
+      "files": "S2 schema; S3; semantic tests",
+      "detail": "deprecated fixture edge=False"
+    },
+    {
+      "check_id": "C09",
+      "concept": "late admission",
+      "status": "passed",
+      "files": "S3; semantic tests",
+      "detail": "snapshot and coverage successor guards present"
+    },
+    {
+      "check_id": "C10",
+      "concept": "public closure output",
+      "status": "passed",
+      "files": "S3; S6 baseline",
+      "detail": "closure output keys inspected"
+    },
+    {
+      "check_id": "C11",
+      "concept": "data quality",
+      "status": "passed",
+      "files": "S3; terminal-review tests",
+      "detail": "top-level data_quality inspected"
+    },
+    {
+      "check_id": "C12",
+      "concept": "EIR denominator",
+      "status": "passed",
+      "files": "S17; S3 output",
+      "detail": "S17 denominator language inspected"
+    },
+    {
+      "check_id": "C13",
+      "concept": "policy boundary",
+      "status": "passed",
+      "files": "S4 policy; S15; S17",
+      "detail": "policy boundary tokens inspected"
+    },
+    {
+      "check_id": "C14",
+      "concept": "evidence boundary",
+      "status": "passed",
+      "files": "README; S18",
+      "detail": "README and S18 evidence boundary inspected"
+    },
+    {
+      "check_id": "C15",
+      "concept": "terminal counterexamples",
+      "status": "passed",
+      "files": "S3_terminal_review_counterexamples.py",
+      "detail": "named regressions=9"
+    },
+    {
+      "check_id": "C16",
+      "concept": "coverage scope across versions",
+      "status": "passed",
+      "files": "S3; S6 fixtures; terminal-review tests",
+      "detail": "scope guard tokens=['candidate_coverage_scope_mismatch', 'window_start_utc', 'responsible_actor']"
+    },
+    {
+      "check_id": "C17",
+      "concept": "canonical review principals",
+      "status": "passed",
+      "files": "S3; S4_principal_registry.csv; terminal-review tests",
+      "detail": "registry=True; guards=['canonical_principal', 'unknown_principal_alias', 'duplicate_principal_alias', 'principal_alias_conflict', 'candidate_review_separation_failure']"
+    },
+    {
+      "check_id": "C18",
+      "concept": "historical status agreement",
+      "status": "passed",
+      "files": "S3; snapshots.csv; terminal-review tests",
+      "detail": "all-snapshot status comparison present"
+    },
+    {
+      "check_id": "C19",
+      "concept": "target release episode completeness",
+      "status": "passed",
+      "files": "S3; S6 fixtures; semantic/adversarial tests",
+      "detail": "target closure reconciliation present"
+    },
+    {
+      "check_id": "C20",
+      "concept": "principal registry digest binding",
+      "status": "passed",
+      "files": "S3; S4_principal_registry.csv; snapshot tests",
+      "detail": "principal registry is a snapshot digest input"
+    },
+    {
+      "check_id": "C21",
+      "concept": "authoritative evidence verifier",
+      "status": "passed",
+      "files": "EvidenceClosure_authoritative_verifier.py; EvidenceClosure_verifier_stage_runner.py; S3; S20; S9 manifest",
+      "detail": "single bounded EvidenceClosure verifier with resolved external runtime output"
+    },
+    {
+      "check_id": "M01",
+      "concept": "manuscript natural-language consistency",
+      "status": "manual_not_automated",
+      "files": "final DOCX and PDF",
+      "detail": "declared manual control; no automated pass is claimed"
+    },
+    {
+      "check_id": "M02",
+      "concept": "publication responsibility",
+      "status": "manual_not_automated",
+      "files": "author checklist; final declarations",
+      "detail": "declared manual control; no automated pass is claimed"
+    }
+  ]
+}

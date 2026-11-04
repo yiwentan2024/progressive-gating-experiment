@@ -1,0 +1,31 @@
+{
+  "id": "PG-QA",
+  "scenario_family": "B02",
+  "type": "BASELINE_BLOCK",
+  "title": "QA health failure after correct artifact deployment",
+  "injection": {
+    "layer": "stage_health",
+    "at_stage": "qa",
+    "description": "The correct artifact is deployed at every stage. Only QA is started with the declared FAIL_HEALTH=1 switch; dev passes and QA returns HTTP 503. Staging must not be deployed."
+  },
+  "baseline_expected": {
+    "dev": "PASS",
+    "qa": "FAIL",
+    "staging": "NOT_DEPLOYED",
+    "first_failure_stage": "qa",
+    "first_failure_code": "HEALTH_CHECK_FAILED"
+  },
+  "audit_expected": {
+    "P0": "NOT_RUN_UPSTREAM_BLOCKED",
+    "P1": "NOT_RUN_UPSTREAM_BLOCKED",
+    "evidence_status": null,
+    "codes": []
+  },
+  "requires_audit_case": false,
+  "required_evidence": [
+    "QA deployed pyz digest equals the pinned digest",
+    "live QA HTTP response status 503 and body",
+    "staging container absence after rejection",
+    "P1 audit status NOT_RUN_UPSTREAM_BLOCKED (not OPEN)"
+  ]
+}

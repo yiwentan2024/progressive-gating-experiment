@@ -1,0 +1,1 @@
+closure_id,release_decision_id,change_id,selected_build_id,selected_test_run_ids,selected_artifact_id,artifact_digest,approved_at_utc,policy_version,evaluation_time_utc,observation_window_hours,mandatory_gate_ids

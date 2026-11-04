@@ -1,0 +1,15 @@
+# Prespecified independent evaluation protocol (not yet executed)
+
+This protocol is supplied to make the remaining evaluation gap testable. It is not evidence that independent evaluation has occurred.
+
+## Technical replication
+
+An evaluator who did not implement S3 receives the frozen schemas and normative predicates, writes an independent oracle or model checker, and classifies a prespecified set of valid and invalid snapshots. Primary outcomes are agreement, disagreement category, unhandled specification ambiguity, and time to resolution. The reference validator must not be used to generate the oracle labels.
+
+## Controlled application study
+
+Release, test, operations, and governance participants independently judge prospective snapshots before seeing validator output. Prespecified outcomes are closure agreement, false closure, false block, missing-field frequency, recording time, and adjudication rationale. Ethics and organizational authorization are prerequisites.
+
+## Decision rule
+
+The contract advances beyond reference-implementation conformance only if the independent oracle exposes no unresolved safety-critical ambiguity and every disagreement is reported rather than tuned away. This protocol is not executed; the bounded V19 cluster A candidate therefore retains the specification/software-article claim boundary.

@@ -1,0 +1,271 @@
+name: progressive-gating
+run-name: "pg ${{ inputs.mode }} ${{ inputs.batch }} ${{ inputs.scenario }} r${{ inputs.repeat_index }} a${{ inputs.attempt }}"
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "formal = 6x3 matrix; calibration = 3 pairing checks; pair = one scenario; local = developer validation"
+        type: choice
+        options: [formal, calibration, pair, local]
+        default: formal
+      batch:
+        description: "Optional batch id; empty uses the mode default"
+        type: string
+        required: false
+        default: ""
+      scenario:
+        description: "Required only for pair mode (PG-N01, PG-ART, PG-QA, PG-DISP, PG-SEQ, PG-INFO)"
+        type: string
+        required: false
+        default: ""
+      repeat_index:
+        description: "Required only for pair mode (formal 1-3; calibration 1)"
+        type: string
+        required: false
+        default: ""
+      attempt:
+        description: "Retry attempt number for this batch (default 1)"
+        type: string
+        required: false
+        default: "1"
+
+permissions:
+  contents: read
+  id-token: write
+  attestations: write
+  artifact-metadata: write
+
+jobs:
+  progressive-gating:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    env:
+      INPUT_MODE: ${{ inputs.mode }}
+      INPUT_BATCH: ${{ inputs.batch }}
+      INPUT_SCENARIO: ${{ inputs.scenario }}
+      INPUT_REPEAT: ${{ inputs.repeat_index }}
+      INPUT_ATTEMPT: ${{ inputs.attempt }}
+      BUILD_DIR: ${{ github.workspace }}/../pg-build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.13"
+
+      - name: Record tool versions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python --version
+          docker --version
+          docker compose version
+          gh --version | head -n 1
+
+      - name: Check frozen reference manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/check_frozen_manifest.py
+
+      - name: Resolve batch and mode
+        shell: bash
+        run: |
+          set -euo pipefail
+          mode="${INPUT_MODE}"
+          batch="${INPUT_BATCH}"
+          case "$mode" in
+            formal)
+              [ -n "$batch" ] || batch="PG-FORMAL-01"
+              [ "$batch" = "PG-FORMAL-01" ] || { echo "formal mode uses the frozen batch PG-FORMAL-01; regenerate protocol.json to change it"; exit 2; }
+              ;;
+            calibration)
+              [ -n "$batch" ] || batch="PG-CAL-01"
+              [ "$batch" = "PG-CAL-01" ] || { echo "calibration mode uses the frozen batch PG-CAL-01; regenerate protocol.json to change it"; exit 2; }
+              ;;
+            pair)
+              [ -n "$batch" ] || batch="PG-PAIR-${GITHUB_RUN_ID}"
+              [ -n "${INPUT_SCENARIO}" ] || { echo "pair mode requires scenario"; exit 2; }
+              [ -n "${INPUT_REPEAT}" ] || { echo "pair mode requires repeat_index"; exit 2; }
+              case "${INPUT_REPEAT}" in
+                1|2|3) ;;
+                *) echo "pair mode repeat_index must be 1, 2, or 3"; exit 2 ;;
+              esac
+              ;;
+            local)
+              [ -n "$batch" ] || batch="LOCAL-${GITHUB_RUN_ID}"
+              [ "${batch#LOCAL-}" != "$batch" ] || { echo "local mode requires a LOCAL- batch id"; exit 2; }
+              ;;
+            *)
+              echo "unknown mode: $mode"
+              exit 2
+              ;;
+          esac
+          {
+            echo "PG_MODE=$mode"
+            echo "PG_BATCH=$batch"
+            echo "PG_SCENARIO=${INPUT_SCENARIO}"
+            echo "PG_REPEAT=${INPUT_REPEAT:-1}"
+            echo "PG_ATTEMPT=${INPUT_ATTEMPT:-1}"
+          } >> "$GITHUB_ENV"
+          mkdir -p "$BUILD_DIR"
+
+      - name: Check protocol hashes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m tools.pg_protocol check
+
+      - name: Run progressive-gating tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m unittest discover -s tests_pg -t . -v
+
+      - name: Build artifact and Docker image (runs existing unit tests)
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m tools.pg_build build \
+            --batch "$PG_BATCH" \
+            --out "$BUILD_DIR" \
+            --attestation-mode github \
+            --source-commit "$GITHUB_SHA"
+
+      - name: Attest the pyz subject
+        uses: actions/attest@v4
+        with:
+          subject-path: dist/release_app.pyz
+
+      - name: Verify attestation and record the result
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          command="gh attestation verify dist/release_app.pyz --repo ${GITHUB_REPOSITORY} --format json"
+          tool_version="$(gh --version | head -n 1)"
+          set +e
+          gh attestation verify dist/release_app.pyz \
+            --repo "$GITHUB_REPOSITORY" \
+            --format json > "$BUILD_DIR/attestation_verify.json" 2> "$BUILD_DIR/attestation_verify.stderr"
+          rc=$?
+          echo "$rc" > "$BUILD_DIR/attestation_verify.exit"
+          echo "attestation verify exit=$rc"
+          set -e
+          python -m tools.pg_build record-attestation \
+            --manifest "$BUILD_DIR/build_manifest.json" \
+            --exit-file "$BUILD_DIR/attestation_verify.exit" \
+            --command "$command" \
+            --tool-version "$tool_version" \
+            --json-file "$BUILD_DIR/attestation_verify.json" \
+            --stderr-file "$BUILD_DIR/attestation_verify.stderr"
+
+      - name: Verify build manifest and attestation binding
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m tools.pg_build verify --manifest "$BUILD_DIR/build_manifest.json"
+
+      - name: Run sequential promotion pairs
+        shell: bash
+        run: |
+          set -euo pipefail
+          args=(
+            --manifest "$BUILD_DIR/build_manifest.json"
+            --mode "$PG_MODE"
+            --batch "$PG_BATCH"
+            --attempt "${PG_ATTEMPT:-1}"
+            --github-run-id "$GITHUB_RUN_ID"
+            --github-run-url "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+            --github-job-id "$GITHUB_JOB"
+          )
+          if [ "$PG_MODE" = "pair" ]; then
+            args+=(--scenario "$PG_SCENARIO" --repeat-index "$PG_REPEAT")
+          fi
+          if [ "$PG_MODE" = "calibration" ]; then
+            args+=(--calibration)
+          fi
+          python -m tools.pg_run "${args[@]}"
+
+      - name: Archive build evidence
+        if: always()
+        shell: bash
+        run: |
+          if [ -f "$BUILD_DIR/build_manifest.json" ]; then
+            safe_batch="$(printf '%s' "$PG_BATCH" | tr '[:upper:]' '[:lower:]' | tr -c 'a-z0-9_.-' '-')"
+            if [ "$PG_MODE" = "pair" ]; then
+              safe_scenario="$(printf '%s' "$PG_SCENARIO" | tr '[:upper:]' '[:lower:]' | tr -c 'a-z0-9_.-' '-')"
+              safe_batch="${safe_batch}__${safe_scenario}__r${PG_REPEAT}"
+            fi
+            mkdir -p "progressive-gating/build/${safe_batch}"
+            cp -R "$BUILD_DIR/." "progressive-gating/build/${safe_batch}/"
+          fi
+
+      - name: Finalize ledgers
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "$PG_MODE" = "formal" ]; then
+            python -m tools.pg_ledger finalize --root progressive-gating --require-complete
+          else
+            python -m tools.pg_ledger finalize --root progressive-gating
+          fi
+
+      - name: Verify ledgers and manifest
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m tools.pg_ledger verify --root progressive-gating
+          if [ "$PG_MODE" = "formal" ]; then
+            python -m tools.pg_ledger verify --root progressive-gating --require-complete
+          fi
+
+      - name: Package verified evidence with the source snapshot
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m tools.pg_archive package \
+            --root progressive-gating \
+            --source-from . \
+            --artifact dist/release_app.pyz
+
+      - name: Upload final package
+        if: always() && hashFiles('progressive-gating-final-*.zip') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: progressive-gating-final-${{ github.run_id }}
+          path: |
+            progressive-gating-final-*.zip
+            progressive-gating-final-*.zip.sha256
+            progressive-gating-final-*.zip.manifest.json
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Upload diagnostics from an incomplete run
+        if: always() && hashFiles('progressive-gating-final-*.zip') == ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: progressive-gating-diagnostics-${{ github.run_id }}
+          path: progressive-gating/
+          if-no-files-found: warn
+          retention-days: 90
+
+      - name: Clean up harness containers and images
+        if: always()
+        shell: bash
+        run: |
+          set +e
+          for cid in $(docker ps -aq --filter label=pg.harness=progressive-gating); do
+            docker rm -f "$cid"
+          done
+          for img in $(docker images -q --filter label=pg.harness=progressive-gating); do
+            docker rmi -f "$img"
+          done
+          exit 0

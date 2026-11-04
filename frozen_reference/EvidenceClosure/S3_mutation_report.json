@@ -1,0 +1,782 @@
+{
+  "scope": "M47-M62 targeted assertion-level mutations",
+  "source_path": "S3_analyze_evidence.py",
+  "source_bytes": 128617,
+  "source_sha256": "424377ba8bb71789af7dff5aba3e7af26a5cb5b2e0ef2ac26afc1eaead338034",
+  "generated": 16,
+  "killed_by_assertion": 16,
+  "killed_by_crash": 0,
+  "survived": [],
+  "status": "passed",
+  "stage_results": [
+    {
+      "name": "M47_coverage_attestation_time",
+      "command": [
+        "C:\\Users\\TYW\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "S3_mutation_test.py",
+        "--cluster-a",
+        "--mutant",
+        "M47_coverage_attestation_time",
+        "--skip-baseline",
+        "--output",
+        "<temporary-stage-output>/evidenceclosure-stage-7okl_v8b\\M47_coverage_attestation_time.json"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 27.188,
+      "timed_out": false,
+      "output_tail": "      \"mutant_id\": \"M47_coverage_attestation_time\",\n      \"guard\": \"coverage attestation follows the observation-window end\",\n      \"status\": \"killed_assertion\",\n      \"returncode\": 1,\n      \"mutant_source_sha256\": \"5fbc8a911a863554f9e54c427f0e5b252e4f868f34468ba581eea57f4a230e33\",\n      \"failing_tests\": [\n        {\n          \"test\": \"test_complete_coverage_cannot_precede_window_end (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_complete_coverage_cannot_precede_window_end)\",\n          \"outcome\": \"FAIL\"\n        },\n        {\n          \"test\": \"test_complete_coverage_cannot_precede_window_end (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_complete_coverage_cannot_precede_window_end)\",\n          \"outcome\": \"FAIL\"\n        }\n      ],\n      \"output_tail\": \"test_raw_inventory_digest_is_row_order_invariant (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_digest_is_row_order_invariant) ... ok\\ntest_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected) ... ok\\ntest_raw_to_import_counts_must_reconcile (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_to_import_counts_must_reconcile) ... ok\\ntest_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata) ... ok\\ntest_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite) ... ok\\n\\n======================================================================\\nFAIL: test_complete_coverage_cannot_precede_window_end (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_complete_coverage_cannot_precede_window_end)\\n----------------------------------------------------------------------\\nTraceback (most recent call last):\\n  File \\\"D:\\\\codex-object\\\\CICD\\\\EvidenceClosure-supplementary\\\\reproduction\\\\EvidenceClosure\\\\S3_terminal_review_counterexamples.py\\\", line 92, in test_complete_coverage_cannot_precede_window_end\\n    self.assertIn(\\\"coverage_attested_before_window_end\\\", error_codes(self.result()))\\nAssertionError: 'coverage_attested_before_window_end' not found in {'candidate_reconciliation_digest_mismatch'}\\n\\n----------------------------------------------------------------------\\nRan 107 tests in 25.728s\\n\\nFAILED (failures=1)\"\n    }\n  ]\n}\n",
+      "output_sha256": "abb86f6e39d43d53de19bfe3d01c3b6fbfc7bc0a9848d01e8d50491236f348ab",
+      "status": "passed",
+      "mutation": {
+        "source_sha256": "424377ba8bb71789af7dff5aba3e7af26a5cb5b2e0ef2ac26afc1eaead338034",
+        "source_bytes": 128617,
+        "generated": 1,
+        "killed_by_assertion": 1,
+        "killed_by_crash": 0,
+        "survived": [],
+        "results": [
+          {
+            "mutant_id": "M47_coverage_attestation_time",
+            "guard": "coverage attestation follows the observation-window end",
+            "status": "killed_assertion",
+            "returncode": 1,
+            "mutant_source_sha256": "5fbc8a911a863554f9e54c427f0e5b252e4f868f34468ba581eea57f4a230e33",
+            "failing_tests": [
+              {
+                "test": "test_complete_coverage_cannot_precede_window_end (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_complete_coverage_cannot_precede_window_end)",
+                "outcome": "FAIL"
+              },
+              {
+                "test": "test_complete_coverage_cannot_precede_window_end (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_complete_coverage_cannot_precede_window_end)",
+                "outcome": "FAIL"
+              }
+            ],
+            "output_tail": "test_raw_inventory_digest_is_row_order_invariant (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_digest_is_row_order_invariant) ... ok\ntest_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected) ... ok\ntest_raw_to_import_counts_must_reconcile (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_to_import_counts_must_reconcile) ... ok\ntest_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata) ... ok\ntest_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite) ... ok\n\n======================================================================\nFAIL: test_complete_coverage_cannot_precede_window_end (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_complete_coverage_cannot_precede_window_end)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\codex-object\\CICD\\EvidenceClosure-supplementary\\reproduction\\EvidenceClosure\\S3_terminal_review_counterexamples.py\", line 92, in test_complete_coverage_cannot_precede_window_end\n    self.assertIn(\"coverage_attested_before_window_end\", error_codes(self.result()))\nAssertionError: 'coverage_attested_before_window_end' not found in {'candidate_reconciliation_digest_mismatch'}\n\n----------------------------------------------------------------------\nRan 107 tests in 25.728s\n\nFAILED (failures=1)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "M48_coverage_version_root",
+      "command": [
+        "C:\\Users\\TYW\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "S3_mutation_test.py",
+        "--cluster-a",
+        "--mutant",
+        "M48_coverage_version_root",
+        "--skip-baseline",
+        "--output",
+        "<temporary-stage-output>/evidenceclosure-stage-7okl_v8b\\M48_coverage_version_root.json"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 27.188,
+      "timed_out": false,
+      "output_tail": "      \"mutant_id\": \"M48_coverage_version_root\",\n      \"guard\": \"coverage version chain starts at an unsuperseded root\",\n      \"status\": \"killed_assertion\",\n      \"returncode\": 1,\n      \"mutant_source_sha256\": \"09e6acee7703fdb014821fb85c017eca25f1e6cff8ffd2fccb532aab54ae9bcb\",\n      \"failing_tests\": [\n        {\n          \"test\": \"test_coverage_version_chain_cannot_skip_the_root (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_coverage_version_chain_cannot_skip_the_root)\",\n          \"outcome\": \"FAIL\"\n        },\n        {\n          \"test\": \"test_coverage_version_chain_cannot_skip_the_root (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_coverage_version_chain_cannot_skip_the_root)\",\n          \"outcome\": \"FAIL\"\n        }\n      ],\n      \"output_tail\": \"test_raw_inventory_digest_is_row_order_invariant (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_digest_is_row_order_invariant) ... ok\\ntest_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected) ... ok\\ntest_raw_to_import_counts_must_reconcile (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_to_import_counts_must_reconcile) ... ok\\ntest_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata) ... ok\\ntest_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite) ... ok\\n\\n======================================================================\\nFAIL: test_coverage_version_chain_cannot_skip_the_root (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_coverage_version_chain_cannot_skip_the_root)\\n----------------------------------------------------------------------\\nTraceback (most recent call last):\\n  File \\\"D:\\\\codex-object\\\\CICD\\\\EvidenceClosure-supplementary\\\\reproduction\\\\EvidenceClosure\\\\S3_terminal_review_counterexamples.py\\\", line 199, in test_coverage_version_chain_cannot_skip_the_root\\n    self.assertIn(\\\"invalid_candidate_coverage_chain\\\", error_codes(self.result()))\\nAssertionError: 'invalid_candidate_coverage_chain' not found in {'candidate_reconciliation_digest_mismatch', 'missing_required_value'}\\n\\n----------------------------------------------------------------------\\nRan 107 tests in 25.799s\\n\\nFAILED (failures=1)\"\n    }\n  ]\n}\n",
+      "output_sha256": "2d5b12f3b1c7ff84079d6f40dff816190160e9d38f862449bf28ea75eee8fc54",
+      "status": "passed",
+      "mutation": {
+        "source_sha256": "424377ba8bb71789af7dff5aba3e7af26a5cb5b2e0ef2ac26afc1eaead338034",
+        "source_bytes": 128617,
+        "generated": 1,
+        "killed_by_assertion": 1,
+        "killed_by_crash": 0,
+        "survived": [],
+        "results": [
+          {
+            "mutant_id": "M48_coverage_version_root",
+            "guard": "coverage version chain starts at an unsuperseded root",
+            "status": "killed_assertion",
+            "returncode": 1,
+            "mutant_source_sha256": "09e6acee7703fdb014821fb85c017eca25f1e6cff8ffd2fccb532aab54ae9bcb",
+            "failing_tests": [
+              {
+                "test": "test_coverage_version_chain_cannot_skip_the_root (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_coverage_version_chain_cannot_skip_the_root)",
+                "outcome": "FAIL"
+              },
+              {
+                "test": "test_coverage_version_chain_cannot_skip_the_root (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_coverage_version_chain_cannot_skip_the_root)",
+                "outcome": "FAIL"
+              }
+            ],
+            "output_tail": "test_raw_inventory_digest_is_row_order_invariant (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_digest_is_row_order_invariant) ... ok\ntest_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected) ... ok\ntest_raw_to_import_counts_must_reconcile (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_to_import_counts_must_reconcile) ... ok\ntest_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata) ... ok\ntest_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite) ... ok\n\n======================================================================\nFAIL: test_coverage_version_chain_cannot_skip_the_root (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_coverage_version_chain_cannot_skip_the_root)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\codex-object\\CICD\\EvidenceClosure-supplementary\\reproduction\\EvidenceClosure\\S3_terminal_review_counterexamples.py\", line 199, in test_coverage_version_chain_cannot_skip_the_root\n    self.assertIn(\"invalid_candidate_coverage_chain\", error_codes(self.result()))\nAssertionError: 'invalid_candidate_coverage_chain' not found in {'candidate_reconciliation_digest_mismatch', 'missing_required_value'}\n\n----------------------------------------------------------------------\nRan 107 tests in 25.799s\n\nFAILED (failures=1)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "M49_raw_inventory_count",
+      "command": [
+        "C:\\Users\\TYW\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "S3_mutation_test.py",
+        "--cluster-a",
+        "--mutant",
+        "M49_raw_inventory_count",
+        "--skip-baseline",
+        "--output",
+        "<temporary-stage-output>/evidenceclosure-stage-7okl_v8b\\M49_raw_inventory_count.json"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 27.188,
+      "timed_out": false,
+      "output_tail": "      \"mutant_id\": \"M49_raw_inventory_count\",\n      \"guard\": \"raw count equals immutable inventory rows\",\n      \"status\": \"killed_assertion\",\n      \"returncode\": 1,\n      \"mutant_source_sha256\": \"a2a16f96831c0d85c848e85fe009d5001c0c20937eda23bd50b8f71d2887a29b\",\n      \"failing_tests\": [\n        {\n          \"test\": \"test_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected)\",\n          \"outcome\": \"FAIL\"\n        },\n        {\n          \"test\": \"test_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected)\",\n          \"outcome\": \"FAIL\"\n        }\n      ],\n      \"output_tail\": \"test_raw_inventory_digest_is_row_order_invariant (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_digest_is_row_order_invariant) ... ok\\ntest_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected) ... FAIL\\ntest_raw_to_import_counts_must_reconcile (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_to_import_counts_must_reconcile) ... ok\\ntest_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata) ... ok\\ntest_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite) ... ok\\n\\n======================================================================\\nFAIL: test_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected)\\n----------------------------------------------------------------------\\nTraceback (most recent call last):\\n  File \\\"D:\\\\codex-object\\\\CICD\\\\EvidenceClosure-supplementary\\\\reproduction\\\\EvidenceClosure\\\\S3_terminal_review_counterexamples.py\\\", line 107, in test_raw_inventory_item_deletion_is_rejected\\n    self.assertIn(\\\"raw_signal_inventory_count_mismatch\\\", error_codes(self.result()))\\nAssertionError: 'raw_signal_inventory_count_mismatch' not found in {'candidate_raw_signal_bijection_mismatch', 'raw_inventory_digest_mismatch', 'raw_signal_disposition_count_mismatch'}\\n\\n----------------------------------------------------------------------\\nRan 107 tests in 25.752s\\n\\nFAILED (failures=1)\"\n    }\n  ]\n}\n",
+      "output_sha256": "120e681635c92a38e64a0ce205c6df3cf37ed5ebb66aa2e16ee4c88034954712",
+      "status": "passed",
+      "mutation": {
+        "source_sha256": "424377ba8bb71789af7dff5aba3e7af26a5cb5b2e0ef2ac26afc1eaead338034",
+        "source_bytes": 128617,
+        "generated": 1,
+        "killed_by_assertion": 1,
+        "killed_by_crash": 0,
+        "survived": [],
+        "results": [
+          {
+            "mutant_id": "M49_raw_inventory_count",
+            "guard": "raw count equals immutable inventory rows",
+            "status": "killed_assertion",
+            "returncode": 1,
+            "mutant_source_sha256": "a2a16f96831c0d85c848e85fe009d5001c0c20937eda23bd50b8f71d2887a29b",
+            "failing_tests": [
+              {
+                "test": "test_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected)",
+                "outcome": "FAIL"
+              },
+              {
+                "test": "test_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected)",
+                "outcome": "FAIL"
+              }
+            ],
+            "output_tail": "test_raw_inventory_digest_is_row_order_invariant (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_digest_is_row_order_invariant) ... ok\ntest_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected) ... FAIL\ntest_raw_to_import_counts_must_reconcile (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_to_import_counts_must_reconcile) ... ok\ntest_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata) ... ok\ntest_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite) ... ok\n\n======================================================================\nFAIL: test_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\codex-object\\CICD\\EvidenceClosure-supplementary\\reproduction\\EvidenceClosure\\S3_terminal_review_counterexamples.py\", line 107, in test_raw_inventory_item_deletion_is_rejected\n    self.assertIn(\"raw_signal_inventory_count_mismatch\", error_codes(self.result()))\nAssertionError: 'raw_signal_inventory_count_mismatch' not found in {'candidate_raw_signal_bijection_mismatch', 'raw_inventory_digest_mismatch', 'raw_signal_disposition_count_mismatch'}\n\n----------------------------------------------------------------------\nRan 107 tests in 25.752s\n\nFAILED (failures=1)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "M50_raw_inventory_digest",
+      "command": [
+        "C:\\Users\\TYW\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "S3_mutation_test.py",
+        "--cluster-a",
+        "--mutant",
+        "M50_raw_inventory_digest",
+        "--skip-baseline",
+        "--output",
+        "<temporary-stage-output>/evidenceclosure-stage-7okl_v8b\\M50_raw_inventory_digest.json"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 27.282,
+      "timed_out": false,
+      "output_tail": "      \"mutant_id\": \"M50_raw_inventory_digest\",\n      \"guard\": \"raw inventory digest detects item or disposition tampering\",\n      \"status\": \"killed_assertion\",\n      \"returncode\": 1,\n      \"mutant_source_sha256\": \"134a6fac7aae819f92c9ca40982a793779e97236b0a8ba5fd4c9d7e59044138e\",\n      \"failing_tests\": [\n        {\n          \"test\": \"test_raw_inventory_digest_detects_disposition_tampering (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_digest_detects_disposition_tampering)\",\n          \"outcome\": \"FAIL\"\n        },\n        {\n          \"test\": \"test_raw_inventory_digest_detects_disposition_tampering (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_digest_detects_disposition_tampering)\",\n          \"outcome\": \"FAIL\"\n        }\n      ],\n      \"output_tail\": \"test_raw_inventory_digest_is_row_order_invariant (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_digest_is_row_order_invariant) ... ok\\ntest_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected) ... ok\\ntest_raw_to_import_counts_must_reconcile (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_to_import_counts_must_reconcile) ... ok\\ntest_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata) ... ok\\ntest_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite) ... ok\\n\\n======================================================================\\nFAIL: test_raw_inventory_digest_detects_disposition_tampering (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_digest_detects_disposition_tampering)\\n----------------------------------------------------------------------\\nTraceback (most recent call last):\\n  File \\\"D:\\\\codex-object\\\\CICD\\\\EvidenceClosure-supplementary\\\\reproduction\\\\EvidenceClosure\\\\S3_terminal_review_counterexamples.py\\\", line 138, in test_raw_inventory_digest_detects_disposition_tampering\\n    self.assertIn(\\\"raw_inventory_digest_mismatch\\\", error_codes(self.result()))\\nAssertionError: 'raw_inventory_digest_mismatch' not found in set()\\n\\n----------------------------------------------------------------------\\nRan 107 tests in 26.023s\\n\\nFAILED (failures=1)\"\n    }\n  ]\n}\n",
+      "output_sha256": "08c104ac1beadaf40b1444d690a7b5429f2a11f9326bafbc97f91d322b892219",
+      "status": "passed",
+      "mutation": {
+        "source_sha256": "424377ba8bb71789af7dff5aba3e7af26a5cb5b2e0ef2ac26afc1eaead338034",
+        "source_bytes": 128617,
+        "generated": 1,
+        "killed_by_assertion": 1,
+        "killed_by_crash": 0,
+        "survived": [],
+        "results": [
+          {
+            "mutant_id": "M50_raw_inventory_digest",
+            "guard": "raw inventory digest detects item or disposition tampering",
+            "status": "killed_assertion",
+            "returncode": 1,
+            "mutant_source_sha256": "134a6fac7aae819f92c9ca40982a793779e97236b0a8ba5fd4c9d7e59044138e",
+            "failing_tests": [
+              {
+                "test": "test_raw_inventory_digest_detects_disposition_tampering (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_digest_detects_disposition_tampering)",
+                "outcome": "FAIL"
+              },
+              {
+                "test": "test_raw_inventory_digest_detects_disposition_tampering (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_digest_detects_disposition_tampering)",
+                "outcome": "FAIL"
+              }
+            ],
+            "output_tail": "test_raw_inventory_digest_is_row_order_invariant (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_digest_is_row_order_invariant) ... ok\ntest_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected) ... ok\ntest_raw_to_import_counts_must_reconcile (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_to_import_counts_must_reconcile) ... ok\ntest_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata) ... ok\ntest_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite) ... ok\n\n======================================================================\nFAIL: test_raw_inventory_digest_detects_disposition_tampering (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_digest_detects_disposition_tampering)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\codex-object\\CICD\\EvidenceClosure-supplementary\\reproduction\\EvidenceClosure\\S3_terminal_review_counterexamples.py\", line 138, in test_raw_inventory_digest_detects_disposition_tampering\n    self.assertIn(\"raw_inventory_digest_mismatch\", error_codes(self.result()))\nAssertionError: 'raw_inventory_digest_mismatch' not found in set()\n\n----------------------------------------------------------------------\nRan 107 tests in 26.023s\n\nFAILED (failures=1)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "M51_reconciliation_metadata_digest",
+      "command": [
+        "C:\\Users\\TYW\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "S3_mutation_test.py",
+        "--cluster-a",
+        "--mutant",
+        "M51_reconciliation_metadata_digest",
+        "--skip-baseline",
+        "--output",
+        "<temporary-stage-output>/evidenceclosure-stage-7okl_v8b\\M51_reconciliation_metadata_digest.json"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 23.281,
+      "timed_out": false,
+      "output_tail": "      \"mutant_id\": \"M51_reconciliation_metadata_digest\",\n      \"guard\": \"reconciliation digest binds query and collector metadata\",\n      \"status\": \"killed_assertion\",\n      \"returncode\": 1,\n      \"mutant_source_sha256\": \"26b219c1b9027de24f632a681d52b6db373c880d1062b880ffee21a4ad8dd209\",\n      \"failing_tests\": [\n        {\n          \"test\": \"test_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata)\",\n          \"outcome\": \"FAIL\"\n        },\n        {\n          \"test\": \"test_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata)\",\n          \"outcome\": \"FAIL\"\n        }\n      ],\n      \"output_tail\": \"test_raw_inventory_digest_is_row_order_invariant (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_digest_is_row_order_invariant) ... ok\\ntest_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected) ... ok\\ntest_raw_to_import_counts_must_reconcile (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_to_import_counts_must_reconcile) ... ok\\ntest_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata) ... FAIL\\ntest_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite) ... ok\\n\\n======================================================================\\nFAIL: test_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata)\\n----------------------------------------------------------------------\\nTraceback (most recent call last):\\n  File \\\"D:\\\\codex-object\\\\CICD\\\\EvidenceClosure-supplementary\\\\reproduction\\\\EvidenceClosure\\\\S3_terminal_review_counterexamples.py\\\", line 130, in test_reconciliation_digest_binds_collector_and_query_metadata\\n    self.assertIn(\\\"candidate_reconciliation_digest_mismatch\\\", error_codes(self.result()))\\nAssertionError: 'candidate_reconciliation_digest_mismatch' not found in set()\\n\\n----------------------------------------------------------------------\\nRan 107 tests in 21.958s\\n\\nFAILED (failures=1)\"\n    }\n  ]\n}\n",
+      "output_sha256": "65e1a8c1daad58431b200f5fcc18e322331165b32390a76d326ac7783e4c18c7",
+      "status": "passed",
+      "mutation": {
+        "source_sha256": "424377ba8bb71789af7dff5aba3e7af26a5cb5b2e0ef2ac26afc1eaead338034",
+        "source_bytes": 128617,
+        "generated": 1,
+        "killed_by_assertion": 1,
+        "killed_by_crash": 0,
+        "survived": [],
+        "results": [
+          {
+            "mutant_id": "M51_reconciliation_metadata_digest",
+            "guard": "reconciliation digest binds query and collector metadata",
+            "status": "killed_assertion",
+            "returncode": 1,
+            "mutant_source_sha256": "26b219c1b9027de24f632a681d52b6db373c880d1062b880ffee21a4ad8dd209",
+            "failing_tests": [
+              {
+                "test": "test_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata)",
+                "outcome": "FAIL"
+              },
+              {
+                "test": "test_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata)",
+                "outcome": "FAIL"
+              }
+            ],
+            "output_tail": "test_raw_inventory_digest_is_row_order_invariant (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_digest_is_row_order_invariant) ... ok\ntest_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected) ... ok\ntest_raw_to_import_counts_must_reconcile (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_to_import_counts_must_reconcile) ... ok\ntest_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata) ... FAIL\ntest_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite) ... ok\n\n======================================================================\nFAIL: test_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\codex-object\\CICD\\EvidenceClosure-supplementary\\reproduction\\EvidenceClosure\\S3_terminal_review_counterexamples.py\", line 130, in test_reconciliation_digest_binds_collector_and_query_metadata\n    self.assertIn(\"candidate_reconciliation_digest_mismatch\", error_codes(self.result()))\nAssertionError: 'candidate_reconciliation_digest_mismatch' not found in set()\n\n----------------------------------------------------------------------\nRan 107 tests in 21.958s\n\nFAILED (failures=1)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "M52_candidate_observed_window",
+      "command": [
+        "C:\\Users\\TYW\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "S3_mutation_test.py",
+        "--cluster-a",
+        "--mutant",
+        "M52_candidate_observed_window",
+        "--skip-baseline",
+        "--output",
+        "<temporary-stage-output>/evidenceclosure-stage-7okl_v8b\\M52_candidate_observed_window.json"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 23.359,
+      "timed_out": false,
+      "output_tail": "      \"mutant_id\": \"M52_candidate_observed_window\",\n      \"guard\": \"candidate observation lies within the coverage window\",\n      \"status\": \"killed_assertion\",\n      \"returncode\": 1,\n      \"mutant_source_sha256\": \"5354848c412021ea72d8e907704c4d6678ff8cc4457649ab9b28fd9903be36d8\",\n      \"failing_tests\": [\n        {\n          \"test\": \"test_candidate_outside_coverage_window_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_outside_coverage_window_is_rejected)\",\n          \"outcome\": \"FAIL\"\n        },\n        {\n          \"test\": \"test_candidate_outside_coverage_window_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_outside_coverage_window_is_rejected)\",\n          \"outcome\": \"FAIL\"\n        }\n      ],\n      \"output_tail\": \"test_raw_inventory_digest_is_row_order_invariant (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_digest_is_row_order_invariant) ... ok\\ntest_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected) ... ok\\ntest_raw_to_import_counts_must_reconcile (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_to_import_counts_must_reconcile) ... ok\\ntest_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata) ... ok\\ntest_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite) ... ok\\n\\n======================================================================\\nFAIL: test_candidate_outside_coverage_window_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_outside_coverage_window_is_rejected)\\n----------------------------------------------------------------------\\nTraceback (most recent call last):\\n  File \\\"D:\\\\codex-object\\\\CICD\\\\EvidenceClosure-supplementary\\\\reproduction\\\\EvidenceClosure\\\\S3_terminal_review_counterexamples.py\\\", line 183, in test_candidate_outside_coverage_window_is_rejected\\n    self.assertIn(\\\"candidate_observed_outside_coverage_window\\\", closure(self.result(), \\\"CL-05-linked_incident\\\")[\\\"failure_codes\\\"])\\nAssertionError: 'candidate_observed_outside_coverage_window' not found in ['schema_validation_error', 'snapshot_status_mismatch']\\n\\n----------------------------------------------------------------------\\nRan 107 tests in 21.945s\\n\\nFAILED (failures=1)\"\n    }\n  ]\n}\n",
+      "output_sha256": "b8c5f326ac5a4f9a773e66ac9a04a1f7d1361168369fe6eb8e9ce593ab4281b7",
+      "status": "passed",
+      "mutation": {
+        "source_sha256": "424377ba8bb71789af7dff5aba3e7af26a5cb5b2e0ef2ac26afc1eaead338034",
+        "source_bytes": 128617,
+        "generated": 1,
+        "killed_by_assertion": 1,
+        "killed_by_crash": 0,
+        "survived": [],
+        "results": [
+          {
+            "mutant_id": "M52_candidate_observed_window",
+            "guard": "candidate observation lies within the coverage window",
+            "status": "killed_assertion",
+            "returncode": 1,
+            "mutant_source_sha256": "5354848c412021ea72d8e907704c4d6678ff8cc4457649ab9b28fd9903be36d8",
+            "failing_tests": [
+              {
+                "test": "test_candidate_outside_coverage_window_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_outside_coverage_window_is_rejected)",
+                "outcome": "FAIL"
+              },
+              {
+                "test": "test_candidate_outside_coverage_window_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_outside_coverage_window_is_rejected)",
+                "outcome": "FAIL"
+              }
+            ],
+            "output_tail": "test_raw_inventory_digest_is_row_order_invariant (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_digest_is_row_order_invariant) ... ok\ntest_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected) ... ok\ntest_raw_to_import_counts_must_reconcile (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_to_import_counts_must_reconcile) ... ok\ntest_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata) ... ok\ntest_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite) ... ok\n\n======================================================================\nFAIL: test_candidate_outside_coverage_window_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_outside_coverage_window_is_rejected)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\codex-object\\CICD\\EvidenceClosure-supplementary\\reproduction\\EvidenceClosure\\S3_terminal_review_counterexamples.py\", line 183, in test_candidate_outside_coverage_window_is_rejected\n    self.assertIn(\"candidate_observed_outside_coverage_window\", closure(self.result(), \"CL-05-linked_incident\")[\"failure_codes\"])\nAssertionError: 'candidate_observed_outside_coverage_window' not found in ['schema_validation_error', 'snapshot_status_mismatch']\n\n----------------------------------------------------------------------\nRan 107 tests in 21.945s\n\nFAILED (failures=1)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "M53_candidate_admitted_attestation",
+      "command": [
+        "C:\\Users\\TYW\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "S3_mutation_test.py",
+        "--cluster-a",
+        "--mutant",
+        "M53_candidate_admitted_attestation",
+        "--skip-baseline",
+        "--output",
+        "<temporary-stage-output>/evidenceclosure-stage-7okl_v8b\\M53_candidate_admitted_attestation.json"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 23.078,
+      "timed_out": false,
+      "output_tail": "      \"mutant_id\": \"M53_candidate_admitted_attestation\",\n      \"guard\": \"candidate admission is covered by the attestation\",\n      \"status\": \"killed_assertion\",\n      \"returncode\": 1,\n      \"mutant_source_sha256\": \"61fd941ffb291d6b5dc6677e78a9f07df630b2852701977ddd7ab60caf893404\",\n      \"failing_tests\": [\n        {\n          \"test\": \"test_candidate_admission_after_coverage_attestation_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_admission_after_coverage_attestation_is_rejected)\",\n          \"outcome\": \"FAIL\"\n        },\n        {\n          \"test\": \"test_candidate_admission_after_coverage_attestation_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_admission_after_coverage_attestation_is_rejected)\",\n          \"outcome\": \"FAIL\"\n        }\n      ],\n      \"output_tail\": \"test_raw_inventory_digest_is_row_order_invariant (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_digest_is_row_order_invariant) ... ok\\ntest_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected) ... ok\\ntest_raw_to_import_counts_must_reconcile (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_to_import_counts_must_reconcile) ... ok\\ntest_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata) ... ok\\ntest_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite) ... ok\\n\\n======================================================================\\nFAIL: test_candidate_admission_after_coverage_attestation_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_admission_after_coverage_attestation_is_rejected)\\n----------------------------------------------------------------------\\nTraceback (most recent call last):\\n  File \\\"D:\\\\codex-object\\\\CICD\\\\EvidenceClosure-supplementary\\\\reproduction\\\\EvidenceClosure\\\\S3_terminal_review_counterexamples.py\\\", line 191, in test_candidate_admission_after_coverage_attestation_is_rejected\\n    self.assertIn(\\\"candidate_admitted_after_coverage_attestation\\\", closure(self.result(), \\\"CL-05-linked_incident\\\")[\\\"failure_codes\\\"])\\nAssertionError: 'candidate_admitted_after_coverage_attestation' not found in ['historical_snapshot_invalid', 'historical_snapshot_invalid_coverage', 'historical_snapshot_status_mismatch', 'incident_candidate_after_cutoff', 'late_candidate_admission_without_reopen', 'snapshot_status_mismatch']\\n\\n----------------------------------------------------------------------\\nRan 107 tests in 21.758s\\n\\nFAILED (failures=1)\"\n    }\n  ]\n}\n",
+      "output_sha256": "e2c72c41fc4fd4b7ebc37607037f85ecfd8a1e4458635dcd665472355271f46e",
+      "status": "passed",
+      "mutation": {
+        "source_sha256": "424377ba8bb71789af7dff5aba3e7af26a5cb5b2e0ef2ac26afc1eaead338034",
+        "source_bytes": 128617,
+        "generated": 1,
+        "killed_by_assertion": 1,
+        "killed_by_crash": 0,
+        "survived": [],
+        "results": [
+          {
+            "mutant_id": "M53_candidate_admitted_attestation",
+            "guard": "candidate admission is covered by the attestation",
+            "status": "killed_assertion",
+            "returncode": 1,
+            "mutant_source_sha256": "61fd941ffb291d6b5dc6677e78a9f07df630b2852701977ddd7ab60caf893404",
+            "failing_tests": [
+              {
+                "test": "test_candidate_admission_after_coverage_attestation_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_admission_after_coverage_attestation_is_rejected)",
+                "outcome": "FAIL"
+              },
+              {
+                "test": "test_candidate_admission_after_coverage_attestation_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_admission_after_coverage_attestation_is_rejected)",
+                "outcome": "FAIL"
+              }
+            ],
+            "output_tail": "test_raw_inventory_digest_is_row_order_invariant (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_digest_is_row_order_invariant) ... ok\ntest_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected) ... ok\ntest_raw_to_import_counts_must_reconcile (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_to_import_counts_must_reconcile) ... ok\ntest_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata) ... ok\ntest_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite) ... ok\n\n======================================================================\nFAIL: test_candidate_admission_after_coverage_attestation_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_admission_after_coverage_attestation_is_rejected)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\codex-object\\CICD\\EvidenceClosure-supplementary\\reproduction\\EvidenceClosure\\S3_terminal_review_counterexamples.py\", line 191, in test_candidate_admission_after_coverage_attestation_is_rejected\n    self.assertIn(\"candidate_admitted_after_coverage_attestation\", closure(self.result(), \"CL-05-linked_incident\")[\"failure_codes\"])\nAssertionError: 'candidate_admitted_after_coverage_attestation' not found in ['historical_snapshot_invalid', 'historical_snapshot_invalid_coverage', 'historical_snapshot_status_mismatch', 'incident_candidate_after_cutoff', 'late_candidate_admission_without_reopen', 'snapshot_status_mismatch']\n\n----------------------------------------------------------------------\nRan 107 tests in 21.758s\n\nFAILED (failures=1)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "M54_candidate_observation_admission_order",
+      "command": [
+        "C:\\Users\\TYW\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "S3_mutation_test.py",
+        "--cluster-a",
+        "--mutant",
+        "M54_candidate_observation_admission_order",
+        "--skip-baseline",
+        "--output",
+        "<temporary-stage-output>/evidenceclosure-stage-7okl_v8b\\M54_candidate_observation_admission_order.json"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 23.14,
+      "timed_out": false,
+      "output_tail": "      \"mutant_id\": \"M54_candidate_observation_admission_order\",\n      \"guard\": \"candidate observation precedes admission\",\n      \"status\": \"killed_assertion\",\n      \"returncode\": 1,\n      \"mutant_source_sha256\": \"14626e08ceaf101b687e5b7a9e958564ddbd07cbd9ba79b7ddd4ec04fdd5e01f\",\n      \"failing_tests\": [\n        {\n          \"test\": \"test_candidate_admission_cannot_precede_observation (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_admission_cannot_precede_observation)\",\n          \"outcome\": \"FAIL\"\n        },\n        {\n          \"test\": \"test_candidate_admission_cannot_precede_observation (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_admission_cannot_precede_observation)\",\n          \"outcome\": \"FAIL\"\n        }\n      ],\n      \"output_tail\": \"test_raw_inventory_digest_is_row_order_invariant (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_digest_is_row_order_invariant) ... ok\\ntest_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected) ... ok\\ntest_raw_to_import_counts_must_reconcile (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_to_import_counts_must_reconcile) ... ok\\ntest_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata) ... ok\\ntest_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite) ... ok\\n\\n======================================================================\\nFAIL: test_candidate_admission_cannot_precede_observation (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_admission_cannot_precede_observation)\\n----------------------------------------------------------------------\\nTraceback (most recent call last):\\n  File \\\"D:\\\\codex-object\\\\CICD\\\\EvidenceClosure-supplementary\\\\reproduction\\\\EvidenceClosure\\\\S3_terminal_review_counterexamples.py\\\", line 217, in test_candidate_admission_cannot_precede_observation\\n    self.assertIn(\\\"candidate_admission_before_observation\\\", error_codes(self.result()))\\nAssertionError: 'candidate_admission_before_observation' not found in set()\\n\\n----------------------------------------------------------------------\\nRan 107 tests in 21.911s\\n\\nFAILED (failures=1)\"\n    }\n  ]\n}\n",
+      "output_sha256": "7e5897a5ba5f5665b9fb4bc6fdc2dbcd16424030675d7e1b158ef0a3ce6a2397",
+      "status": "passed",
+      "mutation": {
+        "source_sha256": "424377ba8bb71789af7dff5aba3e7af26a5cb5b2e0ef2ac26afc1eaead338034",
+        "source_bytes": 128617,
+        "generated": 1,
+        "killed_by_assertion": 1,
+        "killed_by_crash": 0,
+        "survived": [],
+        "results": [
+          {
+            "mutant_id": "M54_candidate_observation_admission_order",
+            "guard": "candidate observation precedes admission",
+            "status": "killed_assertion",
+            "returncode": 1,
+            "mutant_source_sha256": "14626e08ceaf101b687e5b7a9e958564ddbd07cbd9ba79b7ddd4ec04fdd5e01f",
+            "failing_tests": [
+              {
+                "test": "test_candidate_admission_cannot_precede_observation (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_admission_cannot_precede_observation)",
+                "outcome": "FAIL"
+              },
+              {
+                "test": "test_candidate_admission_cannot_precede_observation (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_admission_cannot_precede_observation)",
+                "outcome": "FAIL"
+              }
+            ],
+            "output_tail": "test_raw_inventory_digest_is_row_order_invariant (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_digest_is_row_order_invariant) ... ok\ntest_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected) ... ok\ntest_raw_to_import_counts_must_reconcile (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_to_import_counts_must_reconcile) ... ok\ntest_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata) ... ok\ntest_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite) ... ok\n\n======================================================================\nFAIL: test_candidate_admission_cannot_precede_observation (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_admission_cannot_precede_observation)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\codex-object\\CICD\\EvidenceClosure-supplementary\\reproduction\\EvidenceClosure\\S3_terminal_review_counterexamples.py\", line 217, in test_candidate_admission_cannot_precede_observation\n    self.assertIn(\"candidate_admission_before_observation\", error_codes(self.result()))\nAssertionError: 'candidate_admission_before_observation' not found in set()\n\n----------------------------------------------------------------------\nRan 107 tests in 21.911s\n\nFAILED (failures=1)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "M55_candidate_admission_decision_order",
+      "command": [
+        "C:\\Users\\TYW\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "S3_mutation_test.py",
+        "--cluster-a",
+        "--mutant",
+        "M55_candidate_admission_decision_order",
+        "--skip-baseline",
+        "--output",
+        "<temporary-stage-output>/evidenceclosure-stage-7okl_v8b\\M55_candidate_admission_decision_order.json"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 24.953,
+      "timed_out": false,
+      "output_tail": "      \"mutant_id\": \"M55_candidate_admission_decision_order\",\n      \"guard\": \"candidate admission precedes decision\",\n      \"status\": \"killed_assertion\",\n      \"returncode\": 1,\n      \"mutant_source_sha256\": \"28bf47cf13a64648efcd0dce5e40627c6b9ab3afdedc4ff19ff1b184ff13a4a7\",\n      \"failing_tests\": [\n        {\n          \"test\": \"test_candidate_decision_cannot_precede_admission (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_decision_cannot_precede_admission)\",\n          \"outcome\": \"FAIL\"\n        },\n        {\n          \"test\": \"test_candidate_decision_cannot_precede_admission (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_decision_cannot_precede_admission)\",\n          \"outcome\": \"FAIL\"\n        }\n      ],\n      \"output_tail\": \"test_raw_inventory_digest_is_row_order_invariant (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_digest_is_row_order_invariant) ... ok\\ntest_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected) ... ok\\ntest_raw_to_import_counts_must_reconcile (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_to_import_counts_must_reconcile) ... ok\\ntest_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata) ... ok\\ntest_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite) ... ok\\n\\n======================================================================\\nFAIL: test_candidate_decision_cannot_precede_admission (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_decision_cannot_precede_admission)\\n----------------------------------------------------------------------\\nTraceback (most recent call last):\\n  File \\\"D:\\\\codex-object\\\\CICD\\\\EvidenceClosure-supplementary\\\\reproduction\\\\EvidenceClosure\\\\S3_terminal_review_counterexamples.py\\\", line 209, in test_candidate_decision_cannot_precede_admission\\n    self.assertIn(\\\"candidate_decision_before_admission\\\", error_codes(self.result()))\\nAssertionError: 'candidate_decision_before_admission' not found in set()\\n\\n----------------------------------------------------------------------\\nRan 107 tests in 23.600s\\n\\nFAILED (failures=1)\"\n    }\n  ]\n}\n",
+      "output_sha256": "82d0a424b16c8db551d805ee0a9a6867a4fc8d2a12b3221dfdffc0e649eae8d3",
+      "status": "passed",
+      "mutation": {
+        "source_sha256": "424377ba8bb71789af7dff5aba3e7af26a5cb5b2e0ef2ac26afc1eaead338034",
+        "source_bytes": 128617,
+        "generated": 1,
+        "killed_by_assertion": 1,
+        "killed_by_crash": 0,
+        "survived": [],
+        "results": [
+          {
+            "mutant_id": "M55_candidate_admission_decision_order",
+            "guard": "candidate admission precedes decision",
+            "status": "killed_assertion",
+            "returncode": 1,
+            "mutant_source_sha256": "28bf47cf13a64648efcd0dce5e40627c6b9ab3afdedc4ff19ff1b184ff13a4a7",
+            "failing_tests": [
+              {
+                "test": "test_candidate_decision_cannot_precede_admission (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_decision_cannot_precede_admission)",
+                "outcome": "FAIL"
+              },
+              {
+                "test": "test_candidate_decision_cannot_precede_admission (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_decision_cannot_precede_admission)",
+                "outcome": "FAIL"
+              }
+            ],
+            "output_tail": "test_raw_inventory_digest_is_row_order_invariant (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_digest_is_row_order_invariant) ... ok\ntest_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected) ... ok\ntest_raw_to_import_counts_must_reconcile (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_to_import_counts_must_reconcile) ... ok\ntest_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata) ... ok\ntest_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite) ... ok\n\n======================================================================\nFAIL: test_candidate_decision_cannot_precede_admission (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_decision_cannot_precede_admission)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\codex-object\\CICD\\EvidenceClosure-supplementary\\reproduction\\EvidenceClosure\\S3_terminal_review_counterexamples.py\", line 209, in test_candidate_decision_cannot_precede_admission\n    self.assertIn(\"candidate_decision_before_admission\", error_codes(self.result()))\nAssertionError: 'candidate_decision_before_admission' not found in set()\n\n----------------------------------------------------------------------\nRan 107 tests in 23.600s\n\nFAILED (failures=1)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "M56_candidate_review_order",
+      "command": [
+        "C:\\Users\\TYW\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "S3_mutation_test.py",
+        "--cluster-a",
+        "--mutant",
+        "M56_candidate_review_order",
+        "--skip-baseline",
+        "--output",
+        "<temporary-stage-output>/evidenceclosure-stage-7okl_v8b\\M56_candidate_review_order.json"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 24.375,
+      "timed_out": false,
+      "output_tail": "      \"mutant_id\": \"M56_candidate_review_order\",\n      \"guard\": \"exclusion decision precedes review\",\n      \"status\": \"killed_assertion\",\n      \"returncode\": 1,\n      \"mutant_source_sha256\": \"03ca89aa81576c6e3123c1ece349af7698f823460ce4de41ed607f7da539c061\",\n      \"failing_tests\": [\n        {\n          \"test\": \"test_exclusion_review_cannot_precede_decision (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_exclusion_review_cannot_precede_decision)\",\n          \"outcome\": \"FAIL\"\n        },\n        {\n          \"test\": \"test_exclusion_review_cannot_precede_decision (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_exclusion_review_cannot_precede_decision)\",\n          \"outcome\": \"FAIL\"\n        }\n      ],\n      \"output_tail\": \"test_raw_inventory_digest_is_row_order_invariant (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_digest_is_row_order_invariant) ... ok\\ntest_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected) ... ok\\ntest_raw_to_import_counts_must_reconcile (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_to_import_counts_must_reconcile) ... ok\\ntest_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata) ... ok\\ntest_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite) ... ok\\n\\n======================================================================\\nFAIL: test_exclusion_review_cannot_precede_decision (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_exclusion_review_cannot_precede_decision)\\n----------------------------------------------------------------------\\nTraceback (most recent call last):\\n  File \\\"D:\\\\codex-object\\\\CICD\\\\EvidenceClosure-supplementary\\\\reproduction\\\\EvidenceClosure\\\\S3_terminal_review_counterexamples.py\\\", line 232, in test_exclusion_review_cannot_precede_decision\\n    self.assertIn(\\\"missing_candidate_exclusion_review\\\", error_codes(self.result()))\\nAssertionError: 'missing_candidate_exclusion_review' not found in set()\\n\\n----------------------------------------------------------------------\\nRan 107 tests in 23.184s\\n\\nFAILED (failures=1)\"\n    }\n  ]\n}\n",
+      "output_sha256": "4c88532d99e768de158ff49846ab61e8ce786bee2b082c245770474864902c0c",
+      "status": "passed",
+      "mutation": {
+        "source_sha256": "424377ba8bb71789af7dff5aba3e7af26a5cb5b2e0ef2ac26afc1eaead338034",
+        "source_bytes": 128617,
+        "generated": 1,
+        "killed_by_assertion": 1,
+        "killed_by_crash": 0,
+        "survived": [],
+        "results": [
+          {
+            "mutant_id": "M56_candidate_review_order",
+            "guard": "exclusion decision precedes review",
+            "status": "killed_assertion",
+            "returncode": 1,
+            "mutant_source_sha256": "03ca89aa81576c6e3123c1ece349af7698f823460ce4de41ed607f7da539c061",
+            "failing_tests": [
+              {
+                "test": "test_exclusion_review_cannot_precede_decision (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_exclusion_review_cannot_precede_decision)",
+                "outcome": "FAIL"
+              },
+              {
+                "test": "test_exclusion_review_cannot_precede_decision (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_exclusion_review_cannot_precede_decision)",
+                "outcome": "FAIL"
+              }
+            ],
+            "output_tail": "test_raw_inventory_digest_is_row_order_invariant (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_digest_is_row_order_invariant) ... ok\ntest_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected) ... ok\ntest_raw_to_import_counts_must_reconcile (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_to_import_counts_must_reconcile) ... ok\ntest_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata) ... ok\ntest_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite) ... ok\n\n======================================================================\nFAIL: test_exclusion_review_cannot_precede_decision (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_exclusion_review_cannot_precede_decision)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\codex-object\\CICD\\EvidenceClosure-supplementary\\reproduction\\EvidenceClosure\\S3_terminal_review_counterexamples.py\", line 232, in test_exclusion_review_cannot_precede_decision\n    self.assertIn(\"missing_candidate_exclusion_review\", error_codes(self.result()))\nAssertionError: 'missing_candidate_exclusion_review' not found in set()\n\n----------------------------------------------------------------------\nRan 107 tests in 23.184s\n\nFAILED (failures=1)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "M57_candidate_actor_separation",
+      "command": [
+        "C:\\Users\\TYW\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "S3_mutation_test.py",
+        "--cluster-a",
+        "--mutant",
+        "M57_candidate_actor_separation",
+        "--skip-baseline",
+        "--output",
+        "<temporary-stage-output>/evidenceclosure-stage-7okl_v8b\\M57_candidate_actor_separation.json"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 24.156,
+      "timed_out": false,
+      "output_tail": "      \"mutant_id\": \"M57_candidate_actor_separation\",\n      \"guard\": \"exclusion decider and reviewer are distinct canonical principals\",\n      \"status\": \"killed_assertion\",\n      \"returncode\": 1,\n      \"mutant_source_sha256\": \"1e1e7177693b8747e25292a16e28c05a8666f737cf90447722ae1755288ce103\",\n      \"failing_tests\": [\n        {\n          \"test\": \"test_exclusion_decider_and_reviewer_must_differ (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_exclusion_decider_and_reviewer_must_differ)\",\n          \"outcome\": \"FAIL\"\n        },\n        {\n          \"test\": \"test_exclusion_decider_and_reviewer_must_differ (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_exclusion_decider_and_reviewer_must_differ)\",\n          \"outcome\": \"FAIL\"\n        }\n      ],\n      \"output_tail\": \"test_raw_inventory_digest_is_row_order_invariant (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_digest_is_row_order_invariant) ... ok\\ntest_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected) ... ok\\ntest_raw_to_import_counts_must_reconcile (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_to_import_counts_must_reconcile) ... ok\\ntest_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata) ... ok\\ntest_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite) ... ok\\n\\n======================================================================\\nFAIL: test_exclusion_decider_and_reviewer_must_differ (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_exclusion_decider_and_reviewer_must_differ)\\n----------------------------------------------------------------------\\nTraceback (most recent call last):\\n  File \\\"D:\\\\codex-object\\\\CICD\\\\EvidenceClosure-supplementary\\\\reproduction\\\\EvidenceClosure\\\\S3_terminal_review_counterexamples.py\\\", line 226, in test_exclusion_decider_and_reviewer_must_differ\\n    self.assertIn(\\\"candidate_review_separation_failure\\\", error_codes(self.result()))\\nAssertionError: 'candidate_review_separation_failure' not found in {'unauthorized_candidate_reviewer'}\\n\\n----------------------------------------------------------------------\\nRan 107 tests in 22.974s\\n\\nFAILED (failures=1)\"\n    }\n  ]\n}\n",
+      "output_sha256": "db8d423e132532291ce0c0367f15bd9fd84331bd7a89e73a5a5d193c9de99e24",
+      "status": "passed",
+      "mutation": {
+        "source_sha256": "424377ba8bb71789af7dff5aba3e7af26a5cb5b2e0ef2ac26afc1eaead338034",
+        "source_bytes": 128617,
+        "generated": 1,
+        "killed_by_assertion": 1,
+        "killed_by_crash": 0,
+        "survived": [],
+        "results": [
+          {
+            "mutant_id": "M57_candidate_actor_separation",
+            "guard": "exclusion decider and reviewer are distinct canonical principals",
+            "status": "killed_assertion",
+            "returncode": 1,
+            "mutant_source_sha256": "1e1e7177693b8747e25292a16e28c05a8666f737cf90447722ae1755288ce103",
+            "failing_tests": [
+              {
+                "test": "test_exclusion_decider_and_reviewer_must_differ (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_exclusion_decider_and_reviewer_must_differ)",
+                "outcome": "FAIL"
+              },
+              {
+                "test": "test_exclusion_decider_and_reviewer_must_differ (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_exclusion_decider_and_reviewer_must_differ)",
+                "outcome": "FAIL"
+              }
+            ],
+            "output_tail": "test_raw_inventory_digest_is_row_order_invariant (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_digest_is_row_order_invariant) ... ok\ntest_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected) ... ok\ntest_raw_to_import_counts_must_reconcile (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_to_import_counts_must_reconcile) ... ok\ntest_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata) ... ok\ntest_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite) ... ok\n\n======================================================================\nFAIL: test_exclusion_decider_and_reviewer_must_differ (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_exclusion_decider_and_reviewer_must_differ)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\codex-object\\CICD\\EvidenceClosure-supplementary\\reproduction\\EvidenceClosure\\S3_terminal_review_counterexamples.py\", line 226, in test_exclusion_decider_and_reviewer_must_differ\n    self.assertIn(\"candidate_review_separation_failure\", error_codes(self.result()))\nAssertionError: 'candidate_review_separation_failure' not found in {'unauthorized_candidate_reviewer'}\n\n----------------------------------------------------------------------\nRan 107 tests in 22.974s\n\nFAILED (failures=1)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "M58_candidate_reviewer_authority",
+      "command": [
+        "C:\\Users\\TYW\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "S3_mutation_test.py",
+        "--cluster-a",
+        "--mutant",
+        "M58_candidate_reviewer_authority",
+        "--skip-baseline",
+        "--output",
+        "<temporary-stage-output>/evidenceclosure-stage-7okl_v8b\\M58_candidate_reviewer_authority.json"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 24.266,
+      "timed_out": false,
+      "output_tail": "          \"outcome\": \"FAIL\"\n        },\n        {\n          \"test\": \"test_exclusion_reviewer_authority_must_be_effective (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_exclusion_reviewer_authority_must_be_effective)\",\n          \"outcome\": \"FAIL\"\n        },\n        {\n          \"test\": \"test_exclusion_reviewer_authority_is_service_scoped (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_exclusion_reviewer_authority_is_service_scoped)\",\n          \"outcome\": \"FAIL\"\n        },\n        {\n          \"test\": \"test_exclusion_reviewer_authority_must_be_effective (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_exclusion_reviewer_authority_must_be_effective)\",\n          \"outcome\": \"FAIL\"\n        }\n      ],\n      \"output_tail\": \"----------------------------------------------------------------------\\nTraceback (most recent call last):\\n  File \\\"D:\\\\codex-object\\\\CICD\\\\EvidenceClosure-supplementary\\\\reproduction\\\\EvidenceClosure\\\\S3_terminal_review_counterexamples.py\\\", line 261, in test_exclusion_reviewer_authority_is_service_scoped\\n    self.assertIn(\\\"unauthorized_candidate_reviewer\\\", error_codes(self.result()))\\nAssertionError: 'unauthorized_candidate_reviewer' not found in set()\\n\\n======================================================================\\nFAIL: test_exclusion_reviewer_authority_must_be_effective (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_exclusion_reviewer_authority_must_be_effective)\\n----------------------------------------------------------------------\\nTraceback (most recent call last):\\n  File \\\"D:\\\\codex-object\\\\CICD\\\\EvidenceClosure-supplementary\\\\reproduction\\\\EvidenceClosure\\\\S3_terminal_review_counterexamples.py\\\", line 252, in test_exclusion_reviewer_authority_must_be_effective\\n    self.assertIn(\\\"unauthorized_candidate_reviewer\\\", error_codes(self.result()))\\nAssertionError: 'unauthorized_candidate_reviewer' not found in set()\\n\\n----------------------------------------------------------------------\\nRan 107 tests in 23.047s\\n\\nFAILED (failures=2)\"\n    }\n  ]\n}\n",
+      "output_sha256": "11640f134195c8a06f3b339ce51b6186bcd4f332dc133a9e2f8dd80319abbfeb",
+      "status": "passed",
+      "mutation": {
+        "source_sha256": "424377ba8bb71789af7dff5aba3e7af26a5cb5b2e0ef2ac26afc1eaead338034",
+        "source_bytes": 128617,
+        "generated": 1,
+        "killed_by_assertion": 1,
+        "killed_by_crash": 0,
+        "survived": [],
+        "results": [
+          {
+            "mutant_id": "M58_candidate_reviewer_authority",
+            "guard": "exclusion reviewer has effective service-scoped authority",
+            "status": "killed_assertion",
+            "returncode": 1,
+            "mutant_source_sha256": "8f03a850fe185aee318e5b424c9705213e843137ab90d95d6a1e3694fa030605",
+            "failing_tests": [
+              {
+                "test": "test_exclusion_reviewer_authority_is_service_scoped (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_exclusion_reviewer_authority_is_service_scoped)",
+                "outcome": "FAIL"
+              },
+              {
+                "test": "test_exclusion_reviewer_authority_must_be_effective (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_exclusion_reviewer_authority_must_be_effective)",
+                "outcome": "FAIL"
+              },
+              {
+                "test": "test_exclusion_reviewer_authority_is_service_scoped (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_exclusion_reviewer_authority_is_service_scoped)",
+                "outcome": "FAIL"
+              },
+              {
+                "test": "test_exclusion_reviewer_authority_must_be_effective (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_exclusion_reviewer_authority_must_be_effective)",
+                "outcome": "FAIL"
+              }
+            ],
+            "output_tail": "----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\codex-object\\CICD\\EvidenceClosure-supplementary\\reproduction\\EvidenceClosure\\S3_terminal_review_counterexamples.py\", line 261, in test_exclusion_reviewer_authority_is_service_scoped\n    self.assertIn(\"unauthorized_candidate_reviewer\", error_codes(self.result()))\nAssertionError: 'unauthorized_candidate_reviewer' not found in set()\n\n======================================================================\nFAIL: test_exclusion_reviewer_authority_must_be_effective (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_exclusion_reviewer_authority_must_be_effective)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\codex-object\\CICD\\EvidenceClosure-supplementary\\reproduction\\EvidenceClosure\\S3_terminal_review_counterexamples.py\", line 252, in test_exclusion_reviewer_authority_must_be_effective\n    self.assertIn(\"unauthorized_candidate_reviewer\", error_codes(self.result()))\nAssertionError: 'unauthorized_candidate_reviewer' not found in set()\n\n----------------------------------------------------------------------\nRan 107 tests in 23.047s\n\nFAILED (failures=2)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "M59_candidate_decider_authority",
+      "command": [
+        "C:\\Users\\TYW\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "S3_mutation_test.py",
+        "--cluster-a",
+        "--mutant",
+        "M59_candidate_decider_authority",
+        "--skip-baseline",
+        "--output",
+        "<temporary-stage-output>/evidenceclosure-stage-7okl_v8b\\M59_candidate_decider_authority.json"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 33.875,
+      "timed_out": false,
+      "output_tail": "      \"mutant_id\": \"M59_candidate_decider_authority\",\n      \"guard\": \"candidate decider has effective service-scoped authority\",\n      \"status\": \"killed_assertion\",\n      \"returncode\": 1,\n      \"mutant_source_sha256\": \"14b5ed844499b3dc288758666c537e93447978edeb7a74d51044d8879f2dfaa5\",\n      \"failing_tests\": [\n        {\n          \"test\": \"test_candidate_decider_requires_service_scoped_authority (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_decider_requires_service_scoped_authority)\",\n          \"outcome\": \"FAIL\"\n        },\n        {\n          \"test\": \"test_candidate_decider_requires_service_scoped_authority (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_decider_requires_service_scoped_authority)\",\n          \"outcome\": \"FAIL\"\n        }\n      ],\n      \"output_tail\": \"test_raw_inventory_digest_is_row_order_invariant (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_digest_is_row_order_invariant) ... ok\\ntest_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected) ... ok\\ntest_raw_to_import_counts_must_reconcile (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_to_import_counts_must_reconcile) ... ok\\ntest_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata) ... ok\\ntest_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite) ... ok\\n\\n======================================================================\\nFAIL: test_candidate_decider_requires_service_scoped_authority (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_decider_requires_service_scoped_authority)\\n----------------------------------------------------------------------\\nTraceback (most recent call last):\\n  File \\\"D:\\\\codex-object\\\\CICD\\\\EvidenceClosure-supplementary\\\\reproduction\\\\EvidenceClosure\\\\S3_terminal_review_counterexamples.py\\\", line 240, in test_candidate_decider_requires_service_scoped_authority\\n    self.assertIn(\\\"unauthorized_candidate_decider\\\", error_codes(self.result()))\\nAssertionError: 'unauthorized_candidate_decider' not found in set()\\n\\n----------------------------------------------------------------------\\nRan 107 tests in 32.288s\\n\\nFAILED (failures=1)\"\n    }\n  ]\n}\n",
+      "output_sha256": "42f61c9c2b09e6900735f2080c9018c2919d65cd953e4f91910eb57629f0cc0f",
+      "status": "passed",
+      "mutation": {
+        "source_sha256": "424377ba8bb71789af7dff5aba3e7af26a5cb5b2e0ef2ac26afc1eaead338034",
+        "source_bytes": 128617,
+        "generated": 1,
+        "killed_by_assertion": 1,
+        "killed_by_crash": 0,
+        "survived": [],
+        "results": [
+          {
+            "mutant_id": "M59_candidate_decider_authority",
+            "guard": "candidate decider has effective service-scoped authority",
+            "status": "killed_assertion",
+            "returncode": 1,
+            "mutant_source_sha256": "14b5ed844499b3dc288758666c537e93447978edeb7a74d51044d8879f2dfaa5",
+            "failing_tests": [
+              {
+                "test": "test_candidate_decider_requires_service_scoped_authority (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_decider_requires_service_scoped_authority)",
+                "outcome": "FAIL"
+              },
+              {
+                "test": "test_candidate_decider_requires_service_scoped_authority (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_decider_requires_service_scoped_authority)",
+                "outcome": "FAIL"
+              }
+            ],
+            "output_tail": "test_raw_inventory_digest_is_row_order_invariant (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_digest_is_row_order_invariant) ... ok\ntest_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected) ... ok\ntest_raw_to_import_counts_must_reconcile (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_to_import_counts_must_reconcile) ... ok\ntest_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata) ... ok\ntest_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite) ... ok\n\n======================================================================\nFAIL: test_candidate_decider_requires_service_scoped_authority (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_decider_requires_service_scoped_authority)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\codex-object\\CICD\\EvidenceClosure-supplementary\\reproduction\\EvidenceClosure\\S3_terminal_review_counterexamples.py\", line 240, in test_candidate_decider_requires_service_scoped_authority\n    self.assertIn(\"unauthorized_candidate_decider\", error_codes(self.result()))\nAssertionError: 'unauthorized_candidate_decider' not found in set()\n\n----------------------------------------------------------------------\nRan 107 tests in 32.288s\n\nFAILED (failures=1)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "M60_snapshot_input_digest",
+      "command": [
+        "C:\\Users\\TYW\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "S3_mutation_test.py",
+        "--cluster-a",
+        "--mutant",
+        "M60_snapshot_input_digest",
+        "--skip-baseline",
+        "--output",
+        "<temporary-stage-output>/evidenceclosure-stage-7okl_v8b\\M60_snapshot_input_digest.json"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 33.594,
+      "timed_out": false,
+      "output_tail": "          \"outcome\": \"FAIL\"\n        },\n        {\n          \"test\": \"test_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite)\",\n          \"outcome\": \"FAIL\"\n        },\n        {\n          \"test\": \"test_query_rule_change_cannot_rewrite_an_existing_snapshot (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_query_rule_change_cannot_rewrite_an_existing_snapshot)\",\n          \"outcome\": \"FAIL\"\n        },\n        {\n          \"test\": \"test_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite)\",\n          \"outcome\": \"FAIL\"\n        }\n      ],\n      \"output_tail\": \"----------------------------------------------------------------------\\nTraceback (most recent call last):\\n  File \\\"D:\\\\codex-object\\\\CICD\\\\EvidenceClosure-supplementary\\\\reproduction\\\\EvidenceClosure\\\\S3_terminal_review_counterexamples.py\\\", line 122, in test_query_rule_change_cannot_rewrite_an_existing_snapshot\\n    self.assertIn(\\\"snapshot_input_manifest_digest_mismatch\\\", failures)\\nAssertionError: 'snapshot_input_manifest_digest_mismatch' not found in []\\n\\n======================================================================\\nFAIL: test_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite)\\n----------------------------------------------------------------------\\nTraceback (most recent call last):\\n  File \\\"D:\\\\codex-object\\\\CICD\\\\EvidenceClosure-supplementary\\\\reproduction\\\\EvidenceClosure\\\\S3_terminal_review_counterexamples.py\\\", line 290, in test_snapshot_input_digest_detects_silent_history_rewrite\\n    self.assertIn(\\\"snapshot_input_manifest_digest_mismatch\\\", closure(analyze(self.root, self.policy), \\\"CL-01-complete\\\")[\\\"failure_codes\\\"])\\nAssertionError: 'snapshot_input_manifest_digest_mismatch' not found in []\\n\\n----------------------------------------------------------------------\\nRan 107 tests in 31.971s\\n\\nFAILED (failures=2)\"\n    }\n  ]\n}\n",
+      "output_sha256": "ad233830d68de17f47226c3a4c69945dc4cf562f8e2fce0b0c4bb98c1dc85f5c",
+      "status": "passed",
+      "mutation": {
+        "source_sha256": "424377ba8bb71789af7dff5aba3e7af26a5cb5b2e0ef2ac26afc1eaead338034",
+        "source_bytes": 128617,
+        "generated": 1,
+        "killed_by_assertion": 1,
+        "killed_by_crash": 0,
+        "survived": [],
+        "results": [
+          {
+            "mutant_id": "M60_snapshot_input_digest",
+            "guard": "each snapshot binds its own immutable visible-input digest",
+            "status": "killed_assertion",
+            "returncode": 1,
+            "mutant_source_sha256": "9ae62cd9b16a87c08edd3768ea8469685c58dbc8f2cdcf864e178ccabde3febf",
+            "failing_tests": [
+              {
+                "test": "test_query_rule_change_cannot_rewrite_an_existing_snapshot (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_query_rule_change_cannot_rewrite_an_existing_snapshot)",
+                "outcome": "FAIL"
+              },
+              {
+                "test": "test_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite)",
+                "outcome": "FAIL"
+              },
+              {
+                "test": "test_query_rule_change_cannot_rewrite_an_existing_snapshot (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_query_rule_change_cannot_rewrite_an_existing_snapshot)",
+                "outcome": "FAIL"
+              },
+              {
+                "test": "test_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite)",
+                "outcome": "FAIL"
+              }
+            ],
+            "output_tail": "----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\codex-object\\CICD\\EvidenceClosure-supplementary\\reproduction\\EvidenceClosure\\S3_terminal_review_counterexamples.py\", line 122, in test_query_rule_change_cannot_rewrite_an_existing_snapshot\n    self.assertIn(\"snapshot_input_manifest_digest_mismatch\", failures)\nAssertionError: 'snapshot_input_manifest_digest_mismatch' not found in []\n\n======================================================================\nFAIL: test_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\codex-object\\CICD\\EvidenceClosure-supplementary\\reproduction\\EvidenceClosure\\S3_terminal_review_counterexamples.py\", line 290, in test_snapshot_input_digest_detects_silent_history_rewrite\n    self.assertIn(\"snapshot_input_manifest_digest_mismatch\", closure(analyze(self.root, self.policy), \"CL-01-complete\")[\"failure_codes\"])\nAssertionError: 'snapshot_input_manifest_digest_mismatch' not found in []\n\n----------------------------------------------------------------------\nRan 107 tests in 31.971s\n\nFAILED (failures=2)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "M61_historical_window",
+      "command": [
+        "C:\\Users\\TYW\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "S3_mutation_test.py",
+        "--cluster-a",
+        "--mutant",
+        "M61_historical_window",
+        "--skip-baseline",
+        "--output",
+        "<temporary-stage-output>/evidenceclosure-stage-7okl_v8b\\M61_historical_window.json"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 33.906,
+      "timed_out": false,
+      "output_tail": "      \"mutant_id\": \"M61_historical_window\",\n      \"guard\": \"historical closed snapshot is rejected before its observation window closes\",\n      \"status\": \"killed_assertion\",\n      \"returncode\": 1,\n      \"mutant_source_sha256\": \"4b673ba24b2ba60d53e8bf48311d825d48290687f39708421faef13fc4e249ec\",\n      \"failing_tests\": [\n        {\n          \"test\": \"test_historical_closed_snapshot_before_window_end_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_historical_closed_snapshot_before_window_end_is_rejected)\",\n          \"outcome\": \"FAIL\"\n        },\n        {\n          \"test\": \"test_historical_closed_snapshot_before_window_end_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_historical_closed_snapshot_before_window_end_is_rejected)\",\n          \"outcome\": \"FAIL\"\n        }\n      ],\n      \"output_tail\": \"test_raw_inventory_digest_is_row_order_invariant (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_digest_is_row_order_invariant) ... ok\\ntest_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected) ... ok\\ntest_raw_to_import_counts_must_reconcile (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_to_import_counts_must_reconcile) ... ok\\ntest_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata) ... ok\\ntest_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite) ... ok\\n\\n======================================================================\\nFAIL: test_historical_closed_snapshot_before_window_end_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_historical_closed_snapshot_before_window_end_is_rejected)\\n----------------------------------------------------------------------\\nTraceback (most recent call last):\\n  File \\\"D:\\\\codex-object\\\\CICD\\\\EvidenceClosure-supplementary\\\\reproduction\\\\EvidenceClosure\\\\S3_terminal_review_counterexamples.py\\\", line 74, in test_historical_closed_snapshot_before_window_end_is_rejected\\n    self.assertIn(\\\"historical_snapshot_observation_window_open\\\", failures)\\nAssertionError: 'historical_snapshot_observation_window_open' not found in ['historical_snapshot_invalid', 'historical_snapshot_missing_coverage', 'historical_snapshot_status_mismatch', 'snapshot_status_mismatch']\\n\\n----------------------------------------------------------------------\\nRan 107 tests in 32.346s\\n\\nFAILED (failures=1)\"\n    }\n  ]\n}\n",
+      "output_sha256": "01b38a39235d47b40927f519b652caed93f160d6867f2c1d876bede6ac7f7a7b",
+      "status": "passed",
+      "mutation": {
+        "source_sha256": "424377ba8bb71789af7dff5aba3e7af26a5cb5b2e0ef2ac26afc1eaead338034",
+        "source_bytes": 128617,
+        "generated": 1,
+        "killed_by_assertion": 1,
+        "killed_by_crash": 0,
+        "survived": [],
+        "results": [
+          {
+            "mutant_id": "M61_historical_window",
+            "guard": "historical closed snapshot is rejected before its observation window closes",
+            "status": "killed_assertion",
+            "returncode": 1,
+            "mutant_source_sha256": "4b673ba24b2ba60d53e8bf48311d825d48290687f39708421faef13fc4e249ec",
+            "failing_tests": [
+              {
+                "test": "test_historical_closed_snapshot_before_window_end_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_historical_closed_snapshot_before_window_end_is_rejected)",
+                "outcome": "FAIL"
+              },
+              {
+                "test": "test_historical_closed_snapshot_before_window_end_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_historical_closed_snapshot_before_window_end_is_rejected)",
+                "outcome": "FAIL"
+              }
+            ],
+            "output_tail": "test_raw_inventory_digest_is_row_order_invariant (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_digest_is_row_order_invariant) ... ok\ntest_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected) ... ok\ntest_raw_to_import_counts_must_reconcile (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_to_import_counts_must_reconcile) ... ok\ntest_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata) ... ok\ntest_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite) ... ok\n\n======================================================================\nFAIL: test_historical_closed_snapshot_before_window_end_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_historical_closed_snapshot_before_window_end_is_rejected)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\codex-object\\CICD\\EvidenceClosure-supplementary\\reproduction\\EvidenceClosure\\S3_terminal_review_counterexamples.py\", line 74, in test_historical_closed_snapshot_before_window_end_is_rejected\n    self.assertIn(\"historical_snapshot_observation_window_open\", failures)\nAssertionError: 'historical_snapshot_observation_window_open' not found in ['historical_snapshot_invalid', 'historical_snapshot_missing_coverage', 'historical_snapshot_status_mismatch', 'snapshot_status_mismatch']\n\n----------------------------------------------------------------------\nRan 107 tests in 32.346s\n\nFAILED (failures=1)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "M62_historical_release_path",
+      "command": [
+        "C:\\Users\\TYW\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "S3_mutation_test.py",
+        "--cluster-a",
+        "--mutant",
+        "M62_historical_release_path",
+        "--skip-baseline",
+        "--output",
+        "<temporary-stage-output>/evidenceclosure-stage-7okl_v8b\\M62_historical_release_path.json"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 34.219,
+      "timed_out": false,
+      "output_tail": "      \"mutant_id\": \"M62_historical_release_path\",\n      \"guard\": \"historical snapshot recomputes its selected release path from cutoff-visible evidence\",\n      \"status\": \"killed_assertion\",\n      \"returncode\": 1,\n      \"mutant_source_sha256\": \"5a776047a21124e3c049e97484cde4f1cf925d8ab7f51fc6cdd66122620f7f7b\",\n      \"failing_tests\": [\n        {\n          \"test\": \"test_historical_snapshot_rejects_post_cutoff_selected_path_evidence (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_historical_snapshot_rejects_post_cutoff_selected_path_evidence)\",\n          \"outcome\": \"FAIL\"\n        },\n        {\n          \"test\": \"test_historical_snapshot_rejects_post_cutoff_selected_path_evidence (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_historical_snapshot_rejects_post_cutoff_selected_path_evidence)\",\n          \"outcome\": \"FAIL\"\n        }\n      ],\n      \"output_tail\": \"test_raw_inventory_digest_is_row_order_invariant (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_digest_is_row_order_invariant) ... ok\\ntest_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected) ... ok\\ntest_raw_to_import_counts_must_reconcile (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_to_import_counts_must_reconcile) ... ok\\ntest_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata) ... ok\\ntest_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite) ... ok\\n\\n======================================================================\\nFAIL: test_historical_snapshot_rejects_post_cutoff_selected_path_evidence (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_historical_snapshot_rejects_post_cutoff_selected_path_evidence)\\n----------------------------------------------------------------------\\nTraceback (most recent call last):\\n  File \\\"D:\\\\codex-object\\\\CICD\\\\EvidenceClosure-supplementary\\\\reproduction\\\\EvidenceClosure\\\\S3_terminal_review_counterexamples.py\\\", line 84, in test_historical_snapshot_rejects_post_cutoff_selected_path_evidence\\n    self.assertIn(\\\"historical_snapshot_missing_release_path\\\", failures)\\nAssertionError: 'historical_snapshot_missing_release_path' not found in []\\n\\n----------------------------------------------------------------------\\nRan 107 tests in 32.789s\\n\\nFAILED (failures=1)\"\n    }\n  ]\n}\n",
+      "output_sha256": "50410216e98118ed02eb991e761050ab210b1aa6acf76a9adde4a2faf9a46ef4",
+      "status": "passed",
+      "mutation": {
+        "source_sha256": "424377ba8bb71789af7dff5aba3e7af26a5cb5b2e0ef2ac26afc1eaead338034",
+        "source_bytes": 128617,
+        "generated": 1,
+        "killed_by_assertion": 1,
+        "killed_by_crash": 0,
+        "survived": [],
+        "results": [
+          {
+            "mutant_id": "M62_historical_release_path",
+            "guard": "historical snapshot recomputes its selected release path from cutoff-visible evidence",
+            "status": "killed_assertion",
+            "returncode": 1,
+            "mutant_source_sha256": "5a776047a21124e3c049e97484cde4f1cf925d8ab7f51fc6cdd66122620f7f7b",
+            "failing_tests": [
+              {
+                "test": "test_historical_snapshot_rejects_post_cutoff_selected_path_evidence (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_historical_snapshot_rejects_post_cutoff_selected_path_evidence)",
+                "outcome": "FAIL"
+              },
+              {
+                "test": "test_historical_snapshot_rejects_post_cutoff_selected_path_evidence (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_historical_snapshot_rejects_post_cutoff_selected_path_evidence)",
+                "outcome": "FAIL"
+              }
+            ],
+            "output_tail": "test_raw_inventory_digest_is_row_order_invariant (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_digest_is_row_order_invariant) ... ok\ntest_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected) ... ok\ntest_raw_to_import_counts_must_reconcile (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_to_import_counts_must_reconcile) ... ok\ntest_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata) ... ok\ntest_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite) ... ok\n\n======================================================================\nFAIL: test_historical_snapshot_rejects_post_cutoff_selected_path_evidence (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_historical_snapshot_rejects_post_cutoff_selected_path_evidence)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\codex-object\\CICD\\EvidenceClosure-supplementary\\reproduction\\EvidenceClosure\\S3_terminal_review_counterexamples.py\", line 84, in test_historical_snapshot_rejects_post_cutoff_selected_path_evidence\n    self.assertIn(\"historical_snapshot_missing_release_path\", failures)\nAssertionError: 'historical_snapshot_missing_release_path' not found in []\n\n----------------------------------------------------------------------\nRan 107 tests in 32.789s\n\nFAILED (failures=1)"
+          }
+        ]
+      }
+    }
+  ],
+  "evidence_boundary": "predicate-derived targeted mutants; not an overall mutation adequacy claim"
+}

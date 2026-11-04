@@ -1,0 +1,18 @@
+{
+  "mutant_id": "M49_raw_inventory_count",
+  "guard": "raw count equals immutable inventory rows",
+  "status": "killed_assertion",
+  "returncode": 1,
+  "mutant_source_sha256": "d345660979f83b5845dbef2cd1e63ae8aafb3c711c3c77dc3820887e58f67f88",
+  "failing_tests": [
+    {
+      "test": "test_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected)",
+      "outcome": "FAIL"
+    },
+    {
+      "test": "test_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected)",
+      "outcome": "FAIL"
+    }
+  ],
+  "output_tail": "test_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected) ... FAIL\ntest_raw_to_import_counts_must_reconcile (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_to_import_counts_must_reconcile) ... ok\ntest_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata) ... ok\ntest_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite) ... ok\n\n======================================================================\nFAIL: test_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"reproduction/EvidenceClosure/S3_terminal_review_counterexamples.py\", line 107, in test_raw_inventory_item_deletion_is_rejected\n    self.assertIn(\"raw_signal_inventory_count_mismatch\", error_codes(self.result()))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'raw_signal_inventory_count_mismatch' not found in {'raw_inventory_digest_mismatch', 'raw_signal_disposition_count_mismatch', 'candidate_raw_signal_bijection_mismatch'}\n\n----------------------------------------------------------------------\nRan 107 tests in 30.914s\n\nFAILED (failures=1)"
+}

@@ -1,0 +1,1 @@
+closure_id,node_id,logical_work_item_id,node_type,work_item_kind,service_id,version,policy_version,event_time_utc,created_at_utc,accepted_at_utc,owner,status,artifact_digest,accepted_revision,reviewed,mandatory,immutable,release_approved,environment,metadata_json

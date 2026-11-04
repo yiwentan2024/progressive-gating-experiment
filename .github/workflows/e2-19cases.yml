@@ -1,0 +1,189 @@
+name: E2 19-Case Controlled Evaluation
+on:
+  workflow_dispatch:
+    inputs:
+      scenario_id:
+        description: 'Scenario ID (see scenarios/manifest.json)'
+        required: true
+        type: choice
+        options:
+          - N01
+          - N02
+          - N03
+          - A101
+          - A102
+          - A103
+          - A104
+          - A105
+          - A201
+          - A202
+          - A203
+          - A204
+          - U01
+          - U02
+          - B01
+          - B02
+          - ZH-R2
+          - ZH-R3
+          - ZH-R4
+      variant:
+        description: 'Actual baseline configuration'
+        required: true
+        type: choice
+        options: [B0, B1, B2]
+      replicate_index:
+        description: 'Repeat index (not additional independent evidence)'
+        required: true
+        default: '1'
+permissions:
+  contents: read
+  id-token: write
+  attestations: write
+  artifact-metadata: write
+jobs:
+  run-controlled-eval:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      E2_SCENARIO_ID: ${{ inputs.scenario_id }}
+      E2_VARIANT: ${{ inputs.variant }}
+      E2_REPLICATE_INDEX: ${{ inputs.replicate_index }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Checkout fixed experiment source
+        uses: actions/checkout@v4
+      - name: Install Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.13'
+      - name: Reject unverified historical data and initialize evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m tools.e2_guard "$E2_SCENARIO_ID"
+          mkdir -p evidence/raw evidence/results evidence/metrics
+          python - <<'PY'
+          import json,os,datetime,subprocess,platform
+          from pathlib import Path
+          fields=['E2_SCENARIO_ID','E2_VARIANT','E2_REPLICATE_INDEX','GITHUB_RUN_ID','GITHUB_SHA','GITHUB_REPOSITORY','RUNNER_NAME']
+          pre={k:os.environ.get(k) for k in fields}
+          pre.update({'utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'python':platform.python_version(),
+                      'git_commit':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
+                      })
+          Path('evidence/preflight.json').write_text(json.dumps(pre,indent=2)+'\n')
+          PY
+      - name: Execute actual unit tests (B01 injected failure)
+        shell: bash
+        run: |
+          set +e
+          python -m unittest discover -s tests -v > evidence/raw/unit.log 2>&1
+          echo "$?" > evidence/raw/unit_exit.txt
+          cat evidence/raw/unit.log
+          exit 0
+      - name: Build one pinned subject artifact and Docker image
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/build.py | tee evidence/raw/build.json
+          sha256sum dist/release_app.pyz > evidence/raw/artifact_before.sha256
+          docker build -f infra/Dockerfile -t closure-eval:local . > evidence/raw/docker_build.log 2>&1
+          docker image inspect closure-eval:local --format '{{.Id}}' > evidence/raw/docker_image_id.txt
+      - name: Run three isolated real HTTP stage health checks
+        shell: bash
+        run: |
+          set +e
+          docker compose -f infra/compose.yml up -d > evidence/raw/compose_up.log 2>&1
+          compose_rc=$?
+          if [ "$compose_rc" -eq 0 ]; then
+            python tools/check_stages.py --out evidence > evidence/raw/three_stage.log 2>&1
+            stage_rc=$?
+          else
+            stage_rc=1
+          fi
+          echo "$stage_rc" > evidence/raw/stage_exit.txt
+          cat evidence/raw/three_stage.log 2>/dev/null || true
+          exit 0
+      - name: B1/B2 actual GitHub artifact provenance signing
+        if: ${{ inputs.variant != 'B0' }}
+        uses: actions/attest@v4
+        with:
+          subject-path: dist/release_app.pyz
+      - name: B02 only - substitute artifact bytes AFTER signing
+        if: ${{ inputs.scenario_id == 'B02' }}
+        shell: bash
+        run: |
+          printf '\nTAMPER_AFTER_SIGN_B02\n' >> dist/release_app.pyz
+          sha256sum dist/release_app.pyz > evidence/raw/artifact_after_tamper.sha256
+      - name: Check pinned digest for B0/B1/B2 (do not weaken B0)
+        shell: bash
+        run: |
+          set +e
+          sha256sum -c evidence/raw/artifact_before.sha256 > evidence/raw/digest_pin.log 2>&1
+          echo "$?" > evidence/raw/digest_pinned_exit.txt
+          cat evidence/raw/digest_pin.log
+          exit 0
+      - name: B1/B2 verify real attestation with GitHub CLI
+        if: ${{ inputs.variant != 'B0' }}
+        shell: bash
+        run: |
+          set +e
+          gh attestation verify dist/release_app.pyz --repo "$GITHUB_REPOSITORY" --format json \
+             > evidence/raw/attestation_verify.json 2> evidence/raw/attestation_verify_stderr.log
+          echo "$?" > evidence/raw/attestation_verify_exit.txt
+          cat evidence/raw/attestation_verify_stderr.log
+          exit 0
+      - name: Generate controlled source-event case (actual HTTP source + explicit scripted timing)
+        shell: bash
+        run: |
+          set -euo pipefail
+          ORIG="$(cut -d' ' -f1 evidence/raw/artifact_before.sha256)"
+          CURRENT="$(sha256sum dist/release_app.pyz | cut -d' ' -f1)"
+          RC="$(cat evidence/raw/unit_exit.txt)"
+          python -m scenarios.build_case --scenario "$E2_SCENARIO_ID" \
+            --stage-evidence-dir evidence \
+            --artifact-original-hash "$ORIG" --artifact-current-hash "$CURRENT" \
+            --unit-rc "$RC" --out evidence/case
+      - name: Execute NEW B2 verifier only in B2 variant
+        if: ${{ inputs.variant == 'B2' }}
+        shell: bash
+        run: |
+          set +e
+          python -m verifier.closure_audit --input evidence/case/case.json \
+            --output evidence/results/b2_decision.json --allow-open \
+            > evidence/raw/b2_verifier.log 2>&1
+          rc="$?"
+          echo "$rc" > evidence/raw/b2_verifier_exit.txt
+          cat evidence/raw/b2_verifier.log
+          exit 0
+      - name: Save measured outcomes and immutable evidence manifest
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p evidence/raw evidence/results
+          python -m tools.e2_finalize --out evidence --scenario "$E2_SCENARIO_ID" \
+          --replicate "$E2_REPLICATE_INDEX" \
+            --variant "$E2_VARIANT" --github-run-id "$GITHUB_RUN_ID"
+      - name: Upload all evidence including failed outcomes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2-${{ inputs.scenario_id }}-${{ inputs.variant }}-r${{ inputs.replicate_index }}-${{ github.run_id }}
+          path: evidence/
+          if-no-files-found: warn
+      - name: Tear down isolated stage containers
+        if: always()
+        shell: bash
+        run: docker compose -f infra/compose.yml down --remove-orphans || true
+      - name: Expose actual B0/B1 blocking gate failure as red workflow
+        if: always()
+        shell: bash
+        run: |
+          test -f evidence/results/observed_summary.json || exit 1
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('evidence/results/observed_summary.json').read_text())
+          print('Observed result:',r['observed_baseline_gate_result'],'B2:',r['b2_machine_decision'])
+          if r['observed_baseline_gate_result']!='PASS':
+              raise SystemExit(1)
+          PY

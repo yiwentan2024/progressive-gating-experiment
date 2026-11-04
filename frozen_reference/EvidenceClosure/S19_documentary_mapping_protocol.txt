@@ -1,0 +1,5 @@
+# Documentary mapping protocol and current evidence boundary
+
+The retained documentary worksheet is illustrative, not an independently coded case study. A publishable case-level mapping would require: a dated corpus inventory; inclusion, exclusion, version-selection, and deduplication rules; a coding manual; an explicit mapping unit; one-to-many rules; negative cases; two independent coders or a preserved arbitration trail; authorized source excerpts with locators and translations; and controlled audit access when redistribution is prohibited.
+
+V18 does not claim those steps were completed. S7 remains a claim-source worksheet. Its permitted conclusion is that selected retained descriptions motivated or illustrate categories in the contract. It cannot establish historical conformance, completeness, organizational adoption, or operational effect.

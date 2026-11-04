@@ -1,0 +1,33 @@
+{
+  "id": "PG-SEQ",
+  "scenario_family": "C02",
+  "type": "AUDIT_ONLY",
+  "title": "Post-cutoff Finding with a Requirement temporal-order violation",
+  "injection": {
+    "layer": "audit_time_evidence",
+    "at_stage": null,
+    "description": "All baseline gates pass. A Finding visible only after the source cutoff is added with a Requirement acceptance timestamp earlier than the Finding observation timestamp. The frozen historical snapshot is not rewritten."
+  },
+  "baseline_expected": {
+    "dev": "PASS",
+    "qa": "PASS",
+    "staging": "PASS",
+    "first_failure_stage": null,
+    "first_failure_code": null
+  },
+  "audit_expected": {
+    "P0": "NOT_CONFIGURED",
+    "P1": "OPEN",
+    "evidence_status": "OPEN",
+    "codes": [
+      "A2_REQUIREMENT_TEMPORAL_ORDER"
+    ]
+  },
+  "requires_audit_case": true,
+  "required_evidence": [
+    "source cutoff and scripted Finding observation / Requirement acceptance offsets",
+    "Finding is not present in the frozen historical snapshot",
+    "frozen snapshot digest before and after the audit input build is unchanged",
+    "P1 OPEN with A2_REQUIREMENT_TEMPORAL_ORDER; P0 NOT_CONFIGURED"
+  ]
+}

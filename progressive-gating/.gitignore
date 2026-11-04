@@ -1,0 +1,8 @@
+/build/
+/runs/
+/runs.csv
+/comparisons.csv
+/summary.json
+/MANIFEST.sha256
+/workflow/
+__pycache__/

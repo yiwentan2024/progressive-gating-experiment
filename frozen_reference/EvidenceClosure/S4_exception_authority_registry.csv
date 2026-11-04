@@ -1,0 +1,2 @@
+authority_id,subject,role,policy_version,gate_scope,service_scope,max_risk_class,effective_at_utc,retired_at_utc
+EA-01,exception-approver,release_authority,p18.0,G3,service-4,high,2026-01-01T00:00:00Z,

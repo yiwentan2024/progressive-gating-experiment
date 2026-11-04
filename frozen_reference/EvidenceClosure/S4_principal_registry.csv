@@ -1,0 +1,3 @@
+registry_version,alias,principal_id,effective_at_utc,retired_at_utc
+V21.0,synthetic-triager,principal.synthetic.triager,2025-01-01T00:00:00Z,
+V21.0,synthetic-reviewer,principal.synthetic.reviewer,2025-01-01T00:00:00Z,

@@ -1,0 +1,18 @@
+{
+  "mutant_id": "M59_candidate_decider_authority",
+  "guard": "candidate decider has effective service-scoped authority",
+  "status": "killed_assertion",
+  "returncode": 1,
+  "mutant_source_sha256": "ba9631ffa397b0eacc30d5dfbc8e77b16fd99c315291a5748ad58d0c06d12796",
+  "failing_tests": [
+    {
+      "test": "test_candidate_decider_requires_service_scoped_authority (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_decider_requires_service_scoped_authority)",
+      "outcome": "FAIL"
+    },
+    {
+      "test": "test_candidate_decider_requires_service_scoped_authority (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_decider_requires_service_scoped_authority)",
+      "outcome": "FAIL"
+    }
+  ],
+  "output_tail": "test_raw_inventory_item_deletion_is_rejected (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_inventory_item_deletion_is_rejected) ... ok\ntest_raw_to_import_counts_must_reconcile (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_raw_to_import_counts_must_reconcile) ... ok\ntest_reconciliation_digest_binds_collector_and_query_metadata (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_reconciliation_digest_binds_collector_and_query_metadata) ... ok\ntest_snapshot_input_digest_detects_silent_history_rewrite (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_snapshot_input_digest_detects_silent_history_rewrite) ... ok\n\n======================================================================\nFAIL: test_candidate_decider_requires_service_scoped_authority (S3_terminal_review_counterexamples.TerminalReviewCounterexamples.test_candidate_decider_requires_service_scoped_authority)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"reproduction/EvidenceClosure/S3_terminal_review_counterexamples.py\", line 240, in test_candidate_decider_requires_service_scoped_authority\n    self.assertIn(\"unauthorized_candidate_decider\", error_codes(self.result()))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'unauthorized_candidate_decider' not found in set()\n\n----------------------------------------------------------------------\nRan 107 tests in 29.921s\n\nFAILED (failures=1)"
+}

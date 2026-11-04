@@ -1,0 +1,7 @@
+closure_id,snapshot_id,release_decision_id,evaluated_at_utc,supersedes_snapshot_id,input_manifest_digest,declared_status
+CL-01-complete,S1-SNAP-1,S1-REL,2026-01-06T14:00:00Z,,sha256:050b98ea633e26705c752d8fc58041332af4b4318cf130f0f3e6dbe5178b0695,closed_as_of
+CL-02-orphan,S2-SNAP-1,S2-REL,2026-01-07T14:00:00Z,,sha256:a2009d094f12c08faab96794f61fe8d2fe2951802fc7bc07d106ed5309797d00,open
+CL-03-failed_gate,S3-SNAP-1,S3-REL,2026-01-08T14:00:00Z,,sha256:360ead925f348363ea604f7ae6eeee1256fafb64650dfa687b7a142f83c9c8a1,open
+CL-04-expired_exception,S4-SNAP-1,S4-REL,2026-01-09T14:00:00Z,,sha256:140e79afc34efe59bb984f1379339703627e0d2dadab9b655d3f9cedb6652f12,open
+CL-05-linked_incident,S5-SNAP-1,S5-REL,2026-01-10T14:00:00Z,,sha256:c31cca306121219a9e7cf9cf37b16ed08c2e7ec6d2b1717e855510099ebaa464,closed_as_of
+CL-06-unlinked_incident,S6-SNAP-1,S6-REL,2026-01-11T14:00:00Z,,sha256:af2cfd99ab8dac954781dd7780aa2821122dff9213f0fabf5ca97b73e4237065,open
