@@ -116,7 +116,7 @@ class VerifierVerdictTests(unittest.TestCase):
         self.assertTrue(history["historical_snapshot_unchanged"])
         self.assertEqual(history["finding_ids_visible_after_cutoff"], ["F-PG-01"])
 
-    def test_synthetic_records_are_marked_scripted(self):
+    def test_scenario_records_are_marked_scripted(self):
         bundle, _, _ = audit_for(self.designs["PG-SEQ"], "P0", "2026-10-19T09:00:00Z", 19081)
         provenance = bundle["collector"]["provenance"]
         self.assertEqual(provenance["candidates_findings"]["type"], "scripted")

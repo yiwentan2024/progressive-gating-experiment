@@ -6,7 +6,7 @@
   "injection": {
     "layer": "audit_time_evidence",
     "at_stage": null,
-    "description": "All baseline gates pass. A Finding visible only after the source cutoff is added with a Requirement acceptance timestamp earlier than the Finding observation timestamp. The frozen historical snapshot is not rewritten."
+    "description": "A Finding visible only after the source cutoff is added with a Requirement acceptance timestamp earlier than the Finding observation timestamp."
   },
   "baseline_expected": {
     "dev": "PASS",

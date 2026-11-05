@@ -1,7 +1,7 @@
 """Shared constants and helpers for the progressive-gating experiment.
 
-The existing E2 batch and verifier/closure_audit.py are not modified. This
-harness lives under tools/pg_*.py with evidence under progressive-gating/.
+verifier/closure_audit.py is not modified. This harness lives under
+tools/pg_*.py with evidence under progressive-gating/.
 """
 from __future__ import annotations
 

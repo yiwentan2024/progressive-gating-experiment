@@ -41,21 +41,8 @@
         "PG-INFO"
       ],
       "workflow_runs": 18
-    },
-    "local_validation": {
-      "attestation": "NOT_AVAILABLE_LOCAL",
-      "batch_prefix": "LOCAL-",
-      "purpose": "developer validation without GitHub attestation; excluded from formal and calibration denominators"
     }
   },
-  "claims": [
-    "Each pair is one workflow run: both arms share one build, one image and one attestation, so the only arm difference is the audit. The formal 18 pairs and calibration 3 pairs produce 21 workflow runs and 42 attempts.",
-    "The same deterministic pyz digest is measured at dev, qa and staging inside running containers for passing chains.",
-    "Every promotion edge is a real sequential compose deployment followed by a real digest and live HTTP health gate; the three stages are not started together and probed out of order.",
-    "PG-ART and PG-QA are baseline controls: the baseline gate rejects and the downstream stage is not deployed; neither arm runs the audit.",
-    "For the four audit scenarios, the P0/P1 comparison is conditional on both baselines passing and on semantic input equality.",
-    "All outputs are generated from retained raw and normalized evidence; injected defects are disclosed in injection.json."
-  ],
   "collector": {
     "collector_rule_sha256": "sha256:358b7ba838892cc5bcc2cdc0cf3509514b89ccc30510f3a3a7e78f0fc7142a62",
     "evidence_statuses": [
@@ -147,17 +134,17 @@
     "no harness exception",
     "both arms of the selected pair valid and comparable"
   ],
-  "generated_at_utc": "2026-11-04T08:58:53.492Z",
+  "generated_at_utc": "2026-11-04T09:48:16.811Z",
   "hashes": [
     {
-      "bytes": 9528,
+      "bytes": 9242,
       "path": ".github/workflows/progressive-gating.yml",
-      "sha256": "5b38caa4866def40d0f196e10cc439f85ac6b755cdc6a1adae884891f6081358"
+      "sha256": "78de21499852cea0182959b9b5fd2cd0de9e802e4e96ae3250fdc6a5eb5e5412"
     },
     {
-      "bytes": 1227,
+      "bytes": 1189,
       "path": "app/__main__.py",
-      "sha256": "d1e3c28d878c6946144ad7ee095320421231821e56211f952b487251d428cc91"
+      "sha256": "faaa4d0811a190dc3bec91e3053a2ddf7e4d1b9099ed0335477abe384e3e98e9"
     },
     {
       "bytes": 174,
@@ -170,39 +157,39 @@
       "sha256": "d943899a609b2a7237deed59f7ac836ded3fd05db49078055abd280a3415c9d8"
     },
     {
-      "bytes": 23103,
+      "bytes": 18919,
       "path": "progressive-gating/README_Reproduction.txt",
-      "sha256": "625c2537a96fc4959e75c7c915771715b7f6523c2c7cad197f0796e5e8238e00"
+      "sha256": "23967b86dbf923339bfc8d5e4e4ee2d2a5738fb8629887230eea1a05fff7fc7e"
     },
     {
-      "bytes": 1031,
+      "bytes": 934,
       "path": "progressive-gating/cases/PG-ART.json",
-      "sha256": "b69b6594729f054a677b6cb7c2f1fee17732848b43bb4f433a39f9d7f65dd03c"
+      "sha256": "17f0cc8981496a3c26df884a6646e66696fa6da8846246d12cd631d4cd1ca6a0"
     },
     {
-      "bytes": 1069,
+      "bytes": 923,
       "path": "progressive-gating/cases/PG-DISP.json",
-      "sha256": "68a8d1162d0ae8c57b4b9b40cf4017d8c02510b22e170a538704032df74b2810"
+      "sha256": "3fb2e247ff00fa48ebcabc02b79eb92419ca659b2bcf81834c0b4a2bc4d786ea"
     },
     {
-      "bytes": 1155,
+      "bytes": 1043,
       "path": "progressive-gating/cases/PG-INFO.json",
-      "sha256": "9fa0eb411504481f222f26c3947dc41c52c6aa40a88903de92dcb33ea237d42d"
+      "sha256": "7d7f08a88f49c42fdec06149a8168e42386fa8a547579ac42d0625f74e01c222"
     },
     {
-      "bytes": 889,
+      "bytes": 757,
       "path": "progressive-gating/cases/PG-N01.json",
-      "sha256": "c968311daa323b66398d5cc55f26f2c007313040c31011141a6a5a4730b80919"
+      "sha256": "46105b62c8b180d40ce4d18a0eda1e53764ccdad0c0241543377e457b776734e"
     },
     {
-      "bytes": 1010,
+      "bytes": 895,
       "path": "progressive-gating/cases/PG-QA.json",
-      "sha256": "bf4d6599a4eb1ec8f8375c7ac6bbf900e6342a676b29fca0cf9f146012cfc33d"
+      "sha256": "7cf5be75397e7bfb7ceacbdbaaea7bd79c0f0fd729c3638a2f25c01e50d676e3"
     },
     {
-      "bytes": 1149,
+      "bytes": 1075,
       "path": "progressive-gating/cases/PG-SEQ.json",
-      "sha256": "396f21574d6471912b41a6a465354bb6dba71edbf1a43415775c4ce24b6e7896"
+      "sha256": "3c6b2112b033490ba73a3db6c42a2976879e5f2b8a30f574de8fa82ece8f0013"
     },
     {
       "bytes": 7076,
@@ -250,9 +237,9 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
-      "bytes": 6219,
+      "bytes": 6195,
       "path": "tests_pg/pg_fixtures.py",
-      "sha256": "ee5b80cc0e82f1a4bf03ad24f8c88502c1004b083e249aa8272d43f26f62ce71"
+      "sha256": "561a3d9af3ff4ddb66891e924cf0509117d3e672d8a94f940a2310c8fd4898ae"
     },
     {
       "bytes": 5640,
@@ -265,24 +252,24 @@
       "sha256": "8b6f6224b09e12c4e15ddc91459db8542217d0dcece965c3b5e0af2817f53da5"
     },
     {
-      "bytes": 9463,
+      "bytes": 9462,
       "path": "tests_pg/test_pg_cases.py",
-      "sha256": "5907e1d564f3cc7128947668c0d328c3ce159866f049050402aa2c044f5099c5"
+      "sha256": "3e1578cfabd7a9e03b83654d28607b86a290a8d3d9f567912985b9285669ecaa"
     },
     {
-      "bytes": 8144,
+      "bytes": 8562,
       "path": "tests_pg/test_pg_ledger.py",
-      "sha256": "fa0622a56f319e04400c7480bfd22844dfeedf0705a1d90cef7e377ce9e9a328"
+      "sha256": "1a508bdb5e9bb6de6380fb525119a8d6cefeedd1d42e9008d76b54126ea06a62"
     },
     {
-      "bytes": 2607,
+      "bytes": 2532,
       "path": "tests_pg/test_pg_protocol.py",
-      "sha256": "341f8bd031131bbe004e483ab61ed76b4a8ff1e6e27fde0d20e537f91c80feb3"
+      "sha256": "31cef65d565c61a19f68ed4abd5c23acbbc73ef55d41d623ba777444d25e57c0"
     },
     {
-      "bytes": 5760,
+      "bytes": 5753,
       "path": "tests_pg/test_pg_workflow.py",
-      "sha256": "1cd4f07dd295e8653dc5c1d11a79a33b2e05af6be5a7a600e8b25cb1d1104cda"
+      "sha256": "8240213b20ebae7ae5b9b39918bab5f0ff61ffb6ada666479427b537b6f48fb9"
     },
     {
       "bytes": 679,
@@ -300,53 +287,45 @@
       "sha256": "62b69197d5cd1a5fa30c6eceeff2313f265db27c08f69ab7c6eeec812cc22a2c"
     },
     {
-      "bytes": 13302,
+      "bytes": 13128,
       "path": "tools/pg_build.py",
-      "sha256": "117142522df28bbfe3fba9082a61a1d05d4fb7a4ce03e35c1609b2c8b0adca92"
+      "sha256": "4cbc359afe8b2e67007084043f9fd31824b2235bbf95518c25d655e558d450cd"
     },
     {
-      "bytes": 18445,
+      "bytes": 17862,
       "path": "tools/pg_case.py",
-      "sha256": "d821698c2a73fa6413713a050df2784afad3518c822784911a2491615c8b07b8"
+      "sha256": "1432f0f389a7934e2f87c30cee4dc292f11c39855eb80fa49770cf80fd111387"
     },
     {
-      "bytes": 5636,
+      "bytes": 5609,
       "path": "tools/pg_common.py",
-      "sha256": "0ff9250e58846ed901bc6fffd8a3de4713fd331f1776d85b7cc4a1120ee91076"
+      "sha256": "dbd96f5cbc2de8846b07cd1aae5fbf1b3c754111e5ff2493a62dda211f03427d"
     },
     {
-      "bytes": 44066,
+      "bytes": 39561,
       "path": "tools/pg_ledger.py",
-      "sha256": "7f181230471ebf044c139c241cc6c27d4cd9f77c655def298c4bca34dbfa2450"
+      "sha256": "cd6a2094bde42dec145b34d7204af48ea9dd1d971585bfbef4a21846e920cf80"
     },
     {
-      "bytes": 26830,
+      "bytes": 26693,
       "path": "tools/pg_promote.py",
-      "sha256": "b02827b4dcb6062cdfaa449b8e0160590b431097539305e16846f18923a238b3"
+      "sha256": "dee90fa70f2724d00a3a551add0d223dc4329c7b080cb2001589e93d0bda5a1e"
     },
     {
-      "bytes": 15876,
+      "bytes": 13351,
       "path": "tools/pg_protocol.py",
-      "sha256": "58e66236469eea2bc4e6ce40835dc7c919b679ec5d0ec304576eea0dcd1bcf97"
+      "sha256": "d0583889bf737d225b8ebc4d9b2c93722a8f6c5cfd8a79bbda3b2baf5ad71eb2"
     },
     {
-      "bytes": 30775,
+      "bytes": 30296,
       "path": "tools/pg_run.py",
-      "sha256": "98b1553d841a792d226dc97f311095ce6799cbcb3a5b696b163b6301a1039039"
+      "sha256": "2013ebf9370f77a3e72fe7626445ffd32c73940e34e1be85fdda162665d4abf4"
     },
     {
       "bytes": 13105,
       "path": "verifier/closure_audit.py",
       "sha256": "d30fc846949ef66b1a62763ad69743e70956afc3348e8415fe4a087182a7b961"
     }
-  ],
-  "non_claims": [
-    "This is not a production deployment or a full production inventory.",
-    "Candidates, Findings, dispositions, audit times and fault switches are synthetic test inputs generated from the frozen scenario files; no engineering dataset is read, copied or bridged.",
-    "The collector scope attestation is self-declared for the bounded three-stage chain, not an independent third-party export.",
-    "The OCI image digest is an identity of a different type from the pyz digest; no numerical equality between them is claimed.",
-    "This batch does not re-measure the existing E2 batch in this repository and does not claim those results are reproduced.",
-    "The calibration batch calibrates pairing mechanics; it is not a second independent sample."
   ],
   "pairing_rules": {
     "arm_order": "alternates P0>P1 and P1>P0 by repeat; the order is recorded but is not a scenario variable",
@@ -357,7 +336,7 @@
       "non-selected retry attempts",
       "runs without GitHub attestation",
       "runs from a dirty source tree",
-      "local validation and calibration batches"
+      "calibration batches"
     ],
     "retry_selection": "first comparable attempt per (batch, scenario, repeat); every non-selected attempt stays in runs.csv with an exclusion reason",
     "same_audit_input": "semantic projection equality for audit cases; baseline outcome signature equality for baseline-block pairs",
@@ -381,7 +360,7 @@
         "qa": "PASS",
         "staging": "PASS"
       },
-      "design_sha256": "sha256:5ac3ada442fe18146aa230f9b8815d5aaeb096b4d3fa817a537de98153a7aca6",
+      "design_sha256": "sha256:1d7eae5b2c1927b1deb54d6cc5c2a4a4482ec0c51f49fff3a118a6628f5282e3",
       "id": "PG-N01",
       "required_evidence": [
         "ordered deploy/check/gate events for dev, qa, staging",
@@ -391,7 +370,7 @@
       ],
       "requires_audit_case": true,
       "scenario_family": "N01",
-      "title": "Normal release: staged promotion with no injected evidence defect",
+      "title": "Normal release with no injected evidence defect",
       "type": "CONTROL"
     },
     {
@@ -408,7 +387,7 @@
         "qa": "FAIL",
         "staging": "NOT_DEPLOYED"
       },
-      "design_sha256": "sha256:7de69a514209ed567e3dca2ea22420766d79cb57259ba80d140d316fa0123b67",
+      "design_sha256": "sha256:e739c38dcd6c37bc952e3b75d71314266f8d598ce7b9cbcf13a10f19bf761de5",
       "id": "PG-ART",
       "required_evidence": [
         "expected pyz digest and measured QA pyz digest",
@@ -435,7 +414,7 @@
         "qa": "FAIL",
         "staging": "NOT_DEPLOYED"
       },
-      "design_sha256": "sha256:0d10a1f433575dc2f8f34fe84bcfa73b0be7d113465625a1e8720e0aec530e4c",
+      "design_sha256": "sha256:9903486d957b18d06f1636da141c727768d8853a9b53cf12733a87a79c989062",
       "id": "PG-QA",
       "required_evidence": [
         "QA deployed pyz digest equals the pinned digest",
@@ -464,7 +443,7 @@
         "qa": "PASS",
         "staging": "PASS"
       },
-      "design_sha256": "sha256:ee9eb9ea92e77d77b896d636f33913cd52408d5aa04efd8c0d6d92c286767ffe",
+      "design_sha256": "sha256:75c21daec4bf2edbaa3123cce0e1ba12869123687b65def27755255366e0e1a4",
       "id": "PG-DISP",
       "required_evidence": [
         "raw QA signal present in the bounded inventory",
@@ -474,7 +453,7 @@
       ],
       "requires_audit_case": true,
       "scenario_family": "C01",
-      "title": "Missing effective disposition while the raw signal and baseline gates remain",
+      "title": "Missing effective disposition",
       "type": "AUDIT_ONLY"
     },
     {
@@ -493,7 +472,7 @@
         "qa": "PASS",
         "staging": "PASS"
       },
-      "design_sha256": "sha256:e5f1310702fe73a6dfc826520d24dc100055fce68f4ed111b3f657428d5e11f3",
+      "design_sha256": "sha256:050ad53442d995f36e2354cde1597599d4934827d8cb9bb4e360b6c27f9c9496",
       "id": "PG-SEQ",
       "required_evidence": [
         "source cutoff and scripted Finding observation / Requirement acceptance offsets",
@@ -522,7 +501,7 @@
         "qa": "PASS",
         "staging": "PASS"
       },
-      "design_sha256": "sha256:7af2dec39edee288d1c4b7e64f53b1d08475c02f90831720463791c93e26a4b8",
+      "design_sha256": "sha256:ec3b04c87492d73a26ea15e963302d6b37b3300f9f0c9b658fc368a020c9ec1a",
       "id": "PG-INFO",
       "required_evidence": [
         "the missing query-scope field recorded as unavailable; completeness flag and collector version retained",
@@ -532,13 +511,12 @@
       ],
       "requires_audit_case": true,
       "scenario_family": "I01",
-      "title": "Missing decisive scope attestation",
+      "title": "Missing query-scope attestation field",
       "type": "AUDIT_ONLY"
     }
   ],
   "schema": "pg-protocol-1",
   "scope": {
-    "note": "Six scenario families (N01, B01, B02, C01, C02, I01) exercise staged promotion. The existing E2 batch in this repository is not changed or re-measured.",
     "scenario_families": {
       "B01": "PG-ART",
       "B02": "PG-QA",
@@ -556,15 +534,7 @@
     "implemented": {
       "P0": "B1",
       "P1": "B2"
-    },
-    "not_implemented": {
-      "B0": "Optional third arm defined by the experiment design; out of scope for this batch."
-    },
-    "official_names": [
-      "B0",
-      "B1",
-      "B2"
-    ]
+    }
   },
   "verifier": {
     "expected_codes": {

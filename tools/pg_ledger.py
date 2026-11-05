@@ -1,7 +1,7 @@
 """Build and verify the progressive-gating ledgers.
 
 runs.csv         one row per actual run attempt
-comparisons.csv  one row per actual pair attempt
+comparisons.csv  one row per selected comparable pair
 summary.json     planned matrix, scenario and run denominators, missing cells,
                  with NFI as an explicit subclass of machine OPEN rather than
                  a second count
@@ -33,8 +33,6 @@ from tools.pg_common import (
 RUNS_COLUMNS = [
     "batch",
     "calibration",
-    "local_validation",
-    "formal_batch",
     "scenario_id",
     "scenario_family",
     "arm",
@@ -43,9 +41,6 @@ RUNS_COLUMNS = [
     "attempt",
     "pair_key",
     "run_key",
-    "selected_attempt",
-    "included_in_formal",
-    "included_in_calibration",
     "status",
     "github_run_id",
     "github_run_url",
@@ -99,7 +94,6 @@ RUNS_COLUMNS = [
 COMPARISON_COLUMNS = [
     "batch",
     "calibration",
-    "local_validation",
     "scenario_id",
     "scenario_family",
     "repeat_index",
@@ -107,10 +101,6 @@ COMPARISON_COLUMNS = [
     "pair_key",
     "p0_run_key",
     "p1_run_key",
-    "selected_attempt",
-    "included_in_formal",
-    "included_in_calibration",
-    "status",
     "same_build",
     "same_artifact_digest",
     "same_scenario_design",
@@ -133,8 +123,6 @@ COMPARISON_COLUMNS = [
     "expected_evidence_status_hit",
     "baseline_pass_and_p1_open",
     "baseline_failure_control",
-    "comparable",
-    "not_comparable_reason",
 ]
 
 
@@ -210,7 +198,7 @@ def _semantic_match(p0, p1, e0, e1) -> bool:
     return False
 
 
-def _attempt_record(p0, p1, e0, e1, design, calibration, local) -> dict:
+def _attempt_record(p0, p1, e0, e1, design) -> dict:
     reasons = []
     same_build = bool(p0 and p1 and p0.get("build", {}).get("build_id") == p1.get("build", {}).get("build_id"))
     same_artifact = bool(
@@ -328,7 +316,7 @@ def _pair_attempts(metas: list, batch: str, scenario: str, repeat: int) -> list:
         p1 = next((m for m in group if m.get("arm") == "P1"), None)
         e0 = _evidence(p0) if p0 else {}
         e1 = _evidence(p1) if p1 else {}
-        record = _attempt_record(p0, p1, e0, e1, designs[scenario], False, False)
+        record = _attempt_record(p0, p1, e0, e1, designs[scenario])
         rows.append({"attempt": attempt, "p0": p0, "p1": p1, "e0": e0, "e1": e1, **record})
     return rows
 
@@ -391,7 +379,7 @@ def _stage_gates(chain: dict) -> str:
     )
 
 
-def _run_row(meta, evidence, selected_attempt, included_formal, included_calibration, local_validation, inclusion, exclusion):
+def _run_row(meta, evidence, inclusion, exclusion):
     design = load_designs()[meta["scenario"]]
     chain = evidence["chain"]
     stage_rows = {}
@@ -418,8 +406,6 @@ def _run_row(meta, evidence, selected_attempt, included_formal, included_calibra
     return {
         "batch": meta.get("batch"),
         "calibration": _bool(meta.get("calibration")),
-        "local_validation": _bool(local_validation),
-        "formal_batch": _bool(str(meta.get("batch", "")).startswith("PG-FORMAL")),
         "scenario_id": meta.get("scenario"),
         "scenario_family": design.get("scenario_family"),
         "arm": meta.get("arm"),
@@ -428,9 +414,6 @@ def _run_row(meta, evidence, selected_attempt, included_formal, included_calibra
         "attempt": meta.get("attempt"),
         "pair_key": meta.get("pair_key"),
         "run_key": meta.get("run_key"),
-        "selected_attempt": _bool(selected_attempt),
-        "included_in_formal": _bool(included_formal),
-        "included_in_calibration": _bool(included_calibration),
         "status": "COMPLETED" if meta.get("valid_execution") else "TOOL_FAILURE",
         "github_run_id": meta.get("github_run_id"),
         "github_run_url": meta.get("github_run_url"),
@@ -482,7 +465,7 @@ def _run_row(meta, evidence, selected_attempt, included_formal, included_calibra
     }
 
 
-def _comparison_row(cell, attempt_record, selected, included_formal, included_calibration, local_validation):
+def _comparison_row(cell, attempt_record):
     scenario = cell["scenario"]
     design = load_designs()[scenario]
     p0 = attempt_record.get("p0") or {}
@@ -492,7 +475,6 @@ def _comparison_row(cell, attempt_record, selected, included_formal, included_ca
     return {
         "batch": cell["batch"],
         "calibration": _bool(cell["calibration"]),
-        "local_validation": _bool(local_validation),
         "scenario_id": scenario,
         "scenario_family": design.get("scenario_family"),
         "repeat_index": cell["repeat"],
@@ -500,10 +482,6 @@ def _comparison_row(cell, attempt_record, selected, included_formal, included_ca
         "pair_key": (p0.get("pair_key") or p1.get("pair_key")),
         "p0_run_key": p0.get("run_key"),
         "p1_run_key": p1.get("run_key"),
-        "selected_attempt": _bool(selected),
-        "included_in_formal": _bool(included_formal),
-        "included_in_calibration": _bool(included_calibration),
-        "status": "COMPLETED" if (p0.get("valid_execution") and p1.get("valid_execution")) else "TOOL_FAILURE",
         "same_build": _bool(attempt_record["same_build"]),
         "same_artifact_digest": _bool(attempt_record["same_artifact_digest"]),
         "same_scenario_design": _bool(attempt_record["same_scenario_design"]),
@@ -526,8 +504,6 @@ def _comparison_row(cell, attempt_record, selected, included_formal, included_ca
         "expected_evidence_status_hit": _bool(attempt_record["expected_evidence_status_hit"]),
         "baseline_pass_and_p1_open": _bool(attempt_record["baseline_pass_and_p1_open"]),
         "baseline_failure_control": _bool(attempt_record["baseline_failure_control"]),
-        "comparable": _bool(attempt_record["comparable"]),
-        "not_comparable_reason": attempt_record["not_comparable_reason"],
     }
 
 
@@ -688,35 +664,6 @@ def finalize(args) -> int:
         selected = _select_attempt(attempts)
         if selected is not None:
             selected["selected"] = True
-    # Local batches: no plan, but the same attempt/comparison rules apply.
-    local_batches = sorted(
-        {
-            m.get("batch")
-            for m in metas
-            if m.get("batch")
-            and not str(m.get("batch")).startswith("PG-FORMAL")
-            and not str(m.get("batch")).startswith("PG-CAL")
-        }
-    )
-    local_cells = []
-    for batch in local_batches:
-        scenarios = sorted({m.get("scenario") for m in metas if m.get("batch") == batch})
-        for scenario in scenarios:
-            repeats = sorted({m.get("repeat_index") for m in metas if m.get("batch") == batch and m.get("scenario") == scenario})
-            for repeat in repeats:
-                local_cells.append({"batch": batch, "scenario": scenario, "repeat": repeat, "calibration": False})
-    for cell in local_cells:
-        attempts = _pair_attempts(metas, cell["batch"], cell["scenario"], cell["repeat"])
-        for record in attempts:
-            record["batch"] = cell["batch"]
-            record["scenario"] = cell["scenario"]
-            record["repeat"] = cell["repeat"]
-            record["calibration"] = False
-            all_pairs.append(record)
-        selected = _select_attempt(attempts)
-        if selected is not None:
-            selected["selected"] = True
-
     # Selected attempt per (batch, scenario, repeat).
     selected_by_cell = {}
     for pair in all_pairs:
@@ -727,12 +674,11 @@ def finalize(args) -> int:
     comparisons_rows = []
     missing_cells = []
     missing_runs = []
-    for cell in cells + local_cells:
+    for cell in cells:
         cell_pair_rows = [
             p for p in all_pairs if p["batch"] == cell["batch"] and p["scenario"] == cell["scenario"] and p["repeat"] == cell["repeat"]
         ]
         selected_attempt = selected_by_cell.get((cell["batch"], cell["scenario"], cell["repeat"]))
-        local = cell["batch"] not in {x["batch"] for x in cells}
         if not cell_pair_rows:
             missing_cells.append(
                 {
@@ -771,7 +717,6 @@ def finalize(args) -> int:
                     pair_selected
                     and pair["comparable"]
                     and str(cell["batch"]).startswith("PG-CAL")
-                    and not meta.get("local")
                 )
                 inclusion = "INCLUDED" if (included_formal or included_calibration) else "EXCLUDED"
                 exclusion = ""
@@ -780,44 +725,12 @@ def finalize(args) -> int:
                 elif not pair["comparable"]:
                     exclusion = pair["not_comparable_reason"]
                 elif str(cell["batch"]).startswith("PG-FORMAL") and not meta.get("formal_eligible"):
-                    exclusion = "run is not formal-eligible (attestation/local/dirty)"
+                    exclusion = "run is not formal-eligible (attestation or dirty source)"
                 elif not (included_formal or included_calibration):
                     exclusion = "batch type does not count this run"
-                runs_rows.append(
-                    _run_row(
-                        meta,
-                        evidence,
-                        pair_selected,
-                        included_formal,
-                        included_calibration,
-                        local,
-                        inclusion,
-                        exclusion,
-                    )
-                )
-            comparisons_rows.append(
-                _comparison_row(
-                    cell,
-                    pair,
-                    pair_selected,
-                    bool(
-                        pair_selected
-                        and pair["comparable"]
-                        and str(cell["batch"]).startswith("PG-FORMAL")
-                        and p0
-                        and p1
-                        and p0.get("formal_eligible")
-                        and p1.get("formal_eligible")
-                    ),
-                    bool(
-                        pair_selected
-                        and pair["comparable"]
-                        and str(cell["batch"]).startswith("PG-CAL")
-                        and not ((p0 or {}).get("local") or (p1 or {}).get("local"))
-                    ),
-                    local,
-                )
-            )
+                runs_rows.append(_run_row(meta, evidence, inclusion, exclusion))
+            if pair_selected and pair["comparable"]:
+                comparisons_rows.append(_comparison_row(cell, pair))
 
     _write_csv(root / "runs.csv", RUNS_COLUMNS, runs_rows)
     _write_csv(root / "comparisons.csv", COMPARISON_COLUMNS, comparisons_rows)
@@ -832,10 +745,8 @@ def finalize(args) -> int:
     calibration_repeats = int(calibration_spec.get("repeats", 1))
     formal_pairs = [p for p in all_pairs if p["batch"] == formal_batch]
     calibration_pairs = [p for p in all_pairs if p["batch"] == calibration_batch]
-    local_pairs = [p for p in all_pairs if p["batch"] in local_batches]
     formal_metas = [m for m in metas if m.get("batch") == formal_batch]
     calibration_metas = [m for m in metas if m.get("batch") == calibration_batch]
-    local_metas = [m for m in metas if m.get("batch") in local_batches]
     formal_summary = _aggregate_batch(formal_metas, formal_pairs, formal_batch)
     summary = {
         "schema": "pg-summary-1",
@@ -885,20 +796,8 @@ def finalize(args) -> int:
         },
         "attempt_selection": {
             "rule": "first comparable attempt per (batch, scenario, repeat)",
-            "all_attempts_retained_in_runs_csv": True,
-            "no_cherry_picking": True,
-        },
-        "local_validation": {
-            "batches": local_batches,
-            "runs": len(local_metas),
-            "pairs": len(local_pairs),
-            "aggregate_by_batch": {
-                batch: _aggregate_batch(local_metas, local_pairs, batch, include_all=True) for batch in local_batches
-            },
-            "note": "local validation uses no GitHub attestation and is excluded from formal and calibration denominators",
         },
         "scenario_level": _scenario_summary(formal_pairs),
-        "scenario_level_local": _scenario_summary(local_pairs),
         "anomalies": formal_summary.get("anomalies", []),
         "hashes": _hashes(protocol),
         "manifest_rule": "MANIFEST.sha256 hashes every regular file under progressive-gating/ except MANIFEST.sha256 itself, __pycache__ and .DS_Store; paths are relative to progressive-gating/.",
@@ -928,7 +827,6 @@ def finalize(args) -> int:
                 "formal_pairs": len(formal_pairs),
                 "selected_comparable_pairs": len([p for p in formal_pairs if p.get("selected") and p.get("comparable")]),
                 "audit_contrast": summary["formal"]["audit_contrast"],
-                "local_runs": len(local_metas),
                 "manifest": "MANIFEST.sha256",
             },
             indent=2,

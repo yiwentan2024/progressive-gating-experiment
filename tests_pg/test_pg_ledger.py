@@ -63,7 +63,9 @@ class FinalizeTests(unittest.TestCase):
 
             runs = read_csv(root / "runs.csv")
             self.assertEqual(len(runs), 2)
-            included = [row for row in runs if row["included_in_formal"] == "true"]
+            for column in ("local_validation", "formal_batch", "selected_attempt", "included_in_formal", "included_in_calibration"):
+                self.assertNotIn(column, runs[0])
+            included = [row for row in runs if row["inclusion"] == "INCLUDED"]
             self.assertEqual(len(included), 2)
             self.assertEqual({row["status"] for row in included}, {"COMPLETED"})
             self.assertEqual({row["outcome_class"] for row in included}, {"AUDIT_NOT_CONFIGURED", "VALID_MACHINE_DECISION"})
@@ -72,13 +74,21 @@ class FinalizeTests(unittest.TestCase):
 
             comparisons = read_csv(root / "comparisons.csv")
             self.assertEqual(len(comparisons), 1)
-            selected = [row for row in comparisons if row["selected_attempt"] == "true"]
-            self.assertEqual(len(selected), 1)
-            self.assertEqual(selected[0]["comparable"], "true")
-            self.assertEqual(selected[0]["baseline_pass_and_p1_open"], "true")
-            self.assertEqual(selected[0]["expected_codes_hit"], "true")
-            self.assertEqual(selected[0]["expected_evidence_status_hit"], "true")
-            self.assertEqual(selected[0]["p0_stage_gates"], "dev:PASS;qa:PASS;staging:PASS")
+            for column in (
+                "local_validation",
+                "selected_attempt",
+                "included_in_formal",
+                "included_in_calibration",
+                "status",
+                "comparable",
+                "not_comparable_reason",
+            ):
+                self.assertNotIn(column, comparisons[0])
+            self.assertEqual(comparisons[0]["semantic_inputs_match"], "true")
+            self.assertEqual(comparisons[0]["baseline_pass_and_p1_open"], "true")
+            self.assertEqual(comparisons[0]["expected_codes_hit"], "true")
+            self.assertEqual(comparisons[0]["expected_evidence_status_hit"], "true")
+            self.assertEqual(comparisons[0]["p0_stage_gates"], "dev:PASS;qa:PASS;staging:PASS")
             self.assertEqual(verify_internal(root), 0)
             self.assertEqual(verify_internal(root, require_complete=True), 2)
 

@@ -1,6 +1,6 @@
 """Build the audit case and the minimal collector record from staged live evidence.
 
-The audit case is an E2-case-1 document accepted by verifier/closure_audit.py.
+The audit case is accepted by verifier/closure_audit.py.
 The verifier itself is never modified. A2 successor/Finding timestamps are
 declared scripted offsets from the live source cutoff; live HTTP occurrence and
 receipt times remain native in the raw stage events.
@@ -258,7 +258,7 @@ def _collector(design, run_meta, chain_result, case, missing_dispositions, missi
         "candidates_findings": {
             "type": "scripted",
             "source": "tools/pg_case.py",
-            "rule": "candidate, Finding and successor identifiers are synthetic test records generated from the frozen scenario design; no engineering dataset is read or copied",
+            "rule": "candidate, Finding and successor identifiers are defined by the frozen scenario design",
         },
         "gates": {
             "type": "derived",
@@ -273,31 +273,31 @@ def _collector(design, run_meta, chain_result, case, missing_dispositions, missi
         "image_id": {
             "type": "native",
             "source": "raw/artifact_measurements.json",
-            "rule": "docker inspect .Image; identity type is distinct from the pyz file digest",
+            "rule": "docker inspect .Image",
         },
         "source_cutoff": {
             "type": "scripted",
             "source": "derived from native stage events",
-            "rule": "max(native event, receipt and gate time) + 1s; fixed relative relation across arms",
+            "rule": "max(native event, receipt and gate time) + 1s",
         },
         "audit_time": {
             "type": "scripted",
-            "rule": "source_cutoff + 48h; fixed relative relation across arms",
+            "rule": "source_cutoff + 48h",
         },
         "finding_times": {
             "type": "scripted" if design["id"] == "PG-SEQ" else "unavailable",
-            "rule": "observed_at = cutoff + 2h; accepted_at = cutoff + 1h; target times relative to audit",
+            "rule": "observed_at = cutoff + 2h; accepted_at = cutoff + 1h",
         },
         "collector_attestation": {
             "type": "declared" if design["id"] != "PG-INFO" else "unavailable",
             "source": "tools/pg_case.py",
-            "rule": "self-declared attestation for the bounded three-stage collector; not an independent third-party export",
+            "rule": "self-declared for the bounded three-stage collector",
         },
         "github_attestation": _attestation_provenance(run_meta),
         "stage_inventory": {
             "type": "native",
             "source": "raw/stage_events.jsonl",
-            "rule": "bounded three-stage inventory; not a production inventory",
+            "rule": "bounded three-stage inventory",
         },
     }
     return {
@@ -364,17 +364,10 @@ def _collector(design, run_meta, chain_result, case, missing_dispositions, missi
 
 def _attestation_provenance(run_meta):
     attestation = run_meta.get("build", {}).get("attestation", {})
-    mode = attestation.get("mode")
-    if mode == "github":
-        return {
-            "type": "native",
-            "source": "build_manifest.json attestation.verify_exit / verify_json",
-            "status": attestation.get("status"),
-        }
     return {
-        "type": "unavailable",
-        "source": "no GitHub attestation in local mode",
-        "status": attestation.get("status", "NOT_AVAILABLE_LOCAL"),
+        "type": "native",
+        "source": "build_manifest.json attestation.verify_exit / verify_json",
+        "status": attestation.get("status"),
     }
 
 

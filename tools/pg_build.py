@@ -155,8 +155,8 @@ def build(args) -> int:
     )
     image_id = inspect["stdout"].strip() if inspect["exit"] == 0 else None
     attestation = {
-        "mode": args.attestation_mode,
-        "status": "PENDING_GITHUB_ATTESTATION" if args.attestation_mode == "github" else "NOT_AVAILABLE_LOCAL",
+        "mode": "github",
+        "status": "PENDING_GITHUB_ATTESTATION",
         "subject_path": "dist/release_app.pyz",
         "subject_sha256": artifact_sha,
         "verify_exit": None,
@@ -309,7 +309,6 @@ def main() -> int:
     p.add_argument("--tag", default=None)
     p.add_argument("--build-id", default=None)
     p.add_argument("--source-commit", default=None)
-    p.add_argument("--attestation-mode", choices=["github", "local-unavailable"], required=True)
     p.add_argument("--unit-exit-file", default=None)
     p.add_argument("--skip-unit-tests", action="store_true")
     p.set_defaults(func=build)

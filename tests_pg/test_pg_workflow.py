@@ -37,7 +37,7 @@ class WorkflowConventionTests(unittest.TestCase):
         self.assertLess(tests, build)
 
     def test_formal_matrix_is_not_overridable_from_dispatch(self):
-        self.assertIn("options: [formal, calibration, pair, local]", self.text)
+        self.assertIn("options: [formal, calibration, pair]", self.text)
         self.assertNotIn("\n      repeats:", self.text)
         self.assertNotIn("\n      order:", self.text)
         self.assertIn("--github-job-id \"$GITHUB_JOB\"", self.text)

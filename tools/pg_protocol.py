@@ -102,16 +102,11 @@ def build_protocol() -> dict:
                 design["scenario_family"]: design["id"]
                 for design in sorted(designs.values(), key=lambda item: item["id"])
             },
-            "note": "Six scenario families (N01, B01, B02, C01, C02, I01) exercise staged promotion. The existing E2 batch in this repository is not changed or re-measured.",
         },
         "variant_mapping": {
-            "official_names": ["B0", "B1", "B2"],
             "implemented": {
                 "P0": "B1",
                 "P1": "B2",
-            },
-            "not_implemented": {
-                "B0": "Optional third arm defined by the experiment design; out of scope for this batch.",
             },
             "description": {
                 "P0": "staged promotion + minimal collector; audit NOT_CONFIGURED",
@@ -166,11 +161,6 @@ def build_protocol() -> dict:
                 "workflow_runs": len(CALIBRATION_SCENARIOS),
                 "attempts_per_workflow_run": 2,
                 "purpose": "pairing-mechanics calibration only; not included in the formal denominator",
-            },
-            "local_validation": {
-                "batch_prefix": "LOCAL-",
-                "purpose": "developer validation without GitHub attestation; excluded from formal and calibration denominators",
-                "attestation": "NOT_AVAILABLE_LOCAL",
             },
         },
         "scenarios": _scenario_rows(),
@@ -228,7 +218,7 @@ def build_protocol() -> dict:
                 "non-selected retry attempts",
                 "runs without GitHub attestation",
                 "runs from a dirty source tree",
-                "local validation and calibration batches",
+                "calibration batches",
             ],
         },
         "formal_eligibility": [
@@ -246,22 +236,6 @@ def build_protocol() -> dict:
             "baseline_control_pairs": "PG-ART and PG-QA selected comparable pairs, reported separately and never mixed into the audit-contrast numerator",
             "scenario_counts_are_not_pooled": True,
         },
-        "claims": [
-            "Each pair is one workflow run: both arms share one build, one image and one attestation, so the only arm difference is the audit. The formal 18 pairs and calibration 3 pairs produce 21 workflow runs and 42 attempts.",
-            "The same deterministic pyz digest is measured at dev, qa and staging inside running containers for passing chains.",
-            "Every promotion edge is a real sequential compose deployment followed by a real digest and live HTTP health gate; the three stages are not started together and probed out of order.",
-            "PG-ART and PG-QA are baseline controls: the baseline gate rejects and the downstream stage is not deployed; neither arm runs the audit.",
-            "For the four audit scenarios, the P0/P1 comparison is conditional on both baselines passing and on semantic input equality.",
-            "All outputs are generated from retained raw and normalized evidence; injected defects are disclosed in injection.json.",
-        ],
-        "non_claims": [
-            "This is not a production deployment or a full production inventory.",
-            "Candidates, Findings, dispositions, audit times and fault switches are synthetic test inputs generated from the frozen scenario files; no engineering dataset is read, copied or bridged.",
-            "The collector scope attestation is self-declared for the bounded three-stage chain, not an independent third-party export.",
-            "The OCI image digest is an identity of a different type from the pyz digest; no numerical equality between them is claimed.",
-            "This batch does not re-measure the existing E2 batch in this repository and does not claim those results are reproduced.",
-            "The calibration batch calibrates pairing mechanics; it is not a second independent sample.",
-        ],
         "hashes": _collect_inputs(),
     }
 

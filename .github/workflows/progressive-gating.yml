@@ -5,9 +5,9 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "formal = 6x3 matrix; calibration = 3 pairing checks; pair = one scenario; local = developer validation"
+        description: "formal = 6x3 matrix; calibration = 3 pairing checks; pair = one scenario"
         type: choice
-        options: [formal, calibration, pair, local]
+        options: [formal, calibration, pair]
         default: formal
       batch:
         description: "Optional batch id; empty uses the mode default"
@@ -95,10 +95,6 @@ jobs:
                 *) echo "pair mode repeat_index must be 1, 2, or 3"; exit 2 ;;
               esac
               ;;
-            local)
-              [ -n "$batch" ] || batch="LOCAL-${GITHUB_RUN_ID}"
-              [ "${batch#LOCAL-}" != "$batch" ] || { echo "local mode requires a LOCAL- batch id"; exit 2; }
-              ;;
             *)
               echo "unknown mode: $mode"
               exit 2
@@ -132,7 +128,6 @@ jobs:
           python -m tools.pg_build build \
             --batch "$PG_BATCH" \
             --out "$BUILD_DIR" \
-            --attestation-mode github \
             --source-commit "$GITHUB_SHA"
 
       - name: Attest the pyz subject

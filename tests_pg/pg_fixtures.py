@@ -116,7 +116,6 @@ def write_run(root: Path, scenario: str, arm: str, repeat: int, *, base: str, po
         "build": {"build_id": build_id, "artifact": {"sha256": ARTIFACT_SHA}},
         "valid_execution": True,
         "formal_eligible": formal,
-        "local": False,
         "calibration": False,
         "baseline_result": "PASS",
         "first_failure_stage": None,

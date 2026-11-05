@@ -2,11 +2,11 @@
   "id": "PG-N01",
   "scenario_family": "N01",
   "type": "CONTROL",
-  "title": "Normal release: staged promotion with no injected evidence defect",
+  "title": "Normal release with no injected evidence defect",
   "injection": {
     "layer": "none",
     "at_stage": null,
-    "description": "No injection. One deterministic artifact is promoted dev -> qa -> staging through real HTTP gates; the audit input is complete."
+    "description": "No injection."
   },
   "baseline_expected": {
     "dev": "PASS",

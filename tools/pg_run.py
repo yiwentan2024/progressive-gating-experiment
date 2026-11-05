@@ -54,7 +54,7 @@ def _arm_order(repeat: int, explicit: str) -> list:
 def _mode_scenarios(mode: str, scenario: str | None) -> list:
     if mode == "calibration":
         return list(CALIBRATION_SCENARIOS)
-    if mode in ("formal", "local"):
+    if mode == "formal":
         return list(ALL_SCENARIOS)
     if mode == "pair":
         if scenario not in ALL_SCENARIOS:
@@ -332,7 +332,6 @@ def _run_arm(
     github_job_id: str,
     order_label: str,
     calibration: bool,
-    local_mode: bool,
 ) -> dict:
     run_key = _run_key(pair_key, arm)
     run_dir = out_root / "runs" / run_key
@@ -463,11 +462,10 @@ def _run_arm(
     finished = utc_now()
     attestation = build.get("attestation", {})
     is_calibration = calibration or batch.startswith("PG-CAL")
-    is_local = local_mode or attestation.get("mode") != "github"
     formal_eligible = (
         batch.startswith("PG-FORMAL")
         and not is_calibration
-        and not is_local
+        and attestation.get("mode") == "github"
         and attestation.get("status") == "PASS"
         and not build.get("source_tree_dirty", True)
         and chain_error is None
@@ -530,7 +528,6 @@ def _run_arm(
         "valid_execution": valid_execution,
         "formal_eligible": formal_eligible,
         "calibration": is_calibration,
-        "local": is_local,
         "chain_error": chain_error,
         "evidence_paths": {
             "raw": "raw/",
@@ -555,7 +552,7 @@ def _run_arm(
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", required=True, help="build_manifest.json from tools.pg_build")
-    parser.add_argument("--mode", required=True, choices=["formal", "calibration", "local", "pair"])
+    parser.add_argument("--mode", required=True, choices=["formal", "calibration", "pair"])
     parser.add_argument("--batch", required=True)
     parser.add_argument("--scenario", default=None)
     parser.add_argument("--repeats", type=int, default=None)
@@ -563,9 +560,9 @@ def main() -> int:
     parser.add_argument("--attempt", type=int, default=1)
     parser.add_argument("--order", choices=["auto", "P0P1", "P1P0"], default="auto")
     parser.add_argument("--out-root", default="progressive-gating")
-    parser.add_argument("--github-run-id", default="LOCAL_NOT_GITHUB")
+    parser.add_argument("--github-run-id", default="")
     parser.add_argument("--github-run-url", default="")
-    parser.add_argument("--github-job-id", default="LOCAL_NOT_GITHUB")
+    parser.add_argument("--github-job-id", default="")
     parser.add_argument("--calibration", action="store_true")
     args = parser.parse_args()
 
@@ -584,12 +581,14 @@ def main() -> int:
         print("unit tests did not pass; refusing to run")
         return 2
     attestation = build.get("attestation", {})
-    local_mode = attestation.get("mode") != "github"
-    if not local_mode and attestation.get("status") != "PASS":
+    if attestation.get("mode") != "github":
+        print(f"attestation mode is {attestation.get('mode')!r}; runs require a GitHub-attested build")
+        return 2
+    if attestation.get("status") != "PASS":
         print(f"attestation status is {attestation.get('status')!r}; refusing to run")
         return 2
-    if not local_mode and build.get("source_tree_dirty"):
-        print("source tree is dirty; formal runs require a committed checkout")
+    if build.get("source_tree_dirty"):
+        print("source tree is dirty; runs require a committed checkout")
         return 2
 
     designs = load_designs()
@@ -619,9 +618,6 @@ def main() -> int:
             if args.order != "auto":
                 print(f"{args.mode} mode uses the frozen alternating arm order")
                 return 2
-    if args.mode == "local" and (batch.startswith("PG-FORMAL") or batch.startswith("PG-CAL")):
-        print("local mode must not use a formal or calibration batch id")
-        return 2
     if args.mode == "pair" and (batch.startswith("PG-FORMAL") or batch.startswith("PG-CAL")):
         plan = read_json(protocol_path).get("batch_plan") or {}
         frozen = (plan.get("formal") if batch.startswith("PG-FORMAL") else plan.get("calibration")) or {}
@@ -639,9 +635,6 @@ def main() -> int:
             print(f"pair repeat-index must be between 1 and {int(frozen.get('repeats', 1))}")
             return 2
         args.repeat_index = repeat_index
-    if args.mode == "local" and not batch.startswith("LOCAL-"):
-        print("local mode requires a LOCAL- batch id")
-        return 2
     if args.repeat_index is not None and args.repeat_index < 1:
         print("repeat-index must be >= 1")
         return 2
@@ -684,7 +677,6 @@ def main() -> int:
                         args.github_job_id,
                         order_label,
                         calibration,
-                        local_mode,
                     )
                 except Exception as exc:
                     run_key = _run_key(pair_key, arm)
@@ -704,7 +696,6 @@ def main() -> int:
                         "baseline_result": "TOOL_FAILURE",
                         "audit_status": "TOOL_FAILURE",
                         "formal_eligible": False,
-                        "local": local_mode,
                         "calibration": calibration,
                     }
                     write_json(

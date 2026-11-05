@@ -6,7 +6,7 @@
   "injection": {
     "layer": "artifact",
     "at_stage": "qa",
-    "description": "Dev receives the pinned build. QA is requested with a different, runnable pyz image; the expected digest is not changed. The QA digest gate must reject it and staging must not be deployed."
+    "description": "QA is requested with a different runnable pyz image while the expected digest stays pinned."
   },
   "baseline_expected": {
     "dev": "PASS",

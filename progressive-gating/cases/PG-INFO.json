@@ -2,11 +2,11 @@
   "id": "PG-INFO",
   "scenario_family": "I01",
   "type": "AUDIT_ONLY",
-  "title": "Missing decisive scope attestation",
+  "title": "Missing query-scope attestation field",
   "injection": {
     "layer": "evidence_scope",
     "at_stage": null,
-    "description": "All baseline gates pass. The single decisive query-scope field query_rule_hash is removed from the collector attestation; the completeness flag, collector version, extracted signals and the inventory digest remain. The missing field must not be normalized into an empty set or a PASS."
+    "description": "The query-scope field query_rule_hash is removed from the collector attestation; the completeness flag, collector version, extracted signals and inventory digest remain."
   },
   "baseline_expected": {
     "dev": "PASS",

@@ -506,12 +506,8 @@ class PromotionRunner:
 
         binding_mode = attestation.get("mode")
         binding_subject = attestation.get("subject_sha256")
-        if binding_mode != "github":
-            binding_result = "NOT_APPLICABLE"
-            binding_pass = True
-        else:
-            binding_pass = attestation.get("status") == "PASS" and binding_subject == measure["sha256"]
-            binding_result = "PASS" if binding_pass else "FAIL"
+        binding_pass = attestation.get("status") == "PASS" and binding_subject == measure["sha256"]
+        binding_result = "PASS" if binding_pass else "FAIL"
         binding_check = self.event(
             stage,
             "check_finished",

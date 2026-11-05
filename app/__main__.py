@@ -1,4 +1,4 @@
-"""Small executable HTTP service for a non-production CI/CD evaluation."""
+"""Small executable HTTP service."""
 import argparse, json, os
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 

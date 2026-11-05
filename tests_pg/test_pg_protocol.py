@@ -47,10 +47,9 @@ class ProtocolTests(unittest.TestCase):
         self.assertTrue(PROTOCOL_PATH.is_file(), "run python -m tools.pg_protocol build")
         self.assertEqual(_check_protocol(read_json(PROTOCOL_PATH)), [])
 
-    def test_official_variant_mapping_keeps_b0_out(self):
+    def test_official_variant_mapping_has_both_arms(self):
         protocol = build_protocol()
         self.assertEqual(protocol["variant_mapping"]["implemented"], {"P0": "B1", "P1": "B2"})
-        self.assertIn("B0", protocol["variant_mapping"]["not_implemented"])
         self.assertEqual(protocol["verifier"]["modified"], False)
 
 

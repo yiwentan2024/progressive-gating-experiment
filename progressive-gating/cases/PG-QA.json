@@ -6,7 +6,7 @@
   "injection": {
     "layer": "stage_health",
     "at_stage": "qa",
-    "description": "The correct artifact is deployed at every stage. Only QA is started with the declared FAIL_HEALTH=1 switch; dev passes and QA returns HTTP 503. Staging must not be deployed."
+    "description": "Only QA is started with the declared FAIL_HEALTH=1 switch."
   },
   "baseline_expected": {
     "dev": "PASS",
